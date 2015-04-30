@@ -1,0 +1,653 @@
+
+ALTER SESSION set NLS_DATE_LANGUAGE = 'AMERICAN';
+
+-- Comment de drop statements en de sequences bij de eerste run
+drop table BEZOEKER cascade constraints;
+drop table BUNGALOW cascade constraints;
+drop table CARAVAN cascade constraints;
+drop table EVENT cascade constraints;
+drop table EVENT_BEZOEKER cascade constraints;
+drop table EXEMPLAAR cascade constraints;
+drop table GEBRUIKER cascade constraints;
+drop table HUUROPDRACHT cascade constraints;
+drop table HUURTENT cascade constraints;
+drop table MEDIAMAP cascade constraints;
+drop table PLAATS cascade constraints;
+drop table POST cascade constraints;
+drop table POST_MAP cascade constraints;
+drop table RESERVERING cascade constraints;
+drop table RESERVERINGSOPDRACHT cascade constraints;
+drop table STAPLAATS cascade constraints;
+drop table VOORWERP cascade constraints;
+drop table VRIEND cascade constraints;
+drop table WOONPLAATS cascade constraints;/**/
+
+drop sequence seq_BEZOEKER;
+drop sequence seq_WOONPLAATS;
+drop sequence seq_VOORWERP;
+drop sequence seq_EXEMPLAAR;
+drop sequence seq_HUUROPDRACHT;
+drop sequence seq_RESERVERINGSOPDRACHT;
+drop sequence seq_GEBRUIKER;
+drop sequence seq_EVENT;
+drop sequence seq_PLAATS;
+drop sequence seq_RESERVERING;
+drop sequence seq_POST;
+drop sequence seq_MEDIAMAP;/**/
+
+create table BEZOEKER (
+bezoekerID              number(9) primary key, --Auto generatie
+RFID                    VARCHAR2(10) unique,
+toegankelijkheid        VARCHAR2(1) not null,
+voornaam                VARCHAR2(35) not null, 
+achternaam              VARCHAR2(35) not null,
+accountnaam             VARCHAR2(60) not null,
+accountwachtwoord       VARCHAR2(20) not null,
+betaald                 number(1) check(betaald = 0 or betaald = 1),
+geboortedatum           DATE not null
+);
+
+create table VRIEND (
+bezoekerID              number(9) not null,
+vriendID                number(9) not null,
+primary key (bezoekerID, vriendID),
+CONSTRAINT fk_vriendbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID),
+CONSTRAINT fk_vriendvriend FOREIGN KEY (vriendID) REFERENCES BEZOEKER(bezoekerID)
+);
+
+create table WOONPLAATS (
+woonplaatsID              number(10) primary key, --Auto generatie
+bezoekerID                number(9) not null,
+woonplaats                VARCHAR2(35) not null,
+postcodenumeriek          number(4) not null,
+postcodealfanumeriek      VARCHAR2(2) not null, --To upper!!!
+straatnaam                VARCHAR2(35) not null,
+huisnummer                number(5) not null,
+toevoeging                VARCHAR2(1),
+CONSTRAINT fk_woonplaatsbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID)
+);
+
+--Huur applicatie
+
+
+create table VOORWERP (
+voorwerpID              number(3) primary key, --Auto generatie
+voorwerpsoort           VARCHAR2(45) not null,
+voorwerpmerk            VARCHAR2(35) not null, --Aanpassen in ERD!
+voorwerphuurprijs       number(5, 2) check(voorwerphuurprijs > 0)
+);
+
+create table EXEMPLAAR (
+exemplaarID              number(3) primary key, --Auto generatie
+voorwerpID               number(3) not null,
+exemplaarstaat           VARCHAR2(200),
+CONSTRAINT fk_exemplaarvoorwerp FOREIGN KEY (voorwerpID) REFERENCES VOORWERP(voorwerpID)
+);
+
+create table HUUROPDRACHT (
+huuropdrachtID              number(8) primary key, --Auto generatie
+exemplaarID                 number(3) not null,
+bezoekerID                  number(9) not null,
+huurdatum                   DATE not null,
+inleverdatum                DATE not null,
+retourdatum                 DATE,
+CONSTRAINT fk_huurexemplaar FOREIGN KEY (exemplaarID) REFERENCES EXEMPLAAR(exemplaarID),
+CONSTRAINT fk_huurbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID)
+);
+
+create table RESERVERINGSOPDRACHT (
+reserveringsopdrachtID              number(3) primary key, --Auto generatie  --Misschien datums toevoegen!!!
+voorwerpID                          number(3) not null,
+bezoekerID                          number(9) not null,
+aantal                              number(2) default 1 check(aantal > 0),
+CONSTRAINT fk_reserveervoorwerp FOREIGN KEY (voorwerpID) REFERENCES VOORWERP(voorwerpID),
+CONSTRAINT fk_reserveerbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID)
+);
+
+
+--Event beheersysteem
+
+
+create table GEBRUIKER (
+gebruikerID              number(3) primary key, --Auto generatie
+gebruikersnaam           VARCHAR2(60) unique not null,
+gebruikerswachtwoord     VARCHAR2(35) not null,
+gebruikersemail          VARCHAR2(35) unique not null
+);
+
+create table EVENT (
+eventID                      number(5) primary key, --Auto generatie
+gebruikerID                  number(9) not null,
+eventbegindatum              DATE not null,
+eventeinddatum               DATE not null,
+eventplaats                  VARCHAR2(45) not null,
+eventpostcodenumeriek        number(4) not null,
+eventpostcodealfanumeriek    VARCHAR2(2) not null,
+eventstraatnaam              VARCHAR2(35) not null,
+eventhuisnummer              number(4) not null,
+eventhuisnummertoevoeging    VARCHAR2(1),
+CONSTRAINT fk_eventgebruiker FOREIGN KEY (gebruikerID) REFERENCES GEBRUIKER(gebruikerID)
+);
+
+create table EVENT_BEZOEKER (
+eventID                       number(3),
+bezoekerID                    number(9) not null,
+primary key (eventID, bezoekerID),
+CONSTRAINT fk_eventevent FOREIGN KEY (eventID) REFERENCES EVENT(eventID),
+CONSTRAINT fk_eventbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID)
+);
+
+
+--Reserverings systeem
+
+
+create table PLAATS (
+plaatsID              number(4) primary key, --Auto generatie
+plaatsgrootte         VARCHAR(20),
+maxaantal             number(2) default 1 check(maxaantal > 0)
+);
+
+
+create table STAPLAATS (
+plaatsID                 number(4) primary key,
+plaatshuurprijs          number(6, 2) not null,
+rustigheidsfactor        number(2) check (rustigheidsfactor between 0 and 11),
+CONSTRAINT fk_staplaatsplek FOREIGN KEY (plaatsID) REFERENCES PLAATS(plaatsID)
+);
+
+create table RESERVERING (
+reserveringID              number(10) primary key, --Auto generatie
+bezoekerID                 number(9) not null,
+plaatsID                   number(4) not null,
+reserveringsbegindatum     DATE not null,
+reserveringseinddatum      DATE not null,
+reserveerder               number(9) not null,
+CONSTRAINT fk_reserveerplaats FOREIGN KEY (plaatsID) REFERENCES PLAATS(plaatsID),
+CONSTRAINT fk_reservatieplaatsbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID)
+);
+
+create table HUURTENT (
+plaatsID                number(4) primary key,
+huurtenthuurprijs       number(6, 2) not null,
+CONSTRAINT fk_huurtentstaplaats FOREIGN KEY (plaatsID) REFERENCES STAPLAATS(plaatsID)
+);
+
+create table CARAVAN (
+plaatsID               number(4) primary key,
+caravanhuurprijs       number(6, 2) not null,
+CONSTRAINT fk_caravanstaplaats FOREIGN KEY (plaatsID) REFERENCES STAPLAATS(plaatsID)
+);
+
+create table BUNGALOW (
+plaatsID                number(4) primary key,
+huurtarief              number(6, 2) not null,
+CONSTRAINT fk_bungalowplaats FOREIGN KEY (plaatsID) REFERENCES PLAATS(plaatsID)
+);
+
+
+--Media Sharing
+
+
+create table POST (
+postID              number(10) primary key, --Auto generatie
+bezoekerID          number(9) not null,
+tekst               VARCHAR2(200),
+replyop             number(10),
+bestand             VARCHAR2(300),
+CONSTRAINT fk_postbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID)
+);
+
+create table MEDIAMAP (
+mapID                   number(3) primary key, --Auto generatie
+bezoekerID              number(9) not null,
+submapID                number(3),
+mapnaam                 VARCHAR2(35) unique not null,
+CONSTRAINT fk_mapbezoeker FOREIGN KEY (bezoekerID) REFERENCES BEZOEKER(bezoekerID),
+CONSTRAINT fk_submapmap FOREIGN KEY (submapID) REFERENCES MEDIAMAP(mapID)
+);
+
+create table POST_MAP (
+postID                  number(10),
+mapID                   number(3) not null,
+primary key (postID, mapID),
+CONSTRAINT fk_post FOREIGN KEY (postID) REFERENCES POST(postID),
+CONSTRAINT fk_map FOREIGN KEY (mapID) REFERENCES MEDIAMAP(mapID)
+);
+
+/*==============================================================*/
+/* TRIGGERS AND SEQUENCES                                       */
+/*==============================================================*/
+
+--account
+create sequence seq_BEZOEKER
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_BEZOEKER
+  before insert on BEZOEKER
+  for each row
+begin
+  select seq_BEZOEKER.nextval into :new.bezoekerID from dual;
+end;
+/
+--woonplaats
+create sequence seq_WOONPLAATS
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_WOONPLAATS
+  before insert on WOONPLAATS
+  for each row
+begin
+  select seq_WOONPLAATS.nextval into :new.woonplaatsID from dual;
+end;
+/
+--voorwerp
+create sequence seq_VOORWERP
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_VOORWERP
+  before insert on VOORWERP
+  for each row
+begin
+  select seq_VOORWERP.nextval into :new.voorwerpID from dual;
+end;
+/
+--exemplaar
+create sequence seq_EXEMPLAAR
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_EXEMPLAAR
+  before insert on EXEMPLAAR
+  for each row
+begin
+  select seq_EXEMPLAAR.nextval into :new.exemplaarID from dual;
+end;
+/
+--huuropdracht
+create sequence seq_HUUROPDRACHT
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_HUUROPDRACHT
+  before insert on HUUROPDRACHT
+  for each row
+begin
+  select seq_HUUROPDRACHT.nextval into :new.huuropdrachtID from dual;
+end;
+/
+--reserveringsopdracht
+create sequence seq_RESERVERINGSOPDRACHT
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_RESERVERINGSOPDRACHT
+  before insert on RESERVERINGSOPDRACHT
+  for each row
+begin
+  select seq_RESERVERINGSOPDRACHT.nextval into :new.reserveringsopdrachtID from dual;
+end;
+/
+--gebruiker
+create sequence seq_GEBRUIKER
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_GEBRUIKER
+  before insert on GEBRUIKER
+  for each row
+begin
+  select seq_GEBRUIKER.nextval into :new.gebruikerID from dual;
+end;
+/
+--event
+create sequence seq_EVENT
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_EVENT
+  before insert on EVENT
+  for each row
+begin
+  select seq_EVENT.nextval into :new.eventID from dual;
+end;
+/
+--plaats
+create sequence seq_PLAATS
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_PLAATS
+  before insert on PLAATS
+  for each row
+begin
+  select seq_PLAATS.nextval into :new.plaatsID from dual;
+end;
+/
+--reservering
+create sequence seq_RESERVERING
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_RESERVERING
+  before insert on RESERVERING
+  for each row
+begin
+  select seq_RESERVERING.nextval into :new.reserveringID from dual;
+end;
+/
+--post
+create sequence seq_POST
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_POST
+  before insert on POST
+  for each row
+begin
+  select seq_POST.nextval into :new.postID from dual;
+end;
+/
+--mediamap
+create sequence seq_MEDIAMAP
+start with 1
+increment by 1
+nomaxvalue;
+
+create or replace trigger T_MEDIAMAP
+  before insert on MEDIAMAP
+  for each row
+begin
+  select seq_MEDIAMAP.nextval into :new.mapID from dual;
+end;
+/
+
+savepoint sp_Empty;
+
+/*==============================================================*/
+/* INSERT STATEMENTS                                            */
+/*==============================================================*/
+
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('0000000000','F','XXXX','XXXX','XXXX','XXXX',1,'01-JAN-2000');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('DJ92J1AK97','A','Hans','Ten Berge','Hanustjoe','VisSlUOps',1,'03-DEC-1981');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('99DJ2JJ4J1','A','Leo','Spijksma','LeipeLeo','wachtwoord!1',0,'16-MAY-1997');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('HHA02K1DJ0','A','Lieke','Smits','WildeKikker','IO76{@dws',0,'04-FEB-2000');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('KKOAH092H8','C','Hubert','Hagelaar','Sits003','AaaAA00o',1,'15-JAN-2005');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('92KKS1SJR4','B','Andre','Huijgens','Habertha','HaganaAanNa',1,'03-JAN-2005');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('77D9SS1J71','F','Leonardario','Finyl','Davaci','Sk92AbanaD',0,'06-JAN-1999');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('KKD8JOAZ1C','E','Rikkert','Badspak','Haganeno','DD2koopjead',1,'23-OCT-1995');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('KD02J1JOF4','D','Pauline','Anderssen','Spiksman','DDjja2uf9s',0,'26-MAY-1986');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('LANEP3OK21','H','Frens','Bedonkers','FlensBakker','Flensje132',1,'10-JUN-1997');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('00P0K82NDQ','G','Julia','Pommelen','Pamazela','*ndk2@jd1',1,'01-JUL-1998');
+INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('KDK23KA3JD','A','Stijn','Brandsma','WeerMan','LLLLOOOooo',0,'13-APR-1999');
+
+INSERT INTO VRIEND VALUES (1,2);
+INSERT INTO VRIEND VALUES (1,6);
+INSERT INTO VRIEND VALUES (2,6);
+INSERT INTO VRIEND VALUES (2,4);
+INSERT INTO VRIEND VALUES (2,9);
+INSERT INTO VRIEND VALUES (4,6);
+INSERT INTO VRIEND VALUES (4,3);
+INSERT INTO VRIEND VALUES (4,2);
+INSERT INTO VRIEND VALUES (6,1);
+INSERT INTO VRIEND VALUES (6,2);
+INSERT INTO VRIEND VALUES (6,4);
+INSERT INTO VRIEND VALUES (8,10);
+INSERT INTO VRIEND VALUES (9,11);
+INSERT INTO VRIEND VALUES (9,2);
+INSERT INTO VRIEND VALUES (10,4);
+INSERT INTO VRIEND VALUES (12,7);
+INSERT INTO VRIEND VALUES (12,10);
+
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (1,'Valkenswaard',5552,'HL','Haagstraat',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (2,'Stergsel',5221,'DL','Leuvenstraat',321,'c');
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (3,'Eersel',3312,'FG','Beukenlaan',11,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (4,'Valkenswaard',3221,'TK','Bonenstraat',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (5,'Eindhoven',1112,'VG','Leuwenrik',42,'a');
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (6,'Almere',1324,'HZ','Sallamanderlaan',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (7,'Almere',2247,'PK','Paardenlaan',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (8,'Leende',1152,'GZ','Bonenstraat',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (9,'Assen',8882,'HL','Genevenenslaan',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (10,'Lelystad',8842,'GZ','Fransferdinantsraat',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (11,'Valkenswaard',1112,'YT','Albertdicnkthijmstraat',42,'b');
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (2,'Oslo',2223,'GL','Antwerpseweg',42,null);
+INSERT INTO WOONPLAATS (bezoekerID, woonplaats, postcodenumeriek, postcodealfanumeriek, straatnaam, huisnummer, toevoeging)
+VALUES (6,'Eindhoven',3343,'PL','Leenderweg',42,null);
+
+
+--Huur applicatie
+
+
+INSERT INTO VOORWERP (voorwerpsoort, voorwerpmerk, voorwerphuurprijs)
+VALUES ('Camera','Cannon',10.99);
+INSERT INTO VOORWERP (voorwerpsoort, voorwerpmerk, voorwerphuurprijs)
+VALUES ('Videocamera','Ikegami',15.89);
+INSERT INTO VOORWERP (voorwerpsoort, voorwerpmerk, voorwerphuurprijs)
+VALUES ('Camera','Casio',9.59);
+INSERT INTO VOORWERP (voorwerpsoort, voorwerpmerk, voorwerphuurprijs)
+VALUES ('TV','Sony',19.99);
+
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (1,'Kleine krasjes op de lens');
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (1,'Kraakt als je in/uitzoomt');
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (1,null);
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (2,null);
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (2,'Batterij houdt het maar 0.5 uur vol');
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (3,'Er zit een kras op het touchscreen');
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (4,'Kan geen oneven zenders uitzenden');
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (4,null);
+INSERT INTO EXEMPLAAR (voorwerpID, exemplaarstaat)
+VALUES (4,'Er missen pixels in de rechter bovenhoek');
+
+INSERT INTO HUUROPDRACHT (exemplaarID, bezoekerID, huurdatum, inleverdatum, retourdatum) 
+VALUES (3,7,'22-DEC-2015','23-DEC-2015',null);
+INSERT INTO HUUROPDRACHT (exemplaarID, bezoekerID, huurdatum, inleverdatum, retourdatum) 
+VALUES (8,2,'23-DEC-2015','24-DEC-2015','25-DEC-2015');
+
+INSERT INTO RESERVERINGSOPDRACHT (voorwerpID, bezoekerID, aantal)
+VALUES (4,1,2);
+INSERT INTO RESERVERINGSOPDRACHT (voorwerpID, bezoekerID, aantal)
+VALUES (2,10,1);
+
+
+--Event beheersysteem
+
+
+INSERT INTO GEBRUIKER (gebruikersnaam, gebruikerswachtwoord, gebruikersemail)
+VALUES ('Theodore','Sk3%j@)ld','Thesqaud@gmail.com');
+INSERT INTO GEBRUIKER (gebruikersnaam, gebruikerswachtwoord, gebruikersemail)
+VALUES ('Sjaak','haalloooIkBenSj44k','svwaaijen@hotmail.com');
+
+INSERT INTO EVENT (gebruikerID, eventbegindatum, eventeinddatum, eventplaats, eventpostcodenumeriek, eventpostcodealfanumeriek, eventstraatnaam, eventhuisnummer, eventhuisnummertoevoeging)
+VALUES (1,'20-DEC-2015','25-DEC-2015','Eindhoven',5552,'HZ','Dorenstraat',42,null);
+INSERT INTO EVENT (gebruikerID, eventbegindatum, eventeinddatum, eventplaats, eventpostcodenumeriek, eventpostcodealfanumeriek, eventstraatnaam, eventhuisnummer, eventhuisnummertoevoeging)
+VALUES (2,'10-JAN-2014','13-JAN-2014','Stergsel',4446,'GL','Lindestraat',18,'c');
+
+INSERT INTO EVENT_BEZOEKER VALUES (1,2);
+INSERT INTO EVENT_BEZOEKER VALUES (2,1);
+INSERT INTO EVENT_BEZOEKER VALUES (2,4);
+INSERT INTO EVENT_BEZOEKER VALUES (1,7);
+INSERT INTO EVENT_BEZOEKER VALUES (1,5);
+INSERT INTO EVENT_BEZOEKER VALUES (1,6);
+INSERT INTO EVENT_BEZOEKER VALUES (1,11);
+INSERT INTO EVENT_BEZOEKER VALUES (2,10);
+INSERT INTO EVENT_BEZOEKER VALUES (2,3);
+INSERT INTO EVENT_BEZOEKER VALUES (1,10);
+INSERT INTO EVENT_BEZOEKER VALUES (1,8);
+INSERT INTO EVENT_BEZOEKER VALUES (1,9);
+INSERT INTO EVENT_BEZOEKER VALUES (1,4);
+
+
+--Reserverings systeem
+
+
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('3m x 6m',5);
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('6m x 8m',5);
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('10m x 15m',8);
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('2m x 3m',2);
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('6m x 8m',4);
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('4m x 4m',4);
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('6m x 6m',5);
+INSERT INTO PLAATS (plaatsgrootte, maxaantal)
+VALUES ('7m x 7m',8);
+
+INSERT INTO STAPLAATS VALUES (1,99.99,1);
+INSERT INTO STAPLAATS VALUES (3,159.85,3);
+INSERT INTO STAPLAATS VALUES (4,20.21,9);
+INSERT INTO STAPLAATS VALUES (7,33.66,5);
+INSERT INTO STAPLAATS VALUES (8,12.50,8);
+
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (1,3,'23-DEC-2015','26-DEC-2015',3);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (2,6,'23-DEC-2015','27-DEC-2015',2);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (3,7,'24-DEC-2015','27-DEC-2015',2);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (4,5,'23-DEC-2015','26-DEC-2015',5);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (5,1,'22-DEC-2015','23-DEC-2015',5);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (6,2,'21-DEC-2015','27-DEC-2015',10);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (7,6,'22-DEC-2015','25-DEC-2015',5);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (8,7,'22-DEC-2015','25-DEC-2015',3);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (9,5,'24-DEC-2015','29-DEC-2015',9);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (10,1,'24-DEC-2015','26-DEC-2015',10);
+INSERT INTO RESERVERING (bezoekerID, plaatsID, reserveringsbegindatum, reserveringseinddatum, reserveerder)
+VALUES (11,2,'25-DEC-2015','26-DEC-2015',9);
+
+INSERT INTO HUURTENT VALUES (4,5.99);
+INSERT INTO HUURTENT VALUES (7,8.68);
+
+INSERT INTO CARAVAN VALUES (1,2.89);
+INSERT INTO CARAVAN VALUES (3,11.12);
+
+INSERT INTO BUNGALOW VALUES (2,12.99);
+INSERT INTO BUNGALOW VALUES (5,21.30);
+INSERT INTO BUNGALOW VALUES (6,9.99);
+
+
+--Media Sharing
+
+
+INSERT INTO POST (bezoekerID, tekst, replyop, bestand)
+VALUES (1,'Test123',null,'C:\Users\Kees\Documents\antiguababudaimages\Frank aangeleverd\assets');
+INSERT INTO POST (bezoekerID, tekst, replyop, bestand)
+VALUES (1,'Ja hij doet het!',1,null);
+INSERT INTO POST (bezoekerID, tekst, replyop, bestand)
+VALUES (6,'Nice, ik reply ook :D',2,null);
+
+--De eerste drie mappen zijn de hoofdmappen en hebben dus geen submap reference.
+--Verder zijn ze allemaal door bezoeker 1 aangemaakt.
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (1,null,'MyFirstMap');
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (1,null,'Video`s');
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (1,null,'Groene afbeeldingen');
+--Mappen aangemaakt door bezoekers.
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (3,1,'TestPost');
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (6,1,'Lachen');
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (2,2,'GevallenD:');
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (9,5,'Leukepostszittenhier!');
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (11,2,'Lamafilmpje');
+INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (3,6,'Bomencollage');
+
+INSERT INTO POST_MAP VALUES (1,1);
+INSERT INTO POST_MAP VALUES (1,2);
+INSERT INTO POST_MAP VALUES (1,3);
+INSERT INTO POST_MAP VALUES (2,2);
+INSERT INTO POST_MAP VALUES (2,3);
+INSERT INTO POST_MAP VALUES (3,1);
+INSERT INTO POST_MAP VALUES (3,3);/**/
+
+savepoint sp_Clean;
+
+/*==============================================================*/
+/* TESTING                                                      */
+/*==============================================================*/
+
+-- TEST de betaald check van bezoeker, alleen '0' and '1' zijn toegestaan
+/*INSERT INTO BEZOEKER (RFID, toegankelijkheid, voornaam, achternaam, accountnaam, accountwachtwoord, betaald, geboortedatum)
+VALUES ('DKA30W3JU1','B','Teun','Klaus','Zupperhero','K44slOuf33',2,'06-JAN-1998');
+
+/* this gives:
+SQL Error: ORA-02290: check constraint (DBI324575.SYS_C001171400) violated */
+
+-- TEST de rustigheidsfactor check van staplaats, alleen waardes tussen de '0' and '11' zijn toegestaan
+/*INSERT INTO STAPLAATS VALUES (3,18.83,13);
+INSERT INTO STAPLAATS VALUES (3,18.83,-2);
+
+/* this gives:
+SQL Error: ORA-02290: check constraint (DBI324575.SYS_C001171538) violated */
+
+--Test om de recursie van de submappen te testen
+/*INSERT INTO MEDIAMAP (bezoekerID, submapID, mapnaam)
+VALUES (3,20,'Dikkedoeke');
+
+
+-- rollback naar het einde van het invullen van de testgegevens
+rollback to sp_Clean;
+*/
+--commit;
