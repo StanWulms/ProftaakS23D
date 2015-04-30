@@ -1,0 +1,11 @@
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\bin\Debug\InschrijvingSysteem.exe.config
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\bin\Debug\InschrijvingSysteem.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\bin\Debug\InschrijvingSysteem.pdb
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\obj\Debug\InschrijvingSysteem.csprojResolveAssemblyReference.cache
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\obj\Debug\InschrijvingSysteem.Registerform.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\obj\Debug\InschrijvingSysteem.Properties.Resources.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\obj\Debug\InschrijvingSysteem.csproj.GenerateResource.Cache
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\obj\Debug\InschrijvingSysteem.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\obj\Debug\InschrijvingSysteem.pdb
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\bin\Debug\Oracle.DataAccess.dll
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\InschrijvingSysteem\InschrijvingSysteem\obj\Debug\InschrijvingSysteem.RFIDscan.resources

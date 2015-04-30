@@ -1,0 +1,9 @@
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\x64\Debug\DBconnectietest.exe.config
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\x64\Debug\DBconnectietest.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\x64\Debug\DBconnectietest.pdb
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x64\Debug\DBconnectietest.csprojResolveAssemblyReference.cache
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x64\Debug\DBconnectietest.Form1.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x64\Debug\DBconnectietest.Properties.Resources.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x64\Debug\DBconnectietest.csproj.GenerateResource.Cache
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x64\Debug\DBconnectietest.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x64\Debug\DBconnectietest.pdb

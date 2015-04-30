@@ -1,0 +1,11 @@
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\x86\Debug\DBconnectietest.exe.config
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\x86\Debug\DBconnectietest.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\x86\Debug\DBconnectietest.pdb
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x86\Debug\DBconnectietest.Form1.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x86\Debug\DBconnectietest.Properties.Resources.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x86\Debug\DBconnectietest.csproj.GenerateResource.Cache
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x86\Debug\DBconnectietest.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\x86\Debug\DBconnectietest.pdb
+C:\Users\Kees\Dropbox\S2ProftaakGroepD\Applicaties\DBconnectietest\DBconnectietest\bin\x86\Debug\DBconnectietest.exe.config
+C:\Users\Kees\Dropbox\S2ProftaakGroepD\Applicaties\DBconnectietest\DBconnectietest\obj\x86\Debug\DBconnectietest.exe
+C:\Users\Kees\Dropbox\S2ProftaakGroepD\Applicaties\DBconnectietest\DBconnectietest\obj\x86\Debug\DBconnectietest.pdb

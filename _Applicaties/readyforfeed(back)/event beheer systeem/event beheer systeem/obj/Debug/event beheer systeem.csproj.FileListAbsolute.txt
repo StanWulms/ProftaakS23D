@@ -1,0 +1,19 @@
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\bin\Debug\event beheer systeem.exe.config
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\obj\Debug\event_beheer_systeem.Properties.Resources.resources
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.csproj.GenerateResource.Cache
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\bin\Debug\event beheer systeem.exe
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\bin\Debug\event beheer systeem.pdb
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.exe
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.pdb
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\obj\Debug\event_beheer_systeem.Form1.resources
+C:\Users\Mark\Desktop\school\se23\proftaak\event beheer systeem\event beheer systeem\bin\Debug\Oracle.DataAccess.dll
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\bin\Debug\event beheer systeem.exe.config
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.exe
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.pdb
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\bin\Debug\event beheer systeem.exe
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\bin\Debug\event beheer systeem.pdb
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.csprojResolveAssemblyReference.cache
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\obj\Debug\event_beheer_systeem.Form1.resources
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\obj\Debug\event_beheer_systeem.Properties.Resources.resources
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\event beheer systeem\event beheer systeem\obj\Debug\event beheer systeem.csproj.GenerateResource.Cache

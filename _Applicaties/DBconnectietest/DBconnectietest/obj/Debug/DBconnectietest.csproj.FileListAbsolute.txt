@@ -1,0 +1,10 @@
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\Debug\DBconnectietest.exe.config
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\Debug\DBconnectietest.csprojResolveAssemblyReference.cache
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\Debug\DBconnectietest.Properties.Resources.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\Debug\DBconnectietest.csproj.GenerateResource.Cache
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\Debug\DBconnectietest.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\Debug\DBconnectietest.pdb
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\bin\Debug\Oracle.DataAccess.dll
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\Debug\DBconnectietest.Form1.resources
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\Debug\DBconnectietest.exe
+C:\Users\pim\Desktop\FontysNL\S2\Proftaak\DBconnectietest\DBconnectietest\obj\Debug\DBconnectietest.pdb

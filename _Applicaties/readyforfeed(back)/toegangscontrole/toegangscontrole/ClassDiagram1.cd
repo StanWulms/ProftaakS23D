@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="toegangscontrole.Bezoeker">
+    <Position X="1.5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAIQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bezoeker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="toegangscontrole.Form1">
+    <Position X="4" Y="0.5" Width="2.25" />
+    <Members>
+      <Field Name="bezoekerlijst" Hidden="true" />
+      <Field Name="bezoekers" Hidden="true" />
+      <Field Name="btnInloggen" Hidden="true" />
+      <Field Name="btnuitloggen" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Field Name="conn" Hidden="true" />
+      <Field Name="dynControls" Hidden="true" />
+      <Field Name="gbLogin" Hidden="true" />
+      <Field Name="gebruikersnaam" Hidden="true" />
+      <Field Name="label1" Hidden="true" />
+      <Field Name="label2" Hidden="true" />
+      <Field Name="lbaanwezig" Hidden="true" />
+      <Field Name="lbniet" Hidden="true" />
+      <Field Name="lbPassWord" Hidden="true" />
+      <Field Name="lbUserName" Hidden="true" />
+      <Field Name="loggin" Hidden="true" />
+      <Field Name="pagina" Hidden="true" />
+      <Field Name="rfid" Hidden="true" />
+      <Field Name="tbPassword" Hidden="true" />
+      <Field Name="tbUsername" Hidden="true" />
+      <Field Name="wachtwoord" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAYAgGEAABQACCCQAIECAASRAwAAABAoIABGAAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="toegangscontrole.bezoekers">
+    <Position X="7" Y="0.75" Width="1.5" />
+    <Members>
+      <Field Name="bob" Hidden="true" />
+      <Field Name="naam" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABgAAAAYAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>bezoekers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

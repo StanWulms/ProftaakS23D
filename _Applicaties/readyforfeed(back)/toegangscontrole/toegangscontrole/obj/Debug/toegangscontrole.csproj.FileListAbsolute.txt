@@ -1,0 +1,14 @@
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\bin\Debug\toegangscontrole.exe.config
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\bin\Debug\toegangscontrole.exe
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\bin\Debug\toegangscontrole.pdb
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\bin\Debug\Phidget21.NET.dll
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.Form1.resources
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.Properties.Resources.resources
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.csproj.GenerateResource.Cache
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.exe
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.pdb
+C:\Users\Mark\Desktop\school\se23\proftaak\toegangscontrole\toegangscontrole\bin\Debug\Oracle.DataAccess.dll
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\toegangscontrole\toegangscontrole\bin\Debug\toegangscontrole.exe.config
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.exe
+C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\readyforfeed(back)\toegangscontrole\toegangscontrole\obj\Debug\toegangscontrole.pdb

@@ -1,0 +1,12 @@
+Toeganscode:		Toegang tot:
+
+--bezoekers
+A			SMS
+--Medewerker
+B			MateriaalVerhuur
+C			Toeganscontrole
+D			Reserveringsysteem
+--supervisor			
+E			SMS, materiaalverhuur, toeganscontrole, reserveringsysteem
+--gebruiker/beheerder
+F			Alle Applicaties!
