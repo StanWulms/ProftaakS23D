@@ -14,3 +14,6 @@ C:\Users\Kees\Dropbox\S2ProftaakGroepD\_Applicaties\IventEindwerkstuk\Ivent\Iven
 C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\IventEindwerkstuk\Ivent\Ivent\bin\Debug\Ivent.exe.config
 C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\IventEindwerkstuk\Ivent\Ivent\obj\Debug\Ivent.exe
 C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\IventEindwerkstuk\Ivent\Ivent\obj\Debug\Ivent.pdb
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\Ivent\Ivent\bin\Debug\Ivent.exe.config
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\Ivent\Ivent\obj\Debug\Ivent.exe
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\Ivent\Ivent\obj\Debug\Ivent.pdb
