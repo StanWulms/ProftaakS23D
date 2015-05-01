@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ivent
 {
+    //TestGitHub
     class Bericht
     {
         public int BerichtID { get; set; }
