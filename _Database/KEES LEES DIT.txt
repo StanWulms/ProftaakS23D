@@ -1,0 +1,9 @@
+In de tabel POST
+
+het type van BESTAND veranderen van VARCHAR2(300) naar blob.
+
+
+Je krijgt nu een error bij insert omdat daar een text staat.
+
+
+Ik kon hetgeen ik gemaakt had niet testen, omdat ik iets aan moest passen in de DB.
