@@ -1,0 +1,5 @@
+172.20.110.0-172.20.146.255
+
+172.20.110.0-172.20.144.255 range voor de gebruikers omdat we ongeveer 8500 bezoekers verwachten en dat daarvoor dus genoeg is.
+172.20.145.0-172.20.145.255 range voor de medewerkers en voor de computers in het hoofdgebouw.
+172.20.146.0-172.20.146.255 range voor de servers, we vinden dit beter omdat hij dan ook qua range apart staat van de rest.
