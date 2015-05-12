@@ -1,0 +1,11 @@
+PROFTAAK
+
+
+Router server manager __>
+Nat -->
+Extern --> Properties --> Services &Ports --> WEB SERVER (HTTP) --> Private persoonlijk ip.
+
+  zelf Toevoegen ( LDAP)
+incom port: 389
+private adres : eigen dinges
+Out port: 389
