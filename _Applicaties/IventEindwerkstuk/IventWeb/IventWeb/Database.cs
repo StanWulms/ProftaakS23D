@@ -5,12 +5,13 @@ using System.Web;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
 
 namespace IventWeb
 {
-    class Database
+    public class Database
     {
         private OracleConnection conn;
 
@@ -32,7 +33,9 @@ namespace IventWeb
                 conn.Open(); //opent connectie met de Connectionstring die voor deze connectie is ingesteld.
                 return true;
             }
-            catch { return false; }
+            catch (Exception ex) 
+            { global::System.Windows.Forms.MessageBox.Show(ex.Message ," db tier connectie" );
+                return false; }
         }
 
         /// <summary>

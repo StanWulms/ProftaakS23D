@@ -3,5 +3,4 @@ C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\Ivent
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\IventWeb.pdb
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\Debug\IventWeb.dll
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\Debug\IventWeb.pdb
-C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\Oracle.DataAccess.dll
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\Debug\IventWeb.csprojResolveAssemblyReference.cache
