@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,7 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64" />
+    <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -58,34 +61,64 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Inlog.aspx" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\npm.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="AccountBijdrage.cs" />
-    <Compile Include="Bericht.cs" />
-    <Compile Include="Bestand.cs" />
-    <Compile Include="Bijdrage.cs" />
-    <Compile Include="BijdrageBericht.cs" />
-    <Compile Include="Categorie.cs" />
+    <Compile Include="DataBaseKlassen\Account.cs" />
+    <Compile Include="DataBaseKlassen\AccountBijdrage.cs" />
+    <Compile Include="DataBaseKlassen\Bericht.cs" />
+    <Compile Include="DataBaseKlassen\Bestand.cs" />
+    <Compile Include="DataBaseKlassen\Bijdrage.cs" />
+    <Compile Include="DataBaseKlassen\BijdrageBericht.cs" />
+    <Compile Include="DataBaseKlassen\Categorie.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="Event.cs" />
-    <Compile Include="Locatie.cs" />
-    <Compile Include="Persoon.cs" />
-    <Compile Include="Plek.cs" />
-    <Compile Include="PlekReservering.cs" />
-    <Compile Include="PlekSpecificatie.cs" />
-    <Compile Include="Polsbandje.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="Productcat.cs" />
-    <Compile Include="Productexemplaar.cs" />
+    <Compile Include="DataBaseKlassen\Event.cs" />
+    <Compile Include="DataBaseKlassen\Locatie.cs" />
+    <Compile Include="Inlog.aspx.cs">
+      <DependentUpon>Inlog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inlog.aspx.designer.cs">
+      <DependentUpon>Inlog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterpage.Master.cs">
+      <DependentUpon>Masterpage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterpage.Master.designer.cs">
+      <DependentUpon>Masterpage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseKlassen\Persoon.cs" />
+    <Compile Include="DataBaseKlassen\Plek.cs" />
+    <Compile Include="DataBaseKlassen\PlekReservering.cs" />
+    <Compile Include="DataBaseKlassen\PlekSpecificatie.cs" />
+    <Compile Include="DataBaseKlassen\Polsbandje.cs" />
+    <Compile Include="DataBaseKlassen\Product.cs" />
+    <Compile Include="DataBaseKlassen\Productcat.cs" />
+    <Compile Include="DataBaseKlassen\Productexemplaar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reservering.cs" />
-    <Compile Include="ReserveringPolsbandje.cs" />
-    <Compile Include="Specificatie.cs" />
-    <Compile Include="Verhuur.cs" />
+    <Compile Include="DataBaseKlassen\Reservering.cs" />
+    <Compile Include="DataBaseKlassen\ReserveringPolsbandje.cs" />
+    <Compile Include="DataBaseKlassen\Specificatie.cs" />
+    <Compile Include="DataBaseKlassen\Verhuur.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Masterpage.Master" />
+    <Content Include="css\bootstrap-theme.css.map" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -93,6 +126,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
