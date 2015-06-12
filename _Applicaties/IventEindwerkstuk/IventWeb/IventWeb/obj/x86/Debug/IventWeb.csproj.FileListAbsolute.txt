@@ -4,3 +4,5 @@ C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\Ivent
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.csprojResolveAssemblyReference.cache
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.dll
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.pdb
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.csprojResolveAssemblyReference.cache
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.dll
