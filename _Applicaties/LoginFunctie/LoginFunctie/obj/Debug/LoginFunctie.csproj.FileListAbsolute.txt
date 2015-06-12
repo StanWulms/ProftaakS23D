@@ -10,3 +10,6 @@ C:\Users\Kees\Dropbox\S2ProftaakGroepD\Applicaties\LoginFunctie\LoginFunctie\obj
 C:\Users\Stan\Dropbox\S2ProftaakGroepD\Applicaties\LoginFunctie\LoginFunctie\bin\Debug\LoginFunctie.exe.config
 C:\Users\Stan\Dropbox\S2ProftaakGroepD\Applicaties\LoginFunctie\LoginFunctie\obj\Debug\LoginFunctie.exe
 C:\Users\Stan\Dropbox\S2ProftaakGroepD\Applicaties\LoginFunctie\LoginFunctie\obj\Debug\LoginFunctie.pdb
+C:\Users\pim\Documents\GitHub\ProftaakS23D\_Applicaties\LoginFunctie\LoginFunctie\bin\Debug\LoginFunctie.exe.config
+C:\Users\pim\Documents\GitHub\ProftaakS23D\_Applicaties\LoginFunctie\LoginFunctie\obj\Debug\LoginFunctie.exe
+C:\Users\pim\Documents\GitHub\ProftaakS23D\_Applicaties\LoginFunctie\LoginFunctie\obj\Debug\LoginFunctie.pdb
