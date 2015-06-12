@@ -6,14 +6,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Windows.Forms;
+using System.Configuration;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using System.Data.SqlClient;
 
 namespace IventWeb
 {
     public class Database
     {
         private OracleConnection conn;
+        private SqlConnection connection;
+
+
+        public Database()
+        {
+           connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
+           // ConnectionStringSettings mySettings = ConfigurationManager.ConnectionStrings["DatabaseConnection"];
+
+
+        }
 
         /// <summary>
         /// Wordt aangeroepen om een connectie met de database te creeeren.

@@ -60,17 +60,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\bootstrap-theme.css" />
-    <Content Include="css\bootstrap-theme.min.css" />
-    <Content Include="css\bootstrap.css" />
-    <Content Include="css\bootstrap.min.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="CSS\Style.css" />
+    <Content Include="Images\Cheering_crowd.jpg" />
     <Content Include="Inlog.aspx" />
     <Content Include="jquery-1.11.2.js" />
-    <Content Include="js\bootstrap.js" />
-    <Content Include="js\bootstrap.min.js" />
-    <Content Include="js\npm.js" />
-    <Content Include="style.css" />
+    <Content Include="SMS.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -111,15 +105,16 @@
     <Compile Include="DataBaseKlassen\ReserveringPolsbandje.cs" />
     <Compile Include="DataBaseKlassen\Specificatie.cs" />
     <Compile Include="DataBaseKlassen\Verhuur.cs" />
+    <Compile Include="SMS.aspx.cs">
+      <DependentUpon>SMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMS.aspx.designer.cs">
+      <DependentUpon>SMS.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Masterpage.Master" />
-    <Content Include="css\bootstrap-theme.css.map" />
-    <Content Include="css\bootstrap.css.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
