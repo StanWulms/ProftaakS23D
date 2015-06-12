@@ -41,6 +41,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64" />
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.021\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -64,7 +67,10 @@
     <Content Include="Images\Cheering_crowd.jpg" />
     <Content Include="Inlog.aspx" />
     <Content Include="jquery-1.11.2.js" />
+    <Content Include="Reservatie.aspx" />
     <Content Include="SMS.aspx" />
+    <Content Include="Toegangscontrole.aspx" />
+    <Content Include="Verhuur.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +111,13 @@
     <Compile Include="DataBaseKlassen\ReserveringPolsbandje.cs" />
     <Compile Include="DataBaseKlassen\Specificatie.cs" />
     <Compile Include="DataBaseKlassen\Verhuur.cs" />
+    <Compile Include="Reservatie.aspx.cs">
+      <DependentUpon>Reservatie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reservatie.aspx.designer.cs">
+      <DependentUpon>Reservatie.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SMS.aspx.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -112,9 +125,24 @@
     <Compile Include="SMS.aspx.designer.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Toegangscontrole.aspx.cs">
+      <DependentUpon>Toegangscontrole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Toegangscontrole.aspx.designer.cs">
+      <DependentUpon>Toegangscontrole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Verhuur.aspx.cs">
+      <DependentUpon>Verhuur.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Verhuur.aspx.designer.cs">
+      <DependentUpon>Verhuur.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Masterpage.Master" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
