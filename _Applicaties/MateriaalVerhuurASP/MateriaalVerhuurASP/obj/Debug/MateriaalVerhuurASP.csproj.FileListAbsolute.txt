@@ -1,0 +1,7 @@
+c:\users\stan\documents\visual studio 2013\Projects\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\MateriaalVerhuurASP.dll.config
+c:\users\stan\documents\visual studio 2013\Projects\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\MateriaalVerhuurASP.dll
+c:\users\stan\documents\visual studio 2013\Projects\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\MateriaalVerhuurASP.pdb
+c:\users\stan\documents\visual studio 2013\Projects\MateriaalVerhuurASP\MateriaalVerhuurASP\obj\Debug\MateriaalVerhuurASP.csprojResolveAssemblyReference.cache
+c:\users\stan\documents\visual studio 2013\Projects\MateriaalVerhuurASP\MateriaalVerhuurASP\obj\Debug\MateriaalVerhuurASP.dll
+c:\users\stan\documents\visual studio 2013\Projects\MateriaalVerhuurASP\MateriaalVerhuurASP\obj\Debug\MateriaalVerhuurASP.pdb
+C:\Users\Stan\Documents\Visual Studio 2013\Projects\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\Oracle.ManagedDataAccess.dll
