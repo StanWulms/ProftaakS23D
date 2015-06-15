@@ -1,0 +1,6 @@
+C:\Users\Mark\Desktop\school\se23\SE2\eventbeheersysteemasp\eventbeheersysteemasp\bin\eventbeheersysteemasp.dll.config
+C:\Users\Mark\Desktop\school\se23\SE2\eventbeheersysteemasp\eventbeheersysteemasp\bin\eventbeheersysteemasp.dll
+C:\Users\Mark\Desktop\school\se23\SE2\eventbeheersysteemasp\eventbeheersysteemasp\bin\eventbeheersysteemasp.pdb
+C:\Users\Mark\Desktop\school\se23\SE2\eventbeheersysteemasp\eventbeheersysteemasp\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Mark\Desktop\school\se23\SE2\eventbeheersysteemasp\eventbeheersysteemasp\obj\Debug\eventbeheersysteemasp.dll
+C:\Users\Mark\Desktop\school\se23\SE2\eventbeheersysteemasp\eventbeheersysteemasp\obj\Debug\eventbeheersysteemasp.pdb
