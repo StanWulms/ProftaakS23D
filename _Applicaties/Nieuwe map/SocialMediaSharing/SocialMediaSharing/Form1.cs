@@ -85,7 +85,7 @@ namespace SocialMediaSharing
             try
             {
                 String user = "dbi324575"; //gebruikersnaam van de database.
-                String pw = "YT4Yr6gF81"; //wachtwoord van de database.
+                String pw = "GBNITclsn2"; //wachtwoord van de database.
                 //String user = "dbi323305";
                 //String pw = "dRuklSz8nY";
                 
@@ -173,7 +173,7 @@ namespace SocialMediaSharing
         {
             //hier neergezet omdat ik het wilde testen, moet natuurlijk ergens anders --> tot //BLOB
 
-            try
+            /*try
             {
                 OracleCommand cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
@@ -202,7 +202,7 @@ namespace SocialMediaSharing
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-            }
+            }*/
             //BLOB
             
             // Picture box onder de naam gepositioneerd

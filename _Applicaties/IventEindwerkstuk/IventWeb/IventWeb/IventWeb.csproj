@@ -63,17 +63,36 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CampeerplekZoeken.aspx" />
     <Content Include="CSS\Style.css" />
+    <Content Include="EventBeheren.aspx" />
+    <Content Include="GenereerAccount.aspx" />
+    <Content Include="Home.aspx" />
     <Content Include="Images\Cheering_crowd.jpg" />
+    <Content Include="Inchecken.aspx" />
     <Content Include="Inlog.aspx" />
     <Content Include="jquery-1.11.2.js" />
     <Content Include="Reservatie.aspx" />
+    <Content Include="ReserveringPlaatsen.aspx" />
     <Content Include="SMS.aspx" />
+    <Content Include="Systeembeheer.aspx" />
+    <Content Include="TerugBrengen.aspx" />
+    <Content Include="TheWall.aspx" />
     <Content Include="Toegangscontrole.aspx" />
+    <Content Include="Toevoegen.aspx" />
+    <Content Include="Verhuren.aspx" />
     <Content Include="Verhuur.aspx" />
     <Content Include="Web.config" />
+    <Content Include="ZoekPersonen.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CampeerplekZoeken.aspx.cs">
+      <DependentUpon>CampeerplekZoeken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CampeerplekZoeken.aspx.designer.cs">
+      <DependentUpon>CampeerplekZoeken.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DataBaseKlassen\Account.cs" />
     <Compile Include="DataBaseKlassen\AccountBijdrage.cs" />
     <Compile Include="DataBaseKlassen\Bericht.cs" />
@@ -84,6 +103,34 @@
     <Compile Include="Database.cs" />
     <Compile Include="DataBaseKlassen\Event.cs" />
     <Compile Include="DataBaseKlassen\Locatie.cs" />
+    <Compile Include="EventBeheren.aspx.cs">
+      <DependentUpon>EventBeheren.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EventBeheren.aspx.designer.cs">
+      <DependentUpon>EventBeheren.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GenereerAccount.aspx.cs">
+      <DependentUpon>GenereerAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GenereerAccount.aspx.designer.cs">
+      <DependentUpon>GenereerAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inchecken.aspx.cs">
+      <DependentUpon>Inchecken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inchecken.aspx.designer.cs">
+      <DependentUpon>Inchecken.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inlog.aspx.cs">
       <DependentUpon>Inlog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -118,12 +165,40 @@
     <Compile Include="Reservatie.aspx.designer.cs">
       <DependentUpon>Reservatie.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReserveringPlaatsen.aspx.cs">
+      <DependentUpon>ReserveringPlaatsen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReserveringPlaatsen.aspx.designer.cs">
+      <DependentUpon>ReserveringPlaatsen.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SMS.aspx.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SMS.aspx.designer.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Systeembeheer.aspx.cs">
+      <DependentUpon>Systeembeheer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Systeembeheer.aspx.designer.cs">
+      <DependentUpon>Systeembeheer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TerugBrengen.aspx.cs">
+      <DependentUpon>TerugBrengen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TerugBrengen.aspx.designer.cs">
+      <DependentUpon>TerugBrengen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TheWall.aspx.cs">
+      <DependentUpon>TheWall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TheWall.aspx.designer.cs">
+      <DependentUpon>TheWall.aspx</DependentUpon>
     </Compile>
     <Compile Include="Toegangscontrole.aspx.cs">
       <DependentUpon>Toegangscontrole.aspx</DependentUpon>
@@ -132,12 +207,33 @@
     <Compile Include="Toegangscontrole.aspx.designer.cs">
       <DependentUpon>Toegangscontrole.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Toevoegen.aspx.cs">
+      <DependentUpon>Toevoegen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Toevoegen.aspx.designer.cs">
+      <DependentUpon>Toevoegen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Verhuren.aspx.cs">
+      <DependentUpon>Verhuren.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Verhuren.aspx.designer.cs">
+      <DependentUpon>Verhuren.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Verhuur.aspx.cs">
       <DependentUpon>Verhuur.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Verhuur.aspx.designer.cs">
       <DependentUpon>Verhuur.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ZoekPersonen.aspx.cs">
+      <DependentUpon>ZoekPersonen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ZoekPersonen.aspx.designer.cs">
+      <DependentUpon>ZoekPersonen.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

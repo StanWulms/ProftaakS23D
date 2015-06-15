@@ -55,3 +55,9 @@ C:\Users\Stan\Dropbox\S2ProftaakGroepD\_Applicaties\Nieuwe map\SocialMediaSharin
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\bin\Debug\SocialMediaSharing.exe.config
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\obj\Debug\SocialMediaSharing.exe
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\obj\Debug\SocialMediaSharing.pdb
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\bin\Debug\SocialMediaSharing.exe
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\bin\Debug\SocialMediaSharing.pdb
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\obj\Debug\SocialMediaSharing.csprojResolveAssemblyReference.cache
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\obj\Debug\SocialMediaSharing.Form1.resources
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\obj\Debug\SocialMediaSharing.Properties.Resources.resources
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\Nieuwe map\SocialMediaSharing\SocialMediaSharing\obj\Debug\SocialMediaSharing.csproj.GenerateResource.Cache
