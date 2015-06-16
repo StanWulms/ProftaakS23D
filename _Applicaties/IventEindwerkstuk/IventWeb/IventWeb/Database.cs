@@ -564,7 +564,17 @@ namespace IventWeb
             }  
         }
 
-
+        /// <summary>
+        /// Er wordt en de tabel LOCATION een nieuwe locatie toegevoegd.
+        /// Het zijn de plaatsgegevens van waar (nieuwe) events zich plaats kunnen vinden.
+        /// Isnertevent heeft ongeveer dezelfde functionaliteit en zorgt er ook voor dat
+        /// er een nieuwe evenement wordt aangemaakt.
+        /// </summary>
+        /// <param name="naam">De naam van de locatie; bijv.'camping reeendal'</param>
+        /// <param name="straat">Straatnaam</param>
+        /// <param name="huisnr">Huisnummer (met toevoeging)</param>
+        /// <param name="postcode">Postcode</param>
+        /// <param name="plaats">Plaatsnaam</param>
         public void insertlocation(string naam, string straat, string huisnr, string postcode, string plaats)
         {
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
@@ -594,6 +604,12 @@ namespace IventWeb
                 com.ExecuteNonQuery();
             }
         }
+
+        /// <summary>
+        /// Wordt aan geroepen om alle evenementen mee op te vragen.
+        /// Evenementen met bijhorende locatie worden geretouneerd.
+        /// </summary>
+        /// <returns>Lijst met alle evenementen</returns>
         public List<DataBaseKlassen.EventAanmaken> getevents()
         {
             List<DataBaseKlassen.EventAanmaken> events = new List<DataBaseKlassen.EventAanmaken>();
