@@ -73,7 +73,7 @@
     <Content Include="Inlog.aspx" />
     <Content Include="jquery-1.11.2.js" />
     <Content Include="Reservatie.aspx" />
-    <Content Include="ReserveringPlaatsen.aspx" />
+    <Content Include="Reservering.aspx" />
     <Content Include="SMS.aspx" />
     <Content Include="Systeembeheer.aspx" />
     <Content Include="TerugBrengen.aspx" />
@@ -165,12 +165,12 @@
     <Compile Include="Reservatie.aspx.designer.cs">
       <DependentUpon>Reservatie.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ReserveringPlaatsen.aspx.cs">
-      <DependentUpon>ReserveringPlaatsen.aspx</DependentUpon>
+    <Compile Include="Reservering.aspx.cs">
+      <DependentUpon>Reservering.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ReserveringPlaatsen.aspx.designer.cs">
-      <DependentUpon>ReserveringPlaatsen.aspx</DependentUpon>
+    <Compile Include="Reservering.aspx.designer.cs">
+      <DependentUpon>Reservering.aspx</DependentUpon>
     </Compile>
     <Compile Include="SMS.aspx.cs">
       <DependentUpon>SMS.aspx</DependentUpon>

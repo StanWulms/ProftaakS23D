@@ -18,13 +18,10 @@ namespace IventWeb
         private OracleConnection conn;
         private SqlConnection connection;
 
-
         public Database()
         {
            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
            // ConnectionStringSettings mySettings = ConfigurationManager.ConnectionStrings["DatabaseConnection"];
-
-
         }
 
         /// <summary>
@@ -40,7 +37,6 @@ namespace IventWeb
             {
                 String user = username;
                 String pw = Password;
-
                 conn.ConnectionString = connectieString;
                 conn.Open(); //opent connectie met de Connectionstring die voor deze connectie is ingesteld.
                 return true;

@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav">
             <li><a href="Home.aspx">Home</a></li>
             <li><a href="Inlog.aspx">Uitloggen</a></li>
-            <li><a href="ReserveringPlaatsen.aspx">Reservering plaatsen</a></li>
+            <li><a href="Reservering.aspx">Reservering</a></li>
             <li><a href="CampeerplekZoeken.aspx">Campeerplek zoeken</a></li>
         </ul>
     </nav>
