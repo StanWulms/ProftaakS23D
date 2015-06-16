@@ -12,11 +12,20 @@
         <asp:Label ID="Label1" runat="server" Text="Toevoegen"></asp:Label>
         <br />
         <br />
-        <asp:Label ID="lblSoort" runat="server" Text="Soort item: "></asp:Label>
+        <br />
+        <asp:Label ID="Label2" runat="server" Text="product categorie"></asp:Label>
+        <asp:DropDownList ID="DDLproductcat" runat="server">
+        </asp:DropDownList>
+        <br />
+        <br />
+        <asp:Label ID="lblSoort" runat="server" Text="serie:"></asp:Label>
         <asp:TextBox ID="tbSoort" runat="server"></asp:TextBox>
         <div></div>
         <asp:Label ID="lblMerk" runat="server" Text="Merk: "></asp:Label>
         <asp:TextBox ID="tbMerk" runat="server"></asp:TextBox>
+        <br />
+        <asp:Label ID="Label3" runat="server" Text="prijs:"></asp:Label>
+        <asp:TextBox ID="Tbprijs" runat="server"></asp:TextBox>
         <br />
         <asp:Button ID="btnVoorwerpToevoegen" runat="server" Text="Voorwerp toevoegen" OnClick="btnToevoegen_Click" />
         <br />
@@ -29,7 +38,7 @@
         <asp:Label ID="lblBeschrijving" runat="server" Text="Beschrijving: "></asp:Label>
         <asp:TextBox ID="tbBeschrijving" runat="server"></asp:TextBox>
         <br />
-        <asp:Button ID="btnExemplaarToevoegen" runat="server" Text="Exemplaar toevoegen" />
+        <asp:Button ID="btnExemplaarToevoegen" runat="server" Text="Exemplaar toevoegen" OnClick="btnExemplaarToevoegen_Click" />
     </div>
     </form>
 </body>
