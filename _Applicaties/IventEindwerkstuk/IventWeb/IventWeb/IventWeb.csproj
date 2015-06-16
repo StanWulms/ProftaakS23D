@@ -99,6 +99,7 @@
     <Compile Include="DataBaseKlassen\AccountBijdrage.cs" />
     <Compile Include="DataBaseKlassen\Bericht.cs" />
     <Compile Include="DataBaseKlassen\Bestand.cs" />
+    <Compile Include="DataBaseKlassen\Bezoeker.cs" />
     <Compile Include="DataBaseKlassen\Bijdrage.cs" />
     <Compile Include="DataBaseKlassen\BijdrageBericht.cs" />
     <Compile Include="DataBaseKlassen\Categorie.cs" />

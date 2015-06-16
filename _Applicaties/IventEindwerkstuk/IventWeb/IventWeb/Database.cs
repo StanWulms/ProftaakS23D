@@ -157,6 +157,40 @@ namespace IventWeb
             cmd.Dispose();
             return bestanden;
         }
+        public List<DataBaseKlassen.Bezoeker> getbezoekers(string search)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = @"SELECT a.""gebruikersnaam"", r.""aanwezig""FROM account a, RESERVERING_POLSBANDJE r WHERE a.""ID"" = r.""account_id"" AND a.""gebruikersnaam"" LIKE '%" + search + "%'";
+                DbDataReader reader = com.ExecuteReader();
+                List<DataBaseKlassen.Bezoeker> bezoekers = new List<DataBaseKlassen.Bezoeker>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        DataBaseKlassen.Bezoeker bezoeker = new DataBaseKlassen.Bezoeker(reader.GetString(0), reader.GetInt32(1));
+                        bezoekers.Add(bezoeker);
+                    }
+                    return bezoekers;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+            }
+        }
         public List<Bijdrage> GetDataBijdrage(string query)
         {
             OracleCommand cmd = conn.CreateCommand();
@@ -467,6 +501,67 @@ namespace IventWeb
             dr.Close();
             cmd.Dispose();
             return verhuurdingen;
+        }
+
+        /// <summary>
+        /// Eerst wordt er uit de databse de gegevens over de bezoeker
+        /// gehaald. Hij controleerd of de 'tag' overeen komt met de hash van
+        /// de bezoeker. Zo ja, dan gaat wordt zijn account actief (aanwezig = 1)
+        /// </summary>
+        /// <param name="tag">Barcode</param>
+        /// <returns>Update de aanwezigheid van de ingecheckte bezoeker; De naam van de bezoeker wordt gereturnd</returns>
+        public string Tagger(string tag)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = @"SELECT a.""gebruikersnaam"", R.""betaald"",RP.""aanwezig"",RP.""polsbandje_id"",RP.""account_id"" FROM PERSOON p, ""ACCOUNT"" a, RESERVERING_POLSBANDJE RP, RESERVERING R, POLSBANDJE Po WHERE a.""ID"" = RP.""account_id"" AND RP.""polsbandje_id"" = po.""ID"" AND RP.""reservering_id"" = R.""ID"" AND R.""persoon_id"" = p.""ID"" AND Po.""barcode"" = " + tag + "";
+                DbDataReader reader = com.ExecuteReader();
+                try
+                {
+                    reader.Read();
+                    if (reader.HasRows == true)
+                    {
+                        string naam = reader.GetString(0);
+                        if (reader.GetInt32(1) == 1)
+                        {
+                            if (reader.GetInt32(2) == 0)
+                            {
+                                com.CommandText = @"UPDATE RESERVERING_POLSBANDJE SET ""aanwezig"" = 1 WHERE ""polsbandje_id""=" + reader.GetInt32(3) + @"AND""account_id""=" + reader.GetInt32(4);
+                                com.ExecuteNonQuery();
+                                return naam;
+                            }
+                            else
+                            {
+                                throw new Exception(naam + " is al aanwezig");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception(naam + " heeft nog niet betaald");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("tag niet bekend");
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+            }  
         }
     }
 }
