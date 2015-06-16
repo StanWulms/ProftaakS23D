@@ -12,30 +12,18 @@ namespace MateriaalVerhuurASP
 {
     public partial class MateriaalVerhuren : System.Web.UI.Page
     {
+        Database database;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {                
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectieStr"].ConnectionString;
-                con.Open();
-                DbCommand com = OracleClientFactory.Instance.CreateCommand();                
-                com.Connection = con;
-                com.CommandText = @"SELECT ""gebruikersnaam"" FROM ACCOUNT";
-                DbDataReader reader = com.ExecuteReader();
-                try
+            //haalt alle exemplaren op en displayed alle exemplaren die nu niet verhuurd zijn de exemplaarnummers van deze voorwerpen worden in een listbox gezet.
+            database = new Database();
+            List<voorwerpen> Voorwerpen = database.Getvoorwerpen();
+            foreach(voorwerpen voorwerp in Voorwerpen)
+            {
+                if(voorwerp.Verhuurd == false)
                 {
-                    //dropdownmenu
-                    lbItems.Items.Clear();
-                    while (reader.Read())
-                    {
-                        lbItems.Items.Add(reader[0].ToString());
-                    }
-                }
-                catch (NullReferenceException)
-                {
-
-                }
+                    lbItems.Items.Add(Convert.ToString(voorwerp.exemplaarnummer));
+                }                                
             }
         }
 
