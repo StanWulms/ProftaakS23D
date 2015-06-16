@@ -99,11 +99,13 @@
     <Compile Include="DataBaseKlassen\AccountBijdrage.cs" />
     <Compile Include="DataBaseKlassen\Bericht.cs" />
     <Compile Include="DataBaseKlassen\Bestand.cs" />
+    <Compile Include="DataBaseKlassen\Bezoeker.cs" />
     <Compile Include="DataBaseKlassen\Bijdrage.cs" />
     <Compile Include="DataBaseKlassen\BijdrageBericht.cs" />
     <Compile Include="DataBaseKlassen\Categorie.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DataBaseKlassen\Event.cs" />
+    <Compile Include="DataBaseKlassen\EventAanmaken.cs" />
     <Compile Include="DataBaseKlassen\Locatie.cs" />
     <Compile Include="EventBeheren.aspx.cs">
       <DependentUpon>EventBeheren.aspx</DependentUpon>

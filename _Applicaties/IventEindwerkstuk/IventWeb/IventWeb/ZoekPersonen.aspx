@@ -12,4 +12,8 @@
     </nav>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <asp:TextBox ID="Tbsearch" runat="server"></asp:TextBox>
+    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="search" />
+    <p><asp:ListBox ID="lbnietaanwezig" runat="server"></asp:ListBox></p>
+    <asp:ListBox ID="lbaanwezig" runat="server" Height="69px"></asp:ListBox>
 </asp:Content>

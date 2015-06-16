@@ -157,6 +157,40 @@ namespace IventWeb
             cmd.Dispose();
             return bestanden;
         }
+        public List<DataBaseKlassen.Bezoeker> getbezoekers(string search)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = @"SELECT a.""gebruikersnaam"", r.""aanwezig""FROM account a, RESERVERING_POLSBANDJE r WHERE a.""ID"" = r.""account_id"" AND a.""gebruikersnaam"" LIKE '%" + search + "%'";
+                DbDataReader reader = com.ExecuteReader();
+                List<DataBaseKlassen.Bezoeker> bezoekers = new List<DataBaseKlassen.Bezoeker>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        DataBaseKlassen.Bezoeker bezoeker = new DataBaseKlassen.Bezoeker(reader.GetString(0), reader.GetInt32(1));
+                        bezoekers.Add(bezoeker);
+                    }
+                    return bezoekers;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+            }
+        }
         public List<Bijdrage> GetDataBijdrage(string query)
         {
             OracleCommand cmd = conn.CreateCommand();
@@ -467,6 +501,141 @@ namespace IventWeb
             dr.Close();
             cmd.Dispose();
             return verhuurdingen;
+        }
+
+        /// <summary>
+        /// Eerst wordt er uit de databse de gegevens over de bezoeker
+        /// gehaald. Hij controleerd of de 'tag' overeen komt met de hash van
+        /// de bezoeker. Zo ja, dan gaat wordt zijn account actief (aanwezig = 1)
+        /// </summary>
+        /// <param name="tag">Barcode</param>
+        /// <returns>Update de aanwezigheid van de ingecheckte bezoeker; De naam van de bezoeker wordt gereturnd</returns>
+        public string Tagger(string tag)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = @"SELECT a.""gebruikersnaam"", R.""betaald"",RP.""aanwezig"",RP.""polsbandje_id"",RP.""account_id"" FROM PERSOON p, ""ACCOUNT"" a, RESERVERING_POLSBANDJE RP, RESERVERING R, POLSBANDJE Po WHERE a.""ID"" = RP.""account_id"" AND RP.""polsbandje_id"" = po.""ID"" AND RP.""reservering_id"" = R.""ID"" AND R.""persoon_id"" = p.""ID"" AND Po.""barcode"" = " + tag + "";
+                DbDataReader reader = com.ExecuteReader();
+                try
+                {
+                    reader.Read();
+                    if (reader.HasRows == true)
+                    {
+                        string naam = reader.GetString(0);
+                        if (reader.GetInt32(1) == 1)
+                        {
+                            if (reader.GetInt32(2) == 0)
+                            {
+                                com.CommandText = @"UPDATE RESERVERING_POLSBANDJE SET ""aanwezig"" = 1 WHERE ""polsbandje_id""=" + reader.GetInt32(3) + @"AND""account_id""=" + reader.GetInt32(4);
+                                com.ExecuteNonQuery();
+                                return naam;
+                            }
+                            else
+                            {
+                                throw new Exception(naam + " is al aanwezig");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception(naam + " heeft nog niet betaald");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("tag niet bekend");
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+            }  
+        }
+
+        /// <summary>
+        /// Er wordt en de tabel LOCATION een nieuwe locatie toegevoegd.
+        /// Het zijn de plaatsgegevens van waar (nieuwe) events zich plaats kunnen vinden.
+        /// Isnertevent heeft ongeveer dezelfde functionaliteit en zorgt er ook voor dat
+        /// er een nieuwe evenement wordt aangemaakt.
+        /// </summary>
+        /// <param name="naam">De naam van de locatie; bijv.'camping reeendal'</param>
+        /// <param name="straat">Straatnaam</param>
+        /// <param name="huisnr">Huisnummer (met toevoeging)</param>
+        /// <param name="postcode">Postcode</param>
+        /// <param name="plaats">Plaatsnaam</param>
+        public void insertlocation(string naam, string straat, string huisnr, string postcode, string plaats)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                com.Connection = con;
+                com.CommandText = @"insert into locatie(""naam"",""straat"",""nr"",""postcode"",""plaats"") values('" + naam + "','" + straat + "'," + huisnr + ",'" + postcode + "','" + plaats + "')";
+                com.ExecuteNonQuery();
+            }
+        }
+        public void insertevent(string enaam, string lnaam, string begindatum, string einddatum, string maxbezoekers)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand comm = OracleClientFactory.Instance.CreateCommand();
+                comm.Connection = con;
+                comm.CommandText = @"SELECT * FROM locatie WHERE ""naam"" like '%" + lnaam + "%' AND rownum < 2";
+                DbDataReader reader = comm.ExecuteReader();
+                reader.Read();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                com.Connection = con;
+                com.CommandText = @"insert into event(""locatie_id"",""naam"",""datumstart"",""datumEinde"",""maxBezoekers"") values(" + reader.GetInt32(0) + ",'" + enaam + "','" + begindatum + "','" + einddatum + "'," + maxbezoekers + ")";
+                com.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
+        /// Wordt aan geroepen om alle evenementen mee op te vragen.
+        /// Evenementen met bijhorende locatie worden geretouneerd.
+        /// </summary>
+        /// <returns>Lijst met alle evenementen</returns>
+        public List<DataBaseKlassen.EventAanmaken> getevents()
+        {
+            List<DataBaseKlassen.EventAanmaken> events = new List<DataBaseKlassen.EventAanmaken>();
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand comm = OracleClientFactory.Instance.CreateCommand();
+                comm.Connection = con;
+                comm.CommandText = "SELECT * FROM event";
+                DbDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                    com.Connection = con;
+                    com.CommandText = @"SELECT * FROM locatie WHERE id = " + reader.GetInt32(1) + " AND rownum < 2";
+                    DbDataReader rd = com.ExecuteReader();
+                    rd.Read();
+                    if (!rd.IsDBNull(5) || !rd.IsDBNull(4) || !rd.IsDBNull(2) || !rd.IsDBNull(3))
+                    {
+                        DataBaseKlassen.EventAanmaken nieuwevent = new DataBaseKlassen.EventAanmaken(reader.GetInt32(0), reader.GetString(2), reader.GetDateTime(3), reader.GetDateTime(4), rd.GetString(5), rd.GetString(4), rd.GetString(2), rd.GetString(3), reader.GetInt32(5));
+                        events.Add(nieuwevent);
+                    }
+                }
+                return events;
+            }
         }
     }
 }
