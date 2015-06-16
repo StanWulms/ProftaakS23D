@@ -149,6 +149,12 @@ namespace IventWeb.ReservatieInhoud
             }
         }
 
+        /// <summary>
+        /// Iedere keer dat er een ander aantal extra bezoekers wordt geselecteerd
+        /// dienen de juiste velden zichtbaar te worden. De textboxen hebben standaard waardes -1 t/m -5.
+        /// Dit doe ik omdat ik kijk of er geen van de velden gelijk zijn aan elkaar.
+        /// Als de textboxes leeg waren zou deze check altijd 'true' geven.
+        /// </summary>
         protected void ddlAantal_TextChanged(object sender, EventArgs e)
         {
             lblAccount1.Visible = false; tbAccount1.Visible = false; tbAccount1.Text = "-1"; rfvAccount1.Enabled = false; lblEmail1.Visible = false; tbEmail1.Visible = false; tbEmail1.Text = "-1"; rfvEmail1.Enabled = false; revEmail1.Enabled = false;

@@ -64,10 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CampeerplekZoeken.aspx" />
+    <Content Include="CSS\Campeerplekzoeken.css" />
     <Content Include="CSS\Style.css" />
     <Content Include="EventBeheren.aspx" />
     <Content Include="GenereerAccount.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="Images\CampingPlattegrond.png" />
     <Content Include="Images\Cheering_crowd.jpg" />
     <Content Include="Inchecken.aspx" />
     <Content Include="Inlog.aspx" />

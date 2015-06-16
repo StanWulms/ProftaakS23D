@@ -239,35 +239,74 @@ namespace IventWeb
         }
         public List<Persoon> GetDataPersoon(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Persoon> personen = new List<Persoon>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Persoon p = new Persoon(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetString(6), dr.GetString(7));
-                personen.Add(p);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Persoon> personen = new List<Persoon>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        string toevoeging;
+                        try { toevoeging = reader.GetString(2); }
+                        catch { toevoeging = ""; }
+                        Persoon p = new Persoon(reader.GetInt32(0), reader.GetString(1), toevoeging, reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7));
+                        personen.Add(p);
+                    }
+                    return personen;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return personen;
         }
         public List<Plek> GetDataPlek(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Plek> plekken = new List<Plek>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Plek p = new Plek(dr.GetInt32(0), dr.GetInt32(1), dr.GetString(2), dr.GetInt32(3));
-                plekken.Add(p);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Plek> plekken = new List<Plek>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Plek p = new Plek(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3));
+                        plekken.Add(p);
+                    }
+                    return plekken;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return plekken;
         }
         public List<PlekReservering> GetDataPlekReservering(string query)
         {
