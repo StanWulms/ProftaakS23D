@@ -22,6 +22,11 @@ namespace IventWeb
             this.Geactiveerd = geactiveerd;
         }
 
+        public Account()
+        {
+
+        }
+
         public override string ToString()
         {
             return base.ToString();

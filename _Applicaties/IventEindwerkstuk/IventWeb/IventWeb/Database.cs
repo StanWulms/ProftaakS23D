@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Windows.Forms;
 using System.Configuration;
-using Oracle.DataAccess.Client;
-using Oracle.DataAccess.Types;
+
 using System.Data.SqlClient;
+//
+using System.Data.Common;
+using System.Configuration;
+using Oracle.ManagedDataAccess.Client;
 
 namespace IventWeb
 {
@@ -20,30 +23,10 @@ namespace IventWeb
 
         public Database()
         {
-           connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
-           // ConnectionStringSettings mySettings = ConfigurationManager.ConnectionStrings["DatabaseConnection"];
-        }
-
-        /// <summary>
-        /// Wordt aangeroepen om een connectie met de database te creeeren.
-        /// </summary>
-        /// <param name="username">Gebruikersnaam van de database.</param>
-        /// <param name="Password">Wachtwoord van de database.</param>
-        /// <param name="connectieString">String om de verbinding te maken.</param>
-        /// <returns>True als het is gelukt; false als het niet is gelukt</returns>
-        public bool ConnectDatabase(string username, string Password, string connectieString)
-        {
-            try
-            {
-                String user = username;
-                String pw = Password;
-                conn.ConnectionString = connectieString;
-                conn.Open(); //opent connectie met de Connectionstring die voor deze connectie is ingesteld.
-                return true;
-            }
-            catch (Exception ex) 
-            { global::System.Windows.Forms.MessageBox.Show(ex.Message ," db tier connectie" );
-                return false; }
+          // connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
+            DbConnection con = OracleClientFactory.Instance.CreateConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+            // ConnectionStringSettings mySettings = ConfigurationManager.ConnectionStrings["DatabaseConnection"];
         }
 
         /// <summary>
@@ -54,17 +37,34 @@ namespace IventWeb
         /// <returns>True als het is gelukt; false als het niet is gelukt</returns>
         public bool AddData(string query)
         {
-            try
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                OracleCommand cmd = conn.CreateCommand();
-                OracleTransaction otn = conn.BeginTransaction(IsolationLevel.ReadCommitted);
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = query;
-                cmd.ExecuteNonQuery();
-                otn.Commit();
-                return true;
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                OracleCommand cmd = (OracleCommand)con.CreateCommand();
+                try
+                {
+                    OracleTransaction otn = (OracleTransaction)con.BeginTransaction(IsolationLevel.ReadCommitted);
+                    cmd.CommandText = query;
+                    cmd.ExecuteNonQuery();
+                    otn.Commit();
+                    return true;
+                }
+                catch (NullReferenceException)
+                {
+                    return false;
+                }
             }
-            catch { return false; }
         }
 
         /// <summary>
@@ -77,19 +77,37 @@ namespace IventWeb
         /// <returns>Lijst met resultaten van je select query</returns>
         public List<Account> GetDataAccount(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Account> accounts = new List<Account>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Account a = new Account(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetInt32(4));
-                accounts.Add(a);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Account> accounts = new List<Account>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Account a = new Account(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4));
+                        accounts.Add(a);
+                    }
+                    return accounts;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return accounts;
         }
         public List<AccountBijdrage> GetDataAccountBijdrage(string query)
         {

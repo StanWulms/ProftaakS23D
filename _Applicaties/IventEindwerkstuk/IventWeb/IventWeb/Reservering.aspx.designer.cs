@@ -58,6 +58,69 @@ namespace IventWeb.ReservatieInhoud {
         protected global::System.Web.UI.WebControls.TextBox tbTussenvoegsel;
         
         /// <summary>
+        /// rfvAchternaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAchternaam;
+        
+        /// <summary>
+        /// lblAchternaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAchternaam;
+        
+        /// <summary>
+        /// tbAchternaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAchternaam;
+        
+        /// <summary>
+        /// rfv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv;
+        
+        /// <summary>
+        /// lblGebruikersnaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblGebruikersnaam;
+        
+        /// <summary>
+        /// tbGebruikersnaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbGebruikersnaam;
+        
+        /// <summary>
+        /// lblHoofdBoekerError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHoofdBoekerError;
+        
+        /// <summary>
         /// rfvEmail control.
         /// </summary>
         /// <remarks>
@@ -94,31 +157,13 @@ namespace IventWeb.ReservatieInhoud {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
         
         /// <summary>
-        /// rfvAchternaam control.
+        /// lblHoofdBoekerEmailError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAchternaam;
-        
-        /// <summary>
-        /// lblAchternaam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAchternaam;
-        
-        /// <summary>
-        /// tbAchternaam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbAchternaam;
+        protected global::System.Web.UI.WebControls.Label lblHoofdBoekerEmailError;
         
         /// <summary>
         /// rfvStraat control.
@@ -236,6 +281,15 @@ namespace IventWeb.ReservatieInhoud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbBankrekening;
+        
+        /// <summary>
+        /// revHuisnummer0 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revHuisnummer0;
         
         /// <summary>
         /// lblAantal control.
@@ -578,6 +632,24 @@ namespace IventWeb.ReservatieInhoud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail5;
+        
+        /// <summary>
+        /// lblDubbeleUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDubbeleUsername;
+        
+        /// <summary>
+        /// lblDubbeleEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDubbeleEmail;
         
         /// <summary>
         /// btnRegistreer control.
