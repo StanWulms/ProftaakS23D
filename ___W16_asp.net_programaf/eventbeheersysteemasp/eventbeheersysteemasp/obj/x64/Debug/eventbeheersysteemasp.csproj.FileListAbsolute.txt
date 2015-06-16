@@ -1,0 +1,7 @@
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\eventbeheersysteemasp\eventbeheersysteemasp\bin\eventbeheersysteemasp.dll.config
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\eventbeheersysteemasp\eventbeheersysteemasp\bin\eventbeheersysteemasp.dll
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\eventbeheersysteemasp\eventbeheersysteemasp\bin\eventbeheersysteemasp.pdb
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\eventbeheersysteemasp\eventbeheersysteemasp\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\eventbeheersysteemasp\eventbeheersysteemasp\obj\x64\Debug\eventbeheersysteemasp.csprojResolveAssemblyReference.cache
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\eventbeheersysteemasp\eventbeheersysteemasp\obj\x64\Debug\eventbeheersysteemasp.dll
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\eventbeheersysteemasp\eventbeheersysteemasp\obj\x64\Debug\eventbeheersysteemasp.pdb
