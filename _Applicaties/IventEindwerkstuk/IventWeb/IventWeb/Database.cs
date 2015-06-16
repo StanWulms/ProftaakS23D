@@ -97,20 +97,6 @@ namespace IventWeb
         }
         public List<AccountBijdrage> GetDataAccountBijdrage(string query)
         {
-            using (SqlConnection c = new SqlConnection(connection))
-            {
-                c.Open();
-                SqlCommand cmd = new SqlCommand("select * from dual");
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows())
-                {
-                    while (reader.Read())
-                    {
-
-                    }
-                }
-            }
-            //
             OracleCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = query;
