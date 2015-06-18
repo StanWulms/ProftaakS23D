@@ -13,6 +13,15 @@ namespace IventWeb.SysteembeheerInhoud {
     public partial class EventBeheren {
         
         /// <summary>
+        /// lblEvenementen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEvenementen;
+        
+        /// <summary>
         /// ListBox1 control.
         /// </summary>
         /// <remarks>
@@ -22,13 +31,22 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.ListBox ListBox1;
         
         /// <summary>
-        /// Label1 control.
+        /// rfvNaamLocatie control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNaamLocatie;
+        
+        /// <summary>
+        /// lblNieuwLocatie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNieuwLocatie;
         
         /// <summary>
         /// tbnaamloc control.
@@ -40,13 +58,31 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox tbnaamloc;
         
         /// <summary>
-        /// Label2 control.
+        /// lblNaamLocatieError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lblNaamLocatieError;
+        
+        /// <summary>
+        /// rfvStraat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvStraat;
+        
+        /// <summary>
+        /// lblStraat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStraat;
         
         /// <summary>
         /// Tbstraat control.
@@ -58,13 +94,22 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox Tbstraat;
         
         /// <summary>
-        /// Label3 control.
+        /// rfvHuisnummer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHuisnummer;
+        
+        /// <summary>
+        /// lblNr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNr;
         
         /// <summary>
         /// Tbnr control.
@@ -76,13 +121,31 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox Tbnr;
         
         /// <summary>
-        /// Label4 control.
+        /// revHuisnummer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revHuisnummer;
+        
+        /// <summary>
+        /// rfvPostcode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPostcode;
+        
+        /// <summary>
+        /// lblPostcode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPostcode;
         
         /// <summary>
         /// Tbpostcode control.
@@ -94,13 +157,31 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox Tbpostcode;
         
         /// <summary>
-        /// Label6 control.
+        /// revPostcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revPostcode;
+        
+        /// <summary>
+        /// rfvPlaats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPlaats;
+        
+        /// <summary>
+        /// lblPlaats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPlaats;
         
         /// <summary>
         /// Tbplaats control.
@@ -121,13 +202,31 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.Button btnaddloc;
         
         /// <summary>
-        /// Label7 control.
+        /// lblLocatieError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.Label lblLocatieError;
+        
+        /// <summary>
+        /// rfvEventNaam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEventNaam;
+        
+        /// <summary>
+        /// lblEvent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEvent;
         
         /// <summary>
         /// Tbnaame control.
@@ -139,31 +238,49 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox Tbnaame;
         
         /// <summary>
-        /// Label8 control.
+        /// lblNaamEventError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label lblNaamEventError;
         
         /// <summary>
-        /// Tbnaamlocatie control.
+        /// lblLocatie control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Tbnaamlocatie;
+        protected global::System.Web.UI.WebControls.Label lblLocatie;
         
         /// <summary>
-        /// Label9 control.
+        /// ddlLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
+        
+        /// <summary>
+        /// rfvDatumStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDatumStart;
+        
+        /// <summary>
+        /// lblDatumStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDatumStart;
         
         /// <summary>
         /// Tbdatumstart control.
@@ -175,13 +292,31 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox Tbdatumstart;
         
         /// <summary>
-        /// Label10 control.
+        /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
+        /// rfvDatumEind control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDatumEind;
+        
+        /// <summary>
+        /// lblDatumEind control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDatumEind;
         
         /// <summary>
         /// Tbdatumeind control.
@@ -193,13 +328,31 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox Tbdatumeind;
         
         /// <summary>
-        /// Label11 control.
+        /// RegularExpressionValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+        
+        /// <summary>
+        /// rfvMaxBezoekers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMaxBezoekers;
+        
+        /// <summary>
+        /// lblMaxBezoekers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMaxBezoekers;
         
         /// <summary>
         /// Tbmaxbezoeker control.
@@ -211,6 +364,15 @@ namespace IventWeb.SysteembeheerInhoud {
         protected global::System.Web.UI.WebControls.TextBox Tbmaxbezoeker;
         
         /// <summary>
+        /// RegularExpressionValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
+        
+        /// <summary>
         /// btnAddEvent control.
         /// </summary>
         /// <remarks>
@@ -218,5 +380,14 @@ namespace IventWeb.SysteembeheerInhoud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddEvent;
+        
+        /// <summary>
+        /// lblEventError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEventError;
     }
 }
