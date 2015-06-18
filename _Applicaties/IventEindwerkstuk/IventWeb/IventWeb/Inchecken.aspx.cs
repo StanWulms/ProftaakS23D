@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace IventWeb.ToegangscontroleInhoud
 {
@@ -22,9 +23,26 @@ namespace IventWeb.ToegangscontroleInhoud
         /// </summary>
         protected void btnenter_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+            lblError.ForeColor = Color.Red;
             string tag = tbtag.Text;
-            string naam = db.Tagger(tag);
-            Tbnaam.Text = naam;
+            if (tag != "")
+            {
+                try 
+                { 
+                    Int64 tagnumber = Convert.ToInt64(tag);
+                    string naam = db.Tagger(tag);
+                    if (naam.Substring(0, 4) == "FOUT") { lblError.Text = naam; }
+                    else
+                    {
+                        lblError.ForeColor = Color.Green;
+                        lblError.Text = "Geldige barcode en het kaartje is betaald.";
+                        Tbnaam.Text = naam;
+                    }
+                }
+                catch { lblError.Text = "Vul alleen getallen in!"; }
+            }
+            else { lblError.Text = "Scan eerst de barcode"; }
         }
     }
 }

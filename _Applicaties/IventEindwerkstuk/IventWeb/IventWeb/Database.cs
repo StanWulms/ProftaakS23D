@@ -580,17 +580,17 @@ namespace IventWeb
                             }
                             else
                             {
-                                throw new Exception(naam + " is al aanwezig");
+                                return "FOUT: bezoeker is al aanwezig";
                             }
                         }
                         else
                         {
-                            throw new Exception(naam + " heeft nog niet betaald");
+                            return "FOUT: bezoeker heeft nog niet betaald";
                         }
                     }
                     else
                     {
-                        throw new Exception("tag niet bekend");
+                        return "FOUT: tag niet bekend";
                     }
                 }
                 catch (NullReferenceException)

@@ -12,8 +12,11 @@
     </nav>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <asp:Label ID="lblZoekCriteria" runat="server" Text="Zoekcriteria: "></asp:Label>
     <asp:TextBox ID="Tbsearch" runat="server"></asp:TextBox>
-    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="search" />
-    <p><asp:ListBox ID="lbnietaanwezig" runat="server"></asp:ListBox></p>
-    <asp:ListBox ID="lbaanwezig" runat="server" Height="69px"></asp:ListBox>
+    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="search" /><br /><br />
+    <asp:Label ID="lblAanwezig" runat="server" Text="Aanwezige bezoekers: "></asp:Label><br />
+    <asp:ListBox ID="lbnietaanwezig" runat="server" Height="96px" Width="203px"></asp:ListBox><br /><br />
+    <asp:Label ID="lblAfwezig" runat="server" Text="Afwezige bezoekers: "></asp:Label><br />
+    <asp:ListBox ID="lbaanwezig" runat="server" Height="93px" Width="203px"></asp:ListBox>
 </asp:Content>

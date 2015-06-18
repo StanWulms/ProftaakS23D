@@ -13,11 +13,6 @@
     </nav>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div>
-        <div id="Campeerplaats">
-            <img src ="Images/CampingPlattegrond.png" width="700px" height="700px"/>
-        </div>
-    </div>
     <br /><br />
     <asp:Label ID="lblOmschrijving" runat="server" Text="Reservatiehouder"></asp:Label>
     <asp:Button ID="btnSelecteerReservatieHouder" runat="server" OnClick="btnSelecteerReservatieHouder_Click" Text="Selecteer" Width="76px" />
@@ -42,5 +37,11 @@
     <asp:TextBox ID="tbEindDatum" runat="server"></asp:TextBox>
     <br /><br />
     <asp:Button ID="btnPlaatsReservering" runat="server" Text="Reserveer Plaats" OnClick="btnPlaatsReservering_Click" />
-    <asp:Label ID="lblReserveerError" runat="server" ForeColor="Red"></asp:Label>
+    <asp:Label ID="lblReserveerError" runat="server" ForeColor="Red"></asp:Label><br /><br />
+    <div>
+        <div id="Campeerplaats">
+            <img src ="Images/CampingPlattegrond.png" width="700px" height="700px"/>
+        </div>
+    </div>
+    <br /><br />
 </asp:Content>

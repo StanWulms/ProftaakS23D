@@ -53,13 +53,18 @@ namespace IventWeb.ReservatieInhoud
         /// </summary>
         protected void btnSelecteerReservatieHouder_Click(object sender, EventArgs e)
         {
-            string p;
-            int persoonid;
-            p = lbReservatieHouder.SelectedValue;
-            persoonid = Convert.ToInt32(p.Substring(4, p.IndexOf(":", 3) - 4));
-            p = p.Substring(p.IndexOf(":", 3) + 1);
-            lblReservatiehouder.Text = p;
-            Session["persoonid"] = persoonid;
+            lblReserveerError.Visible = false;
+            try
+            {
+                string p;
+                int persoonid;
+                p = lbReservatieHouder.SelectedValue;
+                persoonid = Convert.ToInt32(p.Substring(4, p.IndexOf(":", 3) - 4));
+                p = p.Substring(p.IndexOf(":", 3) + 1);
+                lblReservatiehouder.Text = p;
+                Session["persoonid"] = persoonid;
+            }
+            catch { lblReserveerError.Text = "Selecteer een reservatiehouder."; lblReserveerError.Visible = true; }
         }
 
         /// <summary>
@@ -70,10 +75,15 @@ namespace IventWeb.ReservatieInhoud
         /// </summary>
         protected void btnSelecteerBezoeker_Click(object sender, EventArgs e)
         {
+            lblReserveerError.Visible = false;
             string a;
             a = lbBezoeker.SelectedValue;
-            lbGeselecteerdePersonen.Items.Add(a);
-            lbBezoeker.Items.Remove(a);
+            if (a == "") { lblReserveerError.Text = "Selecteer een bezoeker."; lblReserveerError.Visible = true; }
+            else
+            {
+                lbGeselecteerdePersonen.Items.Add(a);
+                lbBezoeker.Items.Remove(a);
+            }
         }
 
         /// <summary>
@@ -83,10 +93,15 @@ namespace IventWeb.ReservatieInhoud
         /// </summary>
         protected void btnDeSelecteerBezoeker_Click(object sender, EventArgs e)
         {
+            lblReserveerError.Visible = false;
             string a;
             a = lbGeselecteerdePersonen.SelectedValue;
-            lbBezoeker.Items.Add(a);
-            lbGeselecteerdePersonen.Items.Remove(a);
+            if (a == "") { lblReserveerError.Text = "Selecteer een bezoeker."; lblReserveerError.Visible = true; }
+            else
+            {
+                lbBezoeker.Items.Add(a);
+                lbGeselecteerdePersonen.Items.Remove(a);
+            }
         }
 
         /// <summary>
