@@ -22,6 +22,24 @@ namespace MateriaalVerhuurASP {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// lblSelecteer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelecteer;
+        
+        /// <summary>
+        /// lbItems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbItems;
+        
+        /// <summary>
         /// lblNaam control.
         /// </summary>
         /// <remarks>
@@ -40,22 +58,40 @@ namespace MateriaalVerhuurASP {
         protected global::System.Web.UI.WebControls.Label lblDbNaam;
         
         /// <summary>
-        /// lblSelecteer control.
+        /// tbBarcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSelecteer;
+        protected global::System.Web.UI.WebControls.TextBox tbBarcode;
         
         /// <summary>
-        /// lbItems control.
+        /// BtnZoek control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbItems;
+        protected global::System.Web.UI.WebControls.Button BtnZoek;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// tbExemplaarnummer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbExemplaarnummer;
         
         /// <summary>
         /// btnVerhuur control.

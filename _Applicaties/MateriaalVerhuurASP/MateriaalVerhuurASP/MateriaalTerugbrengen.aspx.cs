@@ -12,21 +12,32 @@ namespace MateriaalVerhuurASP
         Database database;
         protected void Page_Load(object sender, EventArgs e)
         {
+            lbTerugbrengen.Items.Clear();
            //haalt alle exemplaren op en displayed alle exemplaren die nu verhuurd zijn de exemplaarnummers van deze voorwerpen worden in een listbox gezet.
             database = new Database();
-            List<voorwerpen> Voorwerpen = database.Getvoorwerpen();
-            foreach (voorwerpen voorwerp in Voorwerpen)
+            List<voorwerp> Voorwerpen = database.Getvoorwerpen();
+
+            foreach (voorwerp voorwerp in Voorwerpen)
             {
                 if (voorwerp.Verhuurd == true)
                 {
-                    lbTerugbrengen.Items.Add(Convert.ToString(voorwerp.exemplaarnummer));
+                    lbTerugbrengen.Items.Add(voorwerp.ToString());
                 }
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button3_Click(object sender, EventArgs e)
         {
+            int rpnummer = Convert.ToInt32(lblnaamd.Text.Substring(0, 1));
+            database.updateterugbrengen(Convert.ToInt32(tbEventnummer.Text), rpnummer);
             Response.Redirect("WebForm1.aspx");
         }
+
+        protected void btnzoeknaam_Click(object sender, EventArgs e)
+        {
+            {
+                lblnaamd.Text = database.accountnummer(tbBarcode.Text);
+            }
+        }      
     }
 }

@@ -16,8 +16,24 @@
         <asp:ListBox ID="lbTerugbrengen" runat="server"></asp:ListBox>
         <br />
         <br />
-        <asp:Button ID="Button1" runat="server" Text="Terugbrengen" OnClick="Button1_Click" />
     </div>
+        <p>
+            <asp:Label ID="Label2" runat="server" Text="naam: "></asp:Label>
+            <asp:Label ID="lblnaamd" runat="server"></asp:Label>
+        </p>
+        <asp:TextBox ID="tbBarcode" runat="server"></asp:TextBox>
+        <asp:Button ID="btnzoeknaam" runat="server" Text="zoek naam" OnClick="btnzoeknaam_Click" />
+        <p>
+            &nbsp;</p>
+        <p>
+            <asp:Label ID="Label3" runat="server" Text="event nummer"></asp:Label>
+        </p>
+        <p>
+            <asp:TextBox ID="tbEventnummer" runat="server"></asp:TextBox>
+        </p>
+        <p>
+            <asp:Button ID="btnTerugBrengen" runat="server" OnClick="Button3_Click" Text="terug brengen" />
+        </p>
     </form>
 </body>
 </html>

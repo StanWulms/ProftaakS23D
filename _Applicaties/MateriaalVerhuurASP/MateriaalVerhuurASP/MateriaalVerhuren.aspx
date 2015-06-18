@@ -11,20 +11,33 @@
 
     <form id="form1" runat="server">
 
-    <div id ="text">
-        <asp:Label ID="lblNaam" runat="server" Text="Naam: "></asp:Label>
-        <asp:Label ID="lblDbNaam" runat="server" Text="dbNaam"></asp:Label>
-    </div>
         <div id="list">
             <asp:Label ID="lblSelecteer" runat="server" Text="Selecteer een item uit de listbox om te verhuren."></asp:Label>
             <br />
-            <asp:ListBox ID="lbItems" runat="server">
-                <asp:ListItem>Item1</asp:ListItem>
-            </asp:ListBox>
+            <asp:ListBox ID="lbItems" runat="server" Height="232px"></asp:ListBox>
+            
         </div>
         <div>
-            <asp:Button ID="btnVerhuur" runat="server" Text="Verhuur" OnClick="btnVerhuur_Click" />
+
+    <div id ="text">
+        <asp:Label ID="lblNaam" runat="server" Text="Naam: "></asp:Label>
+        <asp:Label ID="lblDbNaam" runat="server"></asp:Label><br/>
+    </div>
         </div>
+        <p>
+            <asp:TextBox ID="tbBarcode" runat="server"></asp:TextBox>
+            <br/>
+            <asp:Button ID="BtnZoek" runat="server" Text="naam zoeken" OnClick="BtnZoek_Click" />
+        </p>
+        <p>
+            <br/>
+            <asp:Label ID="Label1" runat="server" Text="exemplaarnummer"></asp:Label>
+            <br />
+        </p>
+            
+        <asp:TextBox ID="tbExemplaarnummer" runat="server"></asp:TextBox>
+        <br />
+            <asp:Button ID="btnVerhuur" runat="server" Text="Verhuur" OnClick="btnVerhuur_Click" />
     </form>
 </body>
 </html>

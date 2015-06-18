@@ -10,9 +10,9 @@ namespace MateriaalVerhuurASP
 {
     public class Database
     {
+        List<Account> accounts;
         public Database()
-        {
-
+        {            
         }
         public List<String> getproducten()
         {
@@ -97,6 +97,18 @@ namespace MateriaalVerhuurASP
                 com.ExecuteNonQuery();
             }
         }
+        public void insertverhuur(voorwerp voorwerp, int rpnummer)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectieStr"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                com.Connection = con;
+                com.CommandText = @"insert INTO VERHUUR (""productexemplaar_id"",""res_pb_id"",""datumIn"",""prijs"",""betaald"") VALUES (" + voorwerp.exemplaarnummer + "," + rpnummer + ",SYSDATE," + voorwerp.prijs + ",1)";
+                com.ExecuteNonQuery();
+            }
+        }
         public void insertproduct(int productid, string merk, string serie, int prijs)
         {
             //maakt een nieuw product aan door alle gegevens van het product mee te gegeven die bij het nieuwe product horen
@@ -116,7 +128,19 @@ namespace MateriaalVerhuurASP
                 com.ExecuteNonQuery();
             }
         }
-        public List<voorwerpen> Getvoorwerpen()
+        public void updateterugbrengen(int productid, int rpnummer)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectieStr"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                com.Connection = con;
+                com.CommandText = @"UPDATE VERHUUR SET ""datumUit"" = SYSDATE where ""productexemplaar_id"" =" + productid + @" AND ""res_pb_id""=" + rpnummer + @"AND ""datumUit""is null";
+                com.ExecuteNonQuery();
+            }
+        }
+        public List<voorwerp> Getvoorwerpen()
         {
             //haalt alle voorwerpen op uit de database en stelt vast of ze al verhuurd zijn of niet.
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
@@ -125,41 +149,42 @@ namespace MateriaalVerhuurASP
                 con.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 com.Connection = con;
-                com.CommandText = @"SELECT v.""productexemplaar_id"", v.""datumUit"",p.""merk"",p.""serie"", c.""naam"",t.""naam"",p.""prijs"" FROM VERHUUR v, PRODUCTEXEMPLAAR e, PRODUCT p, PRODUCTCAT c LEFT OUTER JOIN PRODUCTCAT t ON c.""productcat_id"" = t.""ID"" WHERE v.""productexemplaar_id"" = e.""ID"" AND e.""product_id"" = p.""ID"" AND p.""productcat_id"" = c.""ID"" ";
+                com.CommandText = @"SELECT e.""ID"", v.""datumIn"",v.""datumUit"",p.""merk"",p.""serie"", c.""naam"",t.""naam"",p.""prijs"" FROM PRODUCTEXEMPLAAR e LEFT OUTER JOIN VERHUUR v ON v.""productexemplaar_id"" = e.""ID"" , PRODUCT p, PRODUCTCAT c LEFT OUTER JOIN PRODUCTCAT t ON c.""productcat_id"" = t.""ID"" WHERE p.""productcat_id"" = c.""ID"" AND e.""product_id"" = p.""ID"" ORDER BY e.""ID""";
                 DbDataReader reader = com.ExecuteReader();
                 try
                 {
-                    List<voorwerpen> voorwerpjes = new List<voorwerpen>();
+                    List<voorwerp> voorwerpjes = new List<voorwerp>();
                     //dropdownmenu                    
                     while (reader.Read())
                     {
                         if (voorwerpjes.Count == 0)
                         {
-                            if (reader.IsDBNull(1))
+                            
+                            if (reader.IsDBNull(2) && !reader.IsDBNull(1))
                             {
-                                if (reader.IsDBNull(5))
+                                if (reader.IsDBNull(6))
                                 {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(4), reader.GetInt32(6));
+                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
                                     voorwerp.Verhuurd = true;
                                     voorwerpjes.Add(voorwerp);
                                 }
                                 else
                                 {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(5) + "-" + reader.GetString(4), reader.GetInt32(6));
+                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
                                     voorwerp.Verhuurd = true;
                                     voorwerpjes.Add(voorwerp);
                                 }                                
                             }
                             else
                             {
-                                if(reader.IsDBNull(5))
+                                if(reader.IsDBNull(6))
                                 {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(4), reader.GetInt32(6));
+                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
                                     voorwerpjes.Add(voorwerp);
                                 }
                                 else
                                 {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(5) + "-" + reader.GetString(4), reader.GetInt32(6));
+                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
                                     voorwerpjes.Add(voorwerp);
                                 }                                
                             }
@@ -167,55 +192,52 @@ namespace MateriaalVerhuurASP
                         else
                         {
                             int soort = 0;
-                            foreach (voorwerpen voorwerpje in voorwerpjes)
+                            foreach (voorwerp voorwerpje in voorwerpjes)
                             {
-                                if (reader.IsDBNull(1))
+                                if (voorwerpje.exemplaarnummer == reader.GetInt32(0))
                                 {
-                                    if (voorwerpje.exemplaarnummer == reader.GetInt32(0))
+                                    if (reader.IsDBNull(2) && !reader.IsDBNull(1))
                                     {
                                         voorwerpje.Verhuurd = true;
+                                        soort = 1;
                                     }
                                     else
                                     {
-                                        soort = 1;                                        
+                                        soort = 1;
+                                    }
+                                }                                
+                            }
+                            if(soort == 0)
+                            {
+                                if (reader.IsDBNull(2) && !reader.IsDBNull(1))
+                                {
+                                    if (reader.IsDBNull(6))
+                                    {
+                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
+                                        voorwerp.Verhuurd = true;
+                                        voorwerpjes.Add(voorwerp);
+                                    }
+                                    else
+                                    {
+                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
+                                        voorwerp.Verhuurd = true;
+                                        voorwerpjes.Add(voorwerp);
                                     }
                                 }
                                 else
                                 {
-                                    if (voorwerpje.exemplaarnummer != reader.GetInt32(0))
+                                    if (reader.IsDBNull(6))
                                     {
-                                        soort = 2;
-                                    }                                  
+                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
+                                        voorwerpjes.Add(voorwerp);
+                                    }
+                                    else
+                                    {
+                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
+                                        voorwerpjes.Add(voorwerp);
+                                    }
                                 }
-                            }
-                            if(soort == 1)
-                            {
-                                if (reader.IsDBNull(5))
-                                {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(4), reader.GetInt32(6));
-                                    voorwerp.Verhuurd = true;
-                                    voorwerpjes.Add(voorwerp);
-                                }
-                                else
-                                {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(5) + "-" + reader.GetString(4), reader.GetInt32(6));
-                                    voorwerp.Verhuurd = true;
-                                    voorwerpjes.Add(voorwerp);
-                                }
-                            }
-                            else if(soort == 2)
-                            {
-                                if (reader.IsDBNull(5))
-                                {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(4), reader.GetInt32(6));
-                                    voorwerpjes.Add(voorwerp);
-                                }
-                                else
-                                {
-                                    voorwerpen voorwerp = new voorwerpen(reader.GetInt32(0), reader.GetString(3), reader.GetString(2), reader.GetString(5) + "-" + reader.GetString(4), reader.GetInt32(6));
-                                    voorwerpjes.Add(voorwerp);
-                                }
-                            }                            
+                            }                                                      
                         }                        
                     }
                     return voorwerpjes;
@@ -226,5 +248,47 @@ namespace MateriaalVerhuurASP
                 return null;
             }
         }
+       
+        
+        public void getAccounts()
+        {
+            accounts = new List<Account>();
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectieStr"].ConnectionString;
+                con.Open();
+                DbCommand comm = OracleClientFactory.Instance.CreateCommand();
+                comm.Connection = con;
+                comm.CommandText = @"SELECT * FROM ""ACCOUNT""";
+                DbDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    Account account = new Account(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4));
+                    accounts.Add(account);
+                }                
+            }
+        }
+        public string accountnummer(string barcode)
+        {            
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectieStr"].ConnectionString;
+                con.Open();
+                DbCommand comm = OracleClientFactory.Instance.CreateCommand();
+                comm.Connection = con;
+                comm.CommandText = @"SELECT a.""gebruikersnaam"", RP.id FROM PERSOON p, ""ACCOUNT"" a, RESERVERING_POLSBANDJE RP, RESERVERING R, POLSBANDJE Po WHERE a.""ID"" = RP.""account_id"" AND RP.""polsbandje_id"" = po.""ID"" AND RP.""reservering_id"" = R.""ID"" AND R.""persoon_id"" = p.""ID"" AND Po.""barcode"" = '" + barcode + "' AND ROWNUM < 2";
+                DbDataReader reader = comm.ExecuteReader();
+                while(reader.Read())
+                {
+                    string naam = reader.GetInt32(1)+","+reader.GetString(0);
+                    return naam;
+                }
+               
+            }
+            return null;
+        }
+
     }
 }
