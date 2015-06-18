@@ -376,19 +376,37 @@ namespace IventWeb
         }
         public List<Polsbandje> GetDataPolsbandje(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Polsbandje> polsbandjes = new List<Polsbandje>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Polsbandje p = new Polsbandje(dr.GetInt32(0), dr.GetString(1), dr.GetInt32(2));
-                polsbandjes.Add(p);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Polsbandje> polsbandjes = new List<Polsbandje>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Polsbandje p = new Polsbandje(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
+                        polsbandjes.Add(p);
+                    }
+                    return polsbandjes;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return polsbandjes;
         }
         public List<Product> GetDataProduct(string query)
         {
@@ -440,19 +458,37 @@ namespace IventWeb
         }
         public List<Reservering> GetDataReservering(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Reservering> reserveringen = new List<Reservering>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Reservering r = new Reservering(dr.GetInt32(0), dr.GetInt32(1), dr.GetDateTime(2), dr.GetDateTime(3), dr.GetInt32(4));
-                reserveringen.Add(r);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Reservering> reservaties = new List<Reservering>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Reservering r = new Reservering(reader.GetInt32(0), reader.GetInt32(1), reader.GetDateTime(2), reader.GetDateTime(3), reader.GetInt32(4));
+                        reservaties.Add(r);
+                    }
+                    return reservaties;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return reserveringen;
         }
         public List<ReserveringPolsbandje> GetDataReserveringPolsbandje(string query)
         {

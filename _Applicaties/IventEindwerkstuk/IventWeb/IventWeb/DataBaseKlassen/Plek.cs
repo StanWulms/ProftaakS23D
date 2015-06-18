@@ -22,7 +22,7 @@ namespace IventWeb
 
         public override string ToString()
         {
-            return Nummer.ToString();
+            return "ID: " + Nummer.ToString() + ":    Capaciteit: " + Capaciteit.ToString();
         }
     }
 }

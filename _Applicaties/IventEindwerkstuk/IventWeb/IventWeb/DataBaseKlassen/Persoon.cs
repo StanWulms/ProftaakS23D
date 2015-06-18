@@ -30,7 +30,7 @@ namespace IventWeb
 
         public override string ToString()
         {
-            return VoorNaam.ToString() + " " + TussenVoegsel.ToString() + " " + AchterNaam.ToString();
+            return "ID: " + PersoonID.ToString() + ": " + VoorNaam.ToString() + " " + TussenVoegsel.ToString() + " " + AchterNaam.ToString();
         }
     }
 }
