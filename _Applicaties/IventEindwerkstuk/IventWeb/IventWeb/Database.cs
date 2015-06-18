@@ -257,19 +257,37 @@ namespace IventWeb
         }
         public List<Locatie> GetDataLocatie(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Locatie> locaties = new List<Locatie>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Locatie l = new Locatie(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5));
-                locaties.Add(l);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Locatie> locaties = new List<Locatie>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Locatie l = new Locatie(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5));
+                        locaties.Add(l);
+                    }
+                    return locaties;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return locaties;
         }
         public List<Persoon> GetDataPersoon(string query)
         {
@@ -376,19 +394,37 @@ namespace IventWeb
         }
         public List<Polsbandje> GetDataPolsbandje(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Polsbandje> polsbandjes = new List<Polsbandje>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Polsbandje p = new Polsbandje(dr.GetInt32(0), dr.GetString(1), dr.GetInt32(2));
-                polsbandjes.Add(p);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Polsbandje> polsbandjes = new List<Polsbandje>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Polsbandje p = new Polsbandje(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
+                        polsbandjes.Add(p);
+                    }
+                    return polsbandjes;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return polsbandjes;
         }
         public List<Product> GetDataProduct(string query)
         {
@@ -440,19 +476,37 @@ namespace IventWeb
         }
         public List<Reservering> GetDataReservering(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Reservering> reserveringen = new List<Reservering>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Reservering r = new Reservering(dr.GetInt32(0), dr.GetInt32(1), dr.GetDateTime(2), dr.GetDateTime(3), dr.GetInt32(4));
-                reserveringen.Add(r);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Reservering> reservaties = new List<Reservering>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Reservering r = new Reservering(reader.GetInt32(0), reader.GetInt32(1), reader.GetDateTime(2), reader.GetDateTime(3), reader.GetInt32(4));
+                        reservaties.Add(r);
+                    }
+                    return reservaties;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return reserveringen;
         }
         public List<ReserveringPolsbandje> GetDataReserveringPolsbandje(string query)
         {
@@ -544,17 +598,17 @@ namespace IventWeb
                             }
                             else
                             {
-                                throw new Exception(naam + " is al aanwezig");
+                                return "FOUT: bezoeker is al aanwezig";
                             }
                         }
                         else
                         {
-                            throw new Exception(naam + " heeft nog niet betaald");
+                            return "FOUT: bezoeker heeft nog niet betaald";
                         }
                     }
                     else
                     {
-                        throw new Exception("tag niet bekend");
+                        return "FOUT: tag niet bekend";
                     }
                 }
                 catch (NullReferenceException)
@@ -575,33 +629,43 @@ namespace IventWeb
         /// <param name="huisnr">Huisnummer (met toevoeging)</param>
         /// <param name="postcode">Postcode</param>
         /// <param name="plaats">Plaatsnaam</param>
-        public void insertlocation(string naam, string straat, string huisnr, string postcode, string plaats)
+        public bool insertlocation(string naam, string straat, string huisnr, string postcode, string plaats)
         {
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
-                DbCommand com = OracleClientFactory.Instance.CreateCommand();
-                com.Connection = con;
-                com.CommandText = @"insert into locatie(""naam"",""straat"",""nr"",""postcode"",""plaats"") values('" + naam + "','" + straat + "'," + huisnr + ",'" + postcode + "','" + plaats + "')";
-                com.ExecuteNonQuery();
+                try
+                {
+                    con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                    con.Open();
+                    DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                    com.Connection = con;
+                    com.CommandText = @"insert into locatie(""naam"",""straat"",""nr"",""postcode"",""plaats"") values('" + naam + "','" + straat + "','" + huisnr + "','" + postcode + "','" + plaats + "')";
+                    com.ExecuteNonQuery();
+                    return true;
+                }
+                catch { return false; }
             }
         }
-        public void insertevent(string enaam, string lnaam, string begindatum, string einddatum, string maxbezoekers)
+        public bool insertevent(string enaam, string lnaam, string begindatum, string einddatum, string maxbezoekers)
         {
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
-                DbCommand comm = OracleClientFactory.Instance.CreateCommand();
-                comm.Connection = con;
-                comm.CommandText = @"SELECT * FROM locatie WHERE ""naam"" like '%" + lnaam + "%' AND rownum < 2";
-                DbDataReader reader = comm.ExecuteReader();
-                reader.Read();
-                DbCommand com = OracleClientFactory.Instance.CreateCommand();
-                com.Connection = con;
-                com.CommandText = @"insert into event(""locatie_id"",""naam"",""datumstart"",""datumEinde"",""maxBezoekers"") values(" + reader.GetInt32(0) + ",'" + enaam + "','" + begindatum + "','" + einddatum + "'," + maxbezoekers + ")";
-                com.ExecuteNonQuery();
+                try
+                {
+                    con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                    con.Open();
+                    DbCommand comm = OracleClientFactory.Instance.CreateCommand();
+                    comm.Connection = con;
+                    comm.CommandText = @"SELECT * FROM locatie WHERE ""naam"" like '%" + lnaam + "%' AND rownum < 2";
+                    DbDataReader reader = comm.ExecuteReader();
+                    reader.Read();
+                    DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                    com.Connection = con;
+                    com.CommandText = @"insert into event(""locatie_id"",""naam"",""datumstart"",""datumEinde"",""maxBezoekers"") values(" + reader.GetInt32(0) + ",'" + enaam + "','" + begindatum + "','" + einddatum + "'," + maxbezoekers + ")";
+                    com.ExecuteNonQuery();
+                    return true;
+                }
+                catch { return false; }
             }
         }
 

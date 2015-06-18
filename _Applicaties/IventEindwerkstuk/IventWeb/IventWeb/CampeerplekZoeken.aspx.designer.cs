@@ -22,6 +22,33 @@ namespace IventWeb.ReservatieInhoud {
         protected global::System.Web.UI.WebControls.Label lblOmschrijving;
         
         /// <summary>
+        /// btnSelecteerReservatieHouder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSelecteerReservatieHouder;
+        
+        /// <summary>
+        /// btnSelecteerBezoeker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSelecteerBezoeker;
+        
+        /// <summary>
+        /// btnDeSelecteerBezoeker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeSelecteerBezoeker;
+        
+        /// <summary>
         /// lbReservatieHouder control.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,42 @@ namespace IventWeb.ReservatieInhoud {
         protected global::System.Web.UI.WebControls.ListBox lbPlek;
         
         /// <summary>
+        /// lblBeginDatum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBeginDatum;
+        
+        /// <summary>
+        /// tbBeginDatum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbBeginDatum;
+        
+        /// <summary>
+        /// lblEindDatum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEindDatum;
+        
+        /// <summary>
+        /// tbEindDatum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbEindDatum;
+        
+        /// <summary>
         /// btnPlaatsReservering control.
         /// </summary>
         /// <remarks>
@@ -92,5 +155,14 @@ namespace IventWeb.ReservatieInhoud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPlaatsReservering;
+        
+        /// <summary>
+        /// lblReserveerError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblReserveerError;
     }
 }

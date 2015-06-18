@@ -11,23 +11,68 @@ namespace IventWeb.SysteembeheerInhoud
     {
         List<DataBaseKlassen.EventAanmaken> events;
         Database db;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            ddlLocation.Items.Clear();
             db = new Database();
             events = db.getevents();
             geefeventsweer();
+            List<Locatie> locaties = db.GetDataLocatie("SELECT * FROM LOCATIE");
+            foreach(Locatie locatie in locaties)
+            {
+                ddlLocation.Items.Add(locatie.Naam);
+            }
         }
 
         protected void btnaddloc_Click(object sender, EventArgs e)
         {
-            db.insertlocation(tbnaamloc.Text, Tbstraat.Text, Tbnr.Text, Tbpostcode.Text, Tbplaats.Text);
+            lblLocatieError.Text = "";
+            lblEventError.Text = "";
+            lblNaamLocatieError.Visible = false;
+            lblNaamEventError.Visible = false;
+            Page.Validate("LocatieValidators");
+            if (Page.IsValid)
+            {
+                if (db.insertlocation(tbnaamloc.Text, Tbstraat.Text, Tbnr.Text, Tbpostcode.Text, Tbplaats.Text))
+                {
+                    ddlLocation.Items.Add(tbnaamloc.Text);
+                }
+                else
+                {
+                    lblNaamLocatieError.Visible = true;
+                }
+            }
+            else
+            {
+                lblLocatieError.Text = "Vul al de velden met een '*' in.";
+            }
         }
 
         protected void btnAddEvent_click(object sender, EventArgs e)
         {
-            db.insertevent(Tbnaame.Text, Tbnaamlocatie.Text, Tbdatumstart.Text, Tbdatumeind.Text, Tbmaxbezoeker.Text);
-            Response.Redirect("eventbeheersysteem.aspx");
+            lblLocatieError.Text = "";
+            lblEventError.Text = "";
+            lblNaamLocatieError.Visible = false;
+            lblNaamEventError.Visible = false;
+            Page.Validate("EventValidators");
+            if (Page.IsValid)
+            {
+                if (db.insertevent(Tbnaame.Text, ddlLocation.Text, Tbdatumstart.Text, Tbdatumeind.Text, Tbmaxbezoeker.Text))
+                {
+                    Response.Redirect("EventBeheren.aspx");
+                }
+                else
+                {
+                    lblNaamEventError.Visible = true;
+                }
+            }
+            else
+            {
+                lblEventError.Text = "Vul al de velden met een '*' in.";
+            }
         }
+
         public void geefeventsweer()
         {
             ListBox1.Items.Clear();

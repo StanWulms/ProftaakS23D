@@ -13,6 +13,15 @@ namespace IventWeb.ToegangscontroleInhoud {
     public partial class ZoekPersonen {
         
         /// <summary>
+        /// lblZoekCriteria control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblZoekCriteria;
+        
+        /// <summary>
         /// Tbsearch control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace IventWeb.ToegangscontroleInhoud {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
+        /// lblAanwezig control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAanwezig;
+        
+        /// <summary>
         /// lbnietaanwezig control.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,15 @@ namespace IventWeb.ToegangscontroleInhoud {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lbnietaanwezig;
+        
+        /// <summary>
+        /// lblAfwezig control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAfwezig;
         
         /// <summary>
         /// lbaanwezig control.

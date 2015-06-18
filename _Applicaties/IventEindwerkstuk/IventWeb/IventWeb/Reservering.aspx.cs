@@ -18,6 +18,7 @@ namespace IventWeb.ReservatieInhoud
         protected void Page_Load(object sender, EventArgs e)
         {
             db = new Database();
+            Session["loadpage"] = "true";
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace IventWeb.ReservatieInhoud
                 lblValidation.Text = "Uw gegevens zijn geldig.";
                 //Eerst wordt er geprobeerd om de persoon toe te voegen aan de database.
                 //Als dit is gelukt wordt er voor de hoofdboeker en iedere extra bezoeker een account toegevoegd.
-                if (db.AddData(@"INSERT INTO persoon (""voornaam"", ""tussenvoegsel"", ""achternaam"", ""straat"", ""huisnr"", ""woonplaats"", ""banknr"") VALUES ('" + tbGebruikersnaam.Text + "','" + tbTussenvoegsel.Text + "','" + tbAchternaam.Text + "','" + tbStraat.Text + "','" + tbHuisnummer.Text + "','" + tbWoonplaats.Text + "','" + tbBankrekening.Text + "')"))
+                if (db.AddData(@"INSERT INTO persoon (""voornaam"", ""tussenvoegsel"", ""achternaam"", ""straat"", ""huisnr"", ""woonplaats"", ""banknr"") VALUES ('" + tbVoornaam.Text + "','" + tbTussenvoegsel.Text + "','" + tbAchternaam.Text + "','" + tbStraat.Text + "','" + tbHuisnummer.Text + "','" + tbWoonplaats.Text + "','" + tbBankrekening.Text + "')"))
                 {
                     //Het genereren van een wilekeurige hash
                     var chars = "abcdef0123456789";
