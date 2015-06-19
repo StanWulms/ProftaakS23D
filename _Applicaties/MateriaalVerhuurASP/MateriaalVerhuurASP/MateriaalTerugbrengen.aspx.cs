@@ -15,9 +15,9 @@ namespace MateriaalVerhuurASP
             lbTerugbrengen.Items.Clear();
            //haalt alle exemplaren op en displayed alle exemplaren die nu verhuurd zijn de exemplaarnummers van deze voorwerpen worden in een listbox gezet.
             database = new Database();
-            List<voorwerp> Voorwerpen = database.Getvoorwerpen();
+            List<Voorwerp> Voorwerpen = database.Getvoorwerpen();
 
-            foreach (voorwerp voorwerp in Voorwerpen)
+            foreach (Voorwerp voorwerp in Voorwerpen)
             {
                 if (voorwerp.Verhuurd == true)
                 {

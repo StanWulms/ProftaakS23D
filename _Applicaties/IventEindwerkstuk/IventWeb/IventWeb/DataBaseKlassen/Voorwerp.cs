@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MateriaalVerhuurASP
+namespace IventWeb.DataBaseKlassen
 {
     public class Voorwerp
     {
         public bool verhuurd = false;
-        
+
         public int exemplaarnummer { get; set; }
         public string serie { get; set; }
         public string merk { get; set; }
@@ -17,8 +17,8 @@ namespace MateriaalVerhuurASP
         public bool Verhuurd
         {
             get { return verhuurd; }
-            set{ verhuurd = value; }
-        }        
+            set { verhuurd = value; }
+        }
         public Voorwerp(int exemplaarnummer, string serie, string merk, string categorie, int prijs)
         {
             this.exemplaarnummer = exemplaarnummer;
@@ -29,7 +29,7 @@ namespace MateriaalVerhuurASP
         }
         public override string ToString()
         {
-            return "nummer: "+Convert.ToString(exemplaarnummer) +" serie: "+ serie +" merk: "+ merk +" categorie: "+ categorie +" prijs: "+ Convert.ToString(prijs);
+            return "nummer: " + Convert.ToString(exemplaarnummer) + " serie: " + serie + " merk: " + merk + " categorie: " + categorie + " prijs: " + Convert.ToString(prijs);
         }
     }
 }

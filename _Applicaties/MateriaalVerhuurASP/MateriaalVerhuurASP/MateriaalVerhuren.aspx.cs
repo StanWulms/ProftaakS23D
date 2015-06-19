@@ -13,7 +13,7 @@ namespace MateriaalVerhuurASP
     public partial class MateriaalVerhuren : System.Web.UI.Page
     {
         Database database;
-        List<voorwerp> Voorwerpen;
+        List<Voorwerp> Voorwerpen;
         protected void Page_Load(object sender, EventArgs e)
         {
             lbItems.Items.Clear();
@@ -21,7 +21,7 @@ namespace MateriaalVerhuurASP
             database = new Database();
             database.getAccounts();
             Voorwerpen = database.Getvoorwerpen();
-            foreach(voorwerp voorwerp in Voorwerpen)
+            foreach(Voorwerp voorwerp in Voorwerpen)
             {
                 if(voorwerp.Verhuurd == false)
                 {
@@ -32,7 +32,7 @@ namespace MateriaalVerhuurASP
 
         protected void btnVerhuur_Click(object sender, EventArgs e)
         {            
-            foreach (voorwerp voorwerp in Voorwerpen)
+            foreach (Voorwerp voorwerp in Voorwerpen)
             {
                 if (voorwerp.exemplaarnummer == Convert.ToInt32(tbExemplaarnummer.Text))
                 {

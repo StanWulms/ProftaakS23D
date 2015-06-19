@@ -115,6 +115,7 @@
     <Compile Include="DataBaseKlassen\Event.cs" />
     <Compile Include="DataBaseKlassen\EventAanmaken.cs" />
     <Compile Include="DataBaseKlassen\Locatie.cs" />
+    <Compile Include="DataBaseKlassen\Voorwerp.cs" />
     <Compile Include="EventBeheren.aspx.cs">
       <DependentUpon>EventBeheren.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
