@@ -617,7 +617,9 @@ namespace IventWeb
                             }
                             else
                             {
-                                return "FOUT: bezoeker is al aanwezig";
+                                com.CommandText = @"UPDATE RESERVERING_POLSBANDJE SET ""aanwezig"" = 0 WHERE ""polsbandje_id""=" + reader.GetInt32(3) + @"AND""account_id""=" + reader.GetInt32(4);
+                                com.ExecuteNonQuery();
+                                return "Bezoeker is uitgecheckt";
                             }
                         }
                         else
@@ -852,7 +854,7 @@ namespace IventWeb
                 com.ExecuteNonQuery();
             }
         }
-        public List<DataBaseKlassen.Voorwerp> Getvoorwerpen()
+        public List<DataBaseKlassen.Voorwerp> Getvoorwerpen(string query)
         {
             //haalt alle voorwerpen op uit de database en stelt vast of ze al verhuurd zijn of niet.
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
@@ -861,7 +863,7 @@ namespace IventWeb
                 con.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 com.Connection = con;
-                com.CommandText = @"SELECT e.""ID"", v.""datumIn"",v.""datumUit"",p.""merk"",p.""serie"", c.""naam"",t.""naam"",p.""prijs"" FROM PRODUCTEXEMPLAAR e LEFT OUTER JOIN VERHUUR v ON v.""productexemplaar_id"" = e.""ID"" , PRODUCT p, PRODUCTCAT c LEFT OUTER JOIN PRODUCTCAT t ON c.""productcat_id"" = t.""ID"" WHERE p.""productcat_id"" = c.""ID"" AND e.""product_id"" = p.""ID"" ORDER BY e.""ID""";
+                com.CommandText = query;
                 DbDataReader reader = com.ExecuteReader();
                 try
                 {
@@ -994,7 +996,7 @@ namespace IventWeb
                 DbDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    string naam = reader.GetInt32(1) + "," + reader.GetString(0);
+                    string naam = reader.GetInt32(1) + " " + reader.GetString(0);
                     return naam;
                 }
 

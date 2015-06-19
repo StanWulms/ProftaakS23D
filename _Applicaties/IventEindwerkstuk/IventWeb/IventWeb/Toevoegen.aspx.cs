@@ -13,6 +13,8 @@ namespace IventWeb.VerhuurInhoud
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["naambezoeker"] = "";
+            Session["itemsbezoeker"] = "";
             database = new Database();
             string laadpagina = (String)Session["loadpageadditem"];
             if (laadpagina != "false")

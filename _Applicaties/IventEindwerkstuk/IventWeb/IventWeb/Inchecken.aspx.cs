@@ -32,12 +32,16 @@ namespace IventWeb.ToegangscontroleInhoud
                 { 
                     Int64 tagnumber = Convert.ToInt64(tag);
                     string naam = db.Tagger(tag);
-                    if (naam.Substring(0, 4) == "FOUT") { lblError.Text = naam; }
+                    if (naam.Substring(0, 4) == "FOUT") 
+                    {
+                        lblError.Text = naam;                       
+                    }
                     else
                     {
                         lblError.ForeColor = Color.Green;
                         lblError.Text = "Geldige barcode en het kaartje is betaald.";
-                        Tbnaam.Text = naam;
+                        if (naam == "Bezoeker is uitgecheckt") { Tbnaam.Text = naam; }
+                        else { Tbnaam.Text = naam + ": is ingecheckt."; }
                     }
                 }
                 catch { lblError.Text = "Vul alleen getallen in!"; }

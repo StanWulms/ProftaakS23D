@@ -14,11 +14,18 @@ namespace IventWeb.VerhuurInhoud
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["loadpageadditem"] = "true";
+            //Het zetten van de huidige bezoeker in de naam_label
+            lblnaamd.Text = (String)Session["naambezoeker"];
             lbTerugbrengen.Items.Clear();
             //haalt alle exemplaren op en displayed alle exemplaren die nu verhuurd zijn de exemplaarnummers van deze voorwerpen worden in een listbox gezet.
             database = new Database();
-            List<DataBaseKlassen.Voorwerp> Voorwerpen = database.Getvoorwerpen();
-
+            //Als er geen gebruiker is ingecheckt worden alle geleende items getoond.
+            //Is er wel iemand ingelogd, dan worden alleen de geleende items van de bezoeker getoond.
+            string bezoekeritems = (String)Session["itemsbezoeker"];
+            List<DataBaseKlassen.Voorwerp> Voorwerpen;
+            if (bezoekeritems == "" || bezoekeritems == null) {  Voorwerpen = database.Getvoorwerpen(@"SELECT e.""ID"", v.""datumIn"",v.""datumUit"",p.""merk"",p.""serie"", c.""naam"",t.""naam"",p.""prijs"" FROM PRODUCTEXEMPLAAR e LEFT OUTER JOIN VERHUUR v ON v.""productexemplaar_id"" = e.""ID"" , PRODUCT p, PRODUCTCAT c LEFT OUTER JOIN PRODUCTCAT t ON c.""productcat_id"" = t.""ID"" WHERE p.""productcat_id"" = c.""ID"" AND e.""product_id"" = p.""ID"" ORDER BY e.""ID"""); }
+            else { Voorwerpen = database.Getvoorwerpen(bezoekeritems); }
+            //Het tekenen van alle gevonden items
             foreach (DataBaseKlassen.Voorwerp voorwerp in Voorwerpen)
             {
                 if (voorwerp.Verhuurd == true)
@@ -38,9 +45,10 @@ namespace IventWeb.VerhuurInhoud
                 {
                     int rpnummer = Convert.ToInt32(lblnaamd.Text.Substring(0, 1));
                     database.updateterugbrengen(Convert.ToInt32(tbEventnummer.Text), rpnummer);
+                    Session["naambezoeker"] = "";
                     Response.Redirect("TerugBrengen.aspx");
                 }
-                catch { lblTerugBrengenError.Visible = true; }
+                catch { lblTerugBrengenError.Text = "Scan eerst een bezoeker"; lblTerugBrengenError.Visible = true; }
             }           
         }
 
@@ -50,7 +58,15 @@ namespace IventWeb.VerhuurInhoud
             Page.Validate("ZoekNaamValidators");
             if (Page.IsValid)
             {
-                lblnaamd.Text = database.accountnummer(tbBarcode.Text);
+                try
+                {
+                    string accountid = database.accountnummer(tbBarcode.Text);
+                    Session["naambezoeker"] = accountid;
+                    accountid = accountid.Substring(0, accountid.IndexOf(" "));
+                    Session["itemsbezoeker"] = @"SELECT e.""ID"", v.""datumIn"",v.""datumUit"",p.""merk"",p.""serie"", c.""naam"",t.""naam"",p.""prijs"" FROM PRODUCTEXEMPLAAR e LEFT OUTER JOIN VERHUUR v ON v.""productexemplaar_id"" = e.""ID"" , PRODUCT p, RESERVERING_POLSBANDJE r ,PRODUCTCAT c LEFT OUTER JOIN PRODUCTCAT t ON c.""productcat_id"" = t.""ID"" WHERE p.""productcat_id"" = c.""ID"" AND e.""product_id"" = p.""ID"" AND r.""ID"" = v.""res_pb_id"" AND r.""account_id"" = " + accountid + @"ORDER BY e.""ID""";
+                    Response.Redirect("TerugBrengen.aspx");
+                }
+                catch { lblTerugBrengenError.Text = "Barcode bestaad niet."; lblTerugBrengenError.Visible = true; }
             } 
         }
 
