@@ -5,3 +5,10 @@ C:\Users\Mark\Desktop\school\se23\SE2\toegangscontrole_asp\toegangscontrole_asp\
 C:\Users\Mark\Desktop\school\se23\SE2\toegangscontrole_asp\toegangscontrole_asp\obj\Debug\toegangscontrole_asp.csprojResolveAssemblyReference.cache
 C:\Users\Mark\Desktop\school\se23\SE2\toegangscontrole_asp\toegangscontrole_asp\obj\Debug\toegangscontrole_asp.dll
 C:\Users\Mark\Desktop\school\se23\SE2\toegangscontrole_asp\toegangscontrole_asp\obj\Debug\toegangscontrole_asp.pdb
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\toegangscontrole_asp\toegangscontrole_asp\bin\toegangscontrole_asp.dll.config
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\toegangscontrole_asp\toegangscontrole_asp\bin\toegangscontrole_asp.dll
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\toegangscontrole_asp\toegangscontrole_asp\bin\toegangscontrole_asp.pdb
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\toegangscontrole_asp\toegangscontrole_asp\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\toegangscontrole_asp\toegangscontrole_asp\obj\Debug\toegangscontrole_asp.csprojResolveAssemblyReference.cache
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\toegangscontrole_asp\toegangscontrole_asp\obj\Debug\toegangscontrole_asp.dll
+C:\Users\Kees\Documents\GitHub\ProftaakS23D\___W16_asp.net_programaf\toegangscontrole_asp\toegangscontrole_asp\obj\Debug\toegangscontrole_asp.pdb

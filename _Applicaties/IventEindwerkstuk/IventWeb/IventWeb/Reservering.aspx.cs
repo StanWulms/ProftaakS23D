@@ -18,6 +18,8 @@ namespace IventWeb.ReservatieInhoud
         protected void Page_Load(object sender, EventArgs e)
         {
             db = new Database();
+            Session["loadpage"] = "true";
+            Session["loadpagebetaling"] = "true";
         }
 
         /// <summary>
@@ -93,7 +95,7 @@ namespace IventWeb.ReservatieInhoud
                 lblValidation.Text = "Uw gegevens zijn geldig.";
                 //Eerst wordt er geprobeerd om de persoon toe te voegen aan de database.
                 //Als dit is gelukt wordt er voor de hoofdboeker en iedere extra bezoeker een account toegevoegd.
-                if (db.AddData(@"INSERT INTO persoon (""voornaam"", ""tussenvoegsel"", ""achternaam"", ""straat"", ""huisnr"", ""woonplaats"", ""banknr"") VALUES ('" + tbGebruikersnaam.Text + "','" + tbTussenvoegsel.Text + "','" + tbAchternaam.Text + "','" + tbStraat.Text + "','" + tbHuisnummer.Text + "','" + tbWoonplaats.Text + "','" + tbBankrekening.Text + "')"))
+                if (db.AddData(@"INSERT INTO persoon (""voornaam"", ""tussenvoegsel"", ""achternaam"", ""straat"", ""huisnr"", ""woonplaats"", ""banknr"") VALUES ('" + tbVoornaam.Text + "','" + tbTussenvoegsel.Text + "','" + tbAchternaam.Text + "','" + tbStraat.Text + "','" + tbHuisnummer.Text + "','" + tbWoonplaats.Text + "','" + tbBankrekening.Text + "')"))
                 {
                     //Het genereren van een wilekeurige hash
                     var chars = "abcdef0123456789";
@@ -149,6 +151,12 @@ namespace IventWeb.ReservatieInhoud
             }
         }
 
+        /// <summary>
+        /// Iedere keer dat er een ander aantal extra bezoekers wordt geselecteerd
+        /// dienen de juiste velden zichtbaar te worden. De textboxen hebben standaard waardes -1 t/m -5.
+        /// Dit doe ik omdat ik kijk of er geen van de velden gelijk zijn aan elkaar.
+        /// Als de textboxes leeg waren zou deze check altijd 'true' geven.
+        /// </summary>
         protected void ddlAantal_TextChanged(object sender, EventArgs e)
         {
             lblAccount1.Visible = false; tbAccount1.Visible = false; tbAccount1.Text = "-1"; rfvAccount1.Enabled = false; lblEmail1.Visible = false; tbEmail1.Visible = false; tbEmail1.Text = "-1"; rfvEmail1.Enabled = false; revEmail1.Enabled = false;

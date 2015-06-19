@@ -63,11 +63,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Betaling.aspx" />
     <Content Include="CampeerplekZoeken.aspx" />
+    <Content Include="CSS\Campeerplekzoeken.css" />
     <Content Include="CSS\Style.css" />
     <Content Include="EventBeheren.aspx" />
     <Content Include="GenereerAccount.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="Images\CampingPlattegrond.png" />
     <Content Include="Images\Cheering_crowd.jpg" />
     <Content Include="Inchecken.aspx" />
     <Content Include="Inlog.aspx" />
@@ -86,6 +89,13 @@
     <Content Include="ZoekPersonen.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Betaling.aspx.cs">
+      <DependentUpon>Betaling.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Betaling.aspx.designer.cs">
+      <DependentUpon>Betaling.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CampeerplekZoeken.aspx.cs">
       <DependentUpon>CampeerplekZoeken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -97,12 +107,15 @@
     <Compile Include="DataBaseKlassen\AccountBijdrage.cs" />
     <Compile Include="DataBaseKlassen\Bericht.cs" />
     <Compile Include="DataBaseKlassen\Bestand.cs" />
+    <Compile Include="DataBaseKlassen\Bezoeker.cs" />
     <Compile Include="DataBaseKlassen\Bijdrage.cs" />
     <Compile Include="DataBaseKlassen\BijdrageBericht.cs" />
     <Compile Include="DataBaseKlassen\Categorie.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DataBaseKlassen\Event.cs" />
+    <Compile Include="DataBaseKlassen\EventAanmaken.cs" />
     <Compile Include="DataBaseKlassen\Locatie.cs" />
+    <Compile Include="DataBaseKlassen\Voorwerp.cs" />
     <Compile Include="EventBeheren.aspx.cs">
       <DependentUpon>EventBeheren.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -73,6 +73,7 @@ namespace toegangscontrole_asp
             }
             return null;
         }
+
         public List<bezoekers> getbezoekers(string search)
         {
             OracleCommand cmd = conn.CreateCommand();

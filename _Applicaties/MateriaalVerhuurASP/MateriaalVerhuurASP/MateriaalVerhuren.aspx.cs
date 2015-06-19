@@ -12,43 +12,45 @@ namespace MateriaalVerhuurASP
 {
     public partial class MateriaalVerhuren : System.Web.UI.Page
     {
+        Database database;
+        List<Voorwerp> Voorwerpen;
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            lbItems.Items.Clear();
+            //haalt alle exemplaren op en displayed alle exemplaren die nu niet verhuurd zijn de exemplaarnummers van deze voorwerpen worden in een listbox gezet.
+            database = new Database();
+            database.getAccounts();
+            Voorwerpen = database.Getvoorwerpen();
+            foreach(Voorwerp voorwerp in Voorwerpen)
             {
-                if (con == null)
+                if(voorwerp.Verhuurd == false)
                 {
-                    //return "Error! No Connection";
-                }
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectieStr"].ConnectionString;
-                con.Open();
-                DbCommand com = OracleClientFactory.Instance.CreateCommand();
-                if (com == null)
-                {
-                    //return "Error! No Command";
-                }
-                com.Connection = con;
-                com.CommandText = @"SELECT ""gebruikersnaam"" FROM ACCOUNT";
-                DbDataReader reader = com.ExecuteReader();
-                try
-                {
-                    //dropdownmenu
-                    lbItems.Items.Clear();
-                    while (reader.Read())
-                    {
-                        lbItems.Items.Add(reader[0].ToString());
-                    }
-                }
-                catch (NullReferenceException)
-                {
-
-                }
+                    lbItems.Items.Add(Convert.ToString(voorwerp));
+                }                                
             }
         }
 
         protected void btnVerhuur_Click(object sender, EventArgs e)
+        {            
+            foreach (Voorwerp voorwerp in Voorwerpen)
+            {
+                if (voorwerp.exemplaarnummer == Convert.ToInt32(tbExemplaarnummer.Text))
+                {
+                    if (voorwerp.Verhuurd == false && lblDbNaam.Text != null)
+                    {
+                        int rpnummer = Convert.ToInt32(lblDbNaam.Text.Substring(0, 1));
+                        database.insertverhuur(voorwerp, rpnummer);
+                        Response.Redirect("WebForm1.aspx");
+                    }
+                }
+                
+            }
+            
+        }
+
+        protected void BtnZoek_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm1.aspx");
+             lblDbNaam.Text = database.accountnummer(tbBarcode.Text);
         }
 
     }

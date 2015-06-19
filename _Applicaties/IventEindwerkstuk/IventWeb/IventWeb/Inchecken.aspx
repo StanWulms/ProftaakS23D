@@ -12,4 +12,10 @@
     </nav>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <div>    
+        <asp:TextBox ID="tbtag" runat="server"></asp:TextBox>
+        <asp:Button ID="btnEnter" runat="server" OnClick="btnenter_Click" Text="Enter" />  
+    </div><br />
+    <asp:TextBox ID="Tbnaam" runat="server" Height="16px" ReadOnly="True"></asp:TextBox><br /><br />
+    <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
 </asp:Content>

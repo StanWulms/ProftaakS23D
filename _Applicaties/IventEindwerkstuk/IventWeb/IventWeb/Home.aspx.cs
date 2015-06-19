@@ -11,7 +11,10 @@ namespace IventWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["naambezoeker"] = "";
+            Session["loadpage"] = "true";
+            Session["loadpageadditem"] = "true";
+            Session["itemsbezoeker"] = "";
         }
     }
 }
