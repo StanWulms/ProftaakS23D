@@ -378,19 +378,37 @@ namespace IventWeb
         }
         public List<PlekSpecificatie> GetDataPlekSpecificatie(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<PlekSpecificatie> plekspecificaties = new List<PlekSpecificatie>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                PlekSpecificatie p = new PlekSpecificatie(dr.GetInt32(0), dr.GetInt32(1), dr.GetInt32(2), dr.GetString(3));
-                plekspecificaties.Add(p);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<PlekSpecificatie> plekspecificaties = new List<PlekSpecificatie>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        PlekSpecificatie p = new PlekSpecificatie(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetString(3));
+                        plekspecificaties.Add(p);
+                    }
+                    return plekspecificaties;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return plekspecificaties;
         }
         public List<Polsbandje> GetDataPolsbandje(string query)
         {

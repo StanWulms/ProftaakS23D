@@ -19,6 +19,7 @@ namespace IventWeb.ReservatieInhoud
         {
             db = new Database();
             Session["loadpage"] = "true";
+            Session["loadpagebetaling"] = "true";
         }
 
         /// <summary>

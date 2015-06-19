@@ -63,6 +63,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Betaling.aspx" />
     <Content Include="CampeerplekZoeken.aspx" />
     <Content Include="CSS\Campeerplekzoeken.css" />
     <Content Include="CSS\Style.css" />
@@ -88,6 +89,13 @@
     <Content Include="ZoekPersonen.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Betaling.aspx.cs">
+      <DependentUpon>Betaling.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Betaling.aspx.designer.cs">
+      <DependentUpon>Betaling.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CampeerplekZoeken.aspx.cs">
       <DependentUpon>CampeerplekZoeken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

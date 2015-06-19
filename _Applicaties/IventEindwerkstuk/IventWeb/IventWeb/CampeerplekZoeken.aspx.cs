@@ -17,6 +17,7 @@ namespace IventWeb.ReservatieInhoud
         protected void Page_Load(object sender, EventArgs e)
         {  
             db = new Database();
+            Session["loadpagebetaling"] = "true";
             string laadpagina = (String)Session["loadpage"];
             if (laadpagina != "false")
             {
