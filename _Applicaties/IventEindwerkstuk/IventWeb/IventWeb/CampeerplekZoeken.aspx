@@ -12,6 +12,17 @@
             <li><a href="Betaling.aspx">Betaling</a></li>
         </ul>
     </nav>
+    <!-- Java script om de barcode pop-up aan te roepen. 
+        Hiermee wordt voor ieder account een apparte barcode gescant -->
+    <script type="text/javascript">
+        function barcodeScanner(naam) {
+            var barcode = prompt(naam);            
+
+            if (barcode != null) {
+                document.getElementById('<%= Hidden1.ClientID %>').value = barcode;
+            }
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <br /><br />
@@ -29,6 +40,9 @@
     <asp:Label ID="lblReservatiehouder" runat="server" Text=""></asp:Label><br /><br />
     <asp:Label ID="lblPlek" runat="server" Text="Plek"></asp:Label><br />
     <asp:ListBox ID="lbPlek" runat="server" Height="144px" Width="278px"></asp:ListBox>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Button ID="btnNext" runat="server" BackColor="#66FF33" ForeColor="Black" Height="70px" OnClick="btnNext_Click" Text="Next" Visible="False" Width="129px" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br />
     <br />
     <asp:Label ID="lblBeginDatum" runat="server" Text="Begindatum: "></asp:Label>
@@ -44,5 +58,9 @@
             <img src ="Images/CampingPlattegrond.png" width="700px" height="700px"/>
         </div>
     </div>
+    <!-- Tijdelijke opslag voor de barcode -->
+    <!--<p id="NotesSiteName" runat="server"></p> -->
+    <!-- <asp:Label ID="lblTijdelijkeBarcode" runat="server" Text=""></asp:Label> -->
+    <asp:HiddenField ID="Hidden1" runat="server" />
     <br /><br />
 </asp:Content>
