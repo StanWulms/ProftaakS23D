@@ -97,7 +97,7 @@ namespace MateriaalVerhuurASP
                 com.ExecuteNonQuery();
             }
         }
-        public void insertverhuur(voorwerp voorwerp, int rpnummer)
+        public void insertverhuur(Voorwerp voorwerp, int rpnummer)
         {
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
@@ -140,7 +140,7 @@ namespace MateriaalVerhuurASP
                 com.ExecuteNonQuery();
             }
         }
-        public List<voorwerp> Getvoorwerpen()
+        public List<Voorwerp> Getvoorwerpen()
         {
             //haalt alle voorwerpen op uit de database en stelt vast of ze al verhuurd zijn of niet.
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
@@ -153,7 +153,7 @@ namespace MateriaalVerhuurASP
                 DbDataReader reader = com.ExecuteReader();
                 try
                 {
-                    List<voorwerp> voorwerpjes = new List<voorwerp>();
+                    List<Voorwerp> voorwerpjes = new List<Voorwerp>();
                     //dropdownmenu                    
                     while (reader.Read())
                     {
@@ -164,13 +164,13 @@ namespace MateriaalVerhuurASP
                             {
                                 if (reader.IsDBNull(6))
                                 {
-                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
+                                    Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
                                     voorwerp.Verhuurd = true;
                                     voorwerpjes.Add(voorwerp);
                                 }
                                 else
                                 {
-                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
+                                    Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
                                     voorwerp.Verhuurd = true;
                                     voorwerpjes.Add(voorwerp);
                                 }                                
@@ -179,12 +179,12 @@ namespace MateriaalVerhuurASP
                             {
                                 if(reader.IsDBNull(6))
                                 {
-                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
+                                    Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
                                     voorwerpjes.Add(voorwerp);
                                 }
                                 else
                                 {
-                                    voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
+                                    Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
                                     voorwerpjes.Add(voorwerp);
                                 }                                
                             }
@@ -192,7 +192,7 @@ namespace MateriaalVerhuurASP
                         else
                         {
                             int soort = 0;
-                            foreach (voorwerp voorwerpje in voorwerpjes)
+                            foreach (Voorwerp voorwerpje in voorwerpjes)
                             {
                                 if (voorwerpje.exemplaarnummer == reader.GetInt32(0))
                                 {
@@ -213,13 +213,13 @@ namespace MateriaalVerhuurASP
                                 {
                                     if (reader.IsDBNull(6))
                                     {
-                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
+                                        Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
                                         voorwerp.Verhuurd = true;
                                         voorwerpjes.Add(voorwerp);
                                     }
                                     else
                                     {
-                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
+                                        Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
                                         voorwerp.Verhuurd = true;
                                         voorwerpjes.Add(voorwerp);
                                     }
@@ -228,12 +228,12 @@ namespace MateriaalVerhuurASP
                                 {
                                     if (reader.IsDBNull(6))
                                     {
-                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
+                                        Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(5), reader.GetInt32(7));
                                         voorwerpjes.Add(voorwerp);
                                     }
                                     else
                                     {
-                                        voorwerp voorwerp = new voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
+                                        Voorwerp voorwerp = new Voorwerp(reader.GetInt32(0), reader.GetString(4), reader.GetString(3), reader.GetString(6) + "-" + reader.GetString(5), reader.GetInt32(7));
                                         voorwerpjes.Add(voorwerp);
                                     }
                                 }

@@ -8,6 +8,7 @@
             <li><a href="Inlog.aspx">Uitloggen</a></li>
             <li><a href="Reservering.aspx">Reservering</a></li>
             <li><a href="CampeerplekZoeken.aspx">Campeerplek zoeken</a></li>
+            <li><a href="Betaling.aspx">Betaling</a></li>
         </ul>
     </nav>
 </asp:Content>

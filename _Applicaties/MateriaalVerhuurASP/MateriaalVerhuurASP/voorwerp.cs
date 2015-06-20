@@ -5,7 +5,7 @@ using System.Web;
 
 namespace MateriaalVerhuurASP
 {
-    public class voorwerp
+    public class Voorwerp
     {
         public bool verhuurd = false;
         
@@ -19,7 +19,7 @@ namespace MateriaalVerhuurASP
             get { return verhuurd; }
             set{ verhuurd = value; }
         }        
-        public voorwerp(int exemplaarnummer, string serie, string merk, string categorie, int prijs)
+        public Voorwerp(int exemplaarnummer, string serie, string merk, string categorie, int prijs)
         {
             this.exemplaarnummer = exemplaarnummer;
             this.serie = serie;
