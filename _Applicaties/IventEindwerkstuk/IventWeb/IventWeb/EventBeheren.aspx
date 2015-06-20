@@ -8,6 +8,7 @@
             <li><a href="Inlog.aspx">Uitloggen</a></li>
             <li><a href="GenereerAccount.aspx">Genereer account</a></li>
             <li><a href="EventBeheren.aspx">Event beheren</a></li>
+            <li><a href="PlekBeheren.aspx">Plek beheren</a></li>
         </ul>
     </nav>
 </asp:Content>
@@ -60,8 +61,7 @@
         <asp:TextBox ID="Tbmaxbezoeker" runat="server" Width="153px"></asp:TextBox>
     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="Tbmaxbezoeker" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="([0-9]{1,})" ValidationGroup="EventValidators">Vul een getal in.</asp:RegularExpressionValidator>
     <br /><br />
-        <asp:Button ID="btnAddEvent" runat="server" Text="voeg event toe" OnClick="btnAddEvent_click" />
-        
+        <asp:Button ID="btnAddEvent" runat="server" Text="voeg event toe" OnClick="btnAddEvent_click" />      
     <asp:Label ID="lblEventError" runat="server" ForeColor="Red"></asp:Label>
         
 </asp:Content>

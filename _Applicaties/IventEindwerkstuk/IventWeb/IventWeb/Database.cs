@@ -242,19 +242,37 @@ namespace IventWeb
         }
         public List<Event> GetDataEvent(string query)
         {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Event> events = new List<Event>();
-            while (dr.Read())
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
             {
-                Event e = new Event(dr.GetInt32(0), dr.GetInt32(1), dr.GetString(2), dr.GetDateTime(3), dr.GetDateTime(4), dr.GetInt32(5));
-                events.Add(e);
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = query;
+                DbDataReader reader = com.ExecuteReader();
+                List<Event> evenementen = new List<Event>();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        Event e = new Event(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetDateTime(3), reader.GetDateTime(4), reader.GetInt32(5));
+                        evenementen.Add(e);
+                    }
+                    return evenementen;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
             }
-            dr.Close();
-            cmd.Dispose();
-            return events;
         }
         public List<Locatie> GetDataLocatie(string query)
         {

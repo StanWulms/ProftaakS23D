@@ -162,29 +162,6 @@ namespace IventWeb.ReservatieInhoud
                         //En voor iedere bezoeker een POLSBANDJE.
                         for (int i = 0; i < lbGeselecteerdePersonen.Items.Count; i++)
                         {
-                            //De ScriptManager roept de javaScript funtie barcodeScanner() aan.
-                            //Dit geeft een pop-up venster waar een barcode gescant kan worden.
-                            //Blijft net zolang loopen totdat de barcode uniek is.
-                            /*bool geslaagd = false;
-                            int [] barcodeWaardes = new int[10]  { 0,  1, 2, 3, 4, 5, 6, 7, 8, 9};
-                            while (!geslaagd)
-                            {
-                                ScriptManager.RegisterStartupScript(this, GetType(), "barcodeScanner", "barcodeScanner();", true);
-                                lblEindDatum.Text = Hidden1.Value;
-                                if (geslaagd) { geslaagd = true; }
-                            }
-                            string barcode = "";*/
-
-                            //Het genereren van een wilekeurige barcode
-                            /*var chars = "0123456789";
-                            var stringChars = new char[12];
-                            var random = new Random();
-                            for (int j = 0; j < stringChars.Length; j++)
-                            {
-                                stringChars[j] = chars[random.Next(chars.Length)];
-                            }
-                            string barcode = new String(stringChars);*/
-
                             db.AddData(@"INSERT INTO polsbandje (""barcode"", ""actief"") VALUES ('" + Convert.ToString(i) + "',0)");
                             //Kijken wat het ID is van het zo juist toegevoegde POLSBANDJE.
                             List<Polsbandje> polsbandjes = new List<Polsbandje>();
@@ -324,7 +301,9 @@ namespace IventWeb.ReservatieInhoud
         }
 
         /// <summary>
-        /// NEXT
+        /// De next-button verschijnt als er een barcode is ingevuld in de 
+        /// javascript pop-up. Door op de knop te klikken wordt (als die er is)
+        /// de volgende bezoeker opgehaald om de barcode voor te scannen.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

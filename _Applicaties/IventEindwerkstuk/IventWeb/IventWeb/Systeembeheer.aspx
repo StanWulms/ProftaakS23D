@@ -8,6 +8,7 @@
             <li><a href="Inlog.aspx">Uitloggen</a></li>
             <li><a href="GenereerAccount.aspx">Genereer account</a></li>
             <li><a href="EventBeheren.aspx">Event beheren</a></li>
+            <li><a href="PlekBeheren.aspx">Plek beheren</a></li>
         </ul>
     </nav>
 </asp:Content>

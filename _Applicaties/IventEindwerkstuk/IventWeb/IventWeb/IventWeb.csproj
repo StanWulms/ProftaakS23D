@@ -75,6 +75,7 @@
     <Content Include="Inchecken.aspx" />
     <Content Include="Inlog.aspx" />
     <Content Include="jquery-1.11.2.js" />
+    <Content Include="PlekBeheren.aspx" />
     <Content Include="Reservatie.aspx" />
     <Content Include="Reservering.aspx" />
     <Content Include="SMS.aspx" />
@@ -166,6 +167,13 @@
     <Compile Include="DataBaseKlassen\Product.cs" />
     <Compile Include="DataBaseKlassen\Productcat.cs" />
     <Compile Include="DataBaseKlassen\Productexemplaar.cs" />
+    <Compile Include="PlekBeheren.aspx.cs">
+      <DependentUpon>PlekBeheren.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PlekBeheren.aspx.designer.cs">
+      <DependentUpon>PlekBeheren.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataBaseKlassen\Reservering.cs" />
     <Compile Include="DataBaseKlassen\ReserveringPolsbandje.cs" />
