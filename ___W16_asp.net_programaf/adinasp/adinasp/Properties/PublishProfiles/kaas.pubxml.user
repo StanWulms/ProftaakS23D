@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Mark\Desktop\adinasp</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="adshit.aspx">
+      <publishTime>06/20/2015 17:10:22</publishTime>
+    </File>
+    <File Include="bin/adinasp.dll">
+      <publishTime>06/20/2015 19:53:24</publishTime>
+    </File>
+    <File Include="changestats.aspx">
+      <publishTime>06/20/2015 19:05:08</publishTime>
+    </File>
+    <File Include="eigenstats.aspx">
+      <publishTime>06/20/2015 19:09:51</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>06/20/2015 17:12:08</publishTime>
+    </File>
+    <File Include="WebForm1.aspx">
+      <publishTime>06/20/2015 17:25:53</publishTime>
+    </File>
+    <File Include="WebForm2.aspx">
+      <publishTime>06/20/2015 17:16:15</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

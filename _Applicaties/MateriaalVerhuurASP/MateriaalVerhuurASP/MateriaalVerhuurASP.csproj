@@ -66,7 +66,9 @@
     <Content Include="MateriaalToevoegen.aspx" />
     <Content Include="MateriaalVerhuren.aspx" />
     <Content Include="StyleSheet1.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
   </ItemGroup>
@@ -121,6 +123,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Site1.Master" />
+    <None Include="Properties\PublishProfiles\broodjekaas.pubxml" />
+    <None Include="Properties\PublishProfiles\kaas.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

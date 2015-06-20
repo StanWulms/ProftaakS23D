@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ConnectieStr-Web.config Connection String" description="ConnectieStr Connection String used in web.config by the application to access the database." defaultValue="User id=dbi322740; password=wDjvYBVqEV; Data Source=//192.168.15.50/fhictora; Pooling=false;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Mark\\Documents\\GitHub\\ProftaakS23D\\_Applicaties\\MateriaalVerhuurASP\\MateriaalVerhuurASP\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ConnectieStr']/@connectionString" />
+  </parameter>
+</parameters>

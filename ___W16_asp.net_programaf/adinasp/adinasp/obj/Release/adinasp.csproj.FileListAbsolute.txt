@@ -1,0 +1,6 @@
+C:\Users\Mark\Desktop\school\se23\SE2\adinasp\adinasp\bin\adinasp.dll.config
+C:\Users\Mark\Desktop\school\se23\SE2\adinasp\adinasp\bin\adinasp.dll
+C:\Users\Mark\Desktop\school\se23\SE2\adinasp\adinasp\bin\adinasp.pdb
+C:\Users\Mark\Desktop\school\se23\SE2\adinasp\adinasp\obj\Release\adinasp.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Desktop\school\se23\SE2\adinasp\adinasp\obj\Release\adinasp.dll
+C:\Users\Mark\Desktop\school\se23\SE2\adinasp\adinasp\obj\Release\adinasp.pdb

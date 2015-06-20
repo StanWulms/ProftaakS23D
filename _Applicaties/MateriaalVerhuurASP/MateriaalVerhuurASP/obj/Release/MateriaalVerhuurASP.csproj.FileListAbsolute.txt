@@ -1,0 +1,7 @@
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\MateriaalVerhuurASP.dll.config
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\MateriaalVerhuurASP.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\MateriaalVerhuurASP.pdb
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\MateriaalVerhuurASP\MateriaalVerhuurASP\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\MateriaalVerhuurASP\MateriaalVerhuurASP\obj\Release\MateriaalVerhuurASP.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\MateriaalVerhuurASP\MateriaalVerhuurASP\obj\Release\MateriaalVerhuurASP.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\MateriaalVerhuurASP\MateriaalVerhuurASP\obj\Release\MateriaalVerhuurASP.pdb

@@ -1,0 +1,14 @@
+﻿body {
+}
+#text{
+    background-color:green;
+    float:left;
+    display: inline-block;
+    margin-right: 30px;
+}
+#list{
+    background-color: red;
+    float: left;
+    display: inline-block;
+    margin-right: 30px;
+}
