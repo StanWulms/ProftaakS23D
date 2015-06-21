@@ -15,6 +15,24 @@
     <asp:Label ID="lblUsername" runat="server" Text="Username: "></asp:Label>
     <asp:TextBox ID="tbUsername" runat="server"></asp:TextBox><br /><br />
     <asp:Label ID="lblPassword" runat="server" Text="Password: "></asp:Label>
-    <asp:TextBox ID="tbPassword" runat="server"></asp:TextBox><br /><br /><br />
+    <asp:TextBox ID="tbPassword" runat="server"></asp:TextBox><br /><br />
+    <asp:Label ID="lblApplicatie" runat="server" Text="Applicatie: "></asp:Label>
+    <asp:DropDownList ID="ddlApplicatie" runat="server">
+        <asp:ListItem Value="1">
+            Event beheer systeem
+        </asp:ListItem>
+        <asp:ListItem Value="2">
+            Materiaalverhuur
+        </asp:ListItem>
+        <asp:ListItem Value="3">
+            Reservering
+        </asp:ListItem>
+        <asp:ListItem Value="4">
+            SMS
+        </asp:ListItem>
+        <asp:ListItem Value="5">
+            Toegangscontrole
+        </asp:ListItem>
+    </asp:DropDownList><br /><br /><br />
     <asp:Button ID="btnLogin" runat="server" Text="Login" />
 </asp:Content>

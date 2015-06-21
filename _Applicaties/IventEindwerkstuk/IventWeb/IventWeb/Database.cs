@@ -110,54 +110,6 @@ namespace IventWeb
                 }
             }
         }
-        public List<AccountBijdrage> GetDataAccountBijdrage(string query)
-        {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<AccountBijdrage> accountbijdragen = new List<AccountBijdrage>();
-            while (dr.Read())
-            {
-                AccountBijdrage a = new AccountBijdrage(dr.GetInt32(0), dr.GetInt32(1), dr.GetInt32(2), dr.GetInt32(3), dr.GetInt32(4));
-                accountbijdragen.Add(a);
-            }
-            dr.Close();
-            cmd.Dispose();
-            return accountbijdragen;
-        }
-        public List<Bericht> GetDataBericht(string query)
-        {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Bericht> berichten = new List<Bericht>();
-            while (dr.Read())
-            {
-                Bericht b = new Bericht(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
-                berichten.Add(b);
-            }
-            dr.Close();
-            cmd.Dispose();
-            return berichten;
-        }
-        public List<Bestand> GetDataBestand(string query)
-        {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Bestand> bestanden = new List<Bestand>();
-            while (dr.Read())
-            {
-                Bestand b = new Bestand(dr.GetInt32(0), dr.GetInt32(1), dr.GetString(2), dr.GetInt32(3));
-                bestanden.Add(b);
-            }
-            dr.Close();
-            cmd.Dispose();
-            return bestanden;
-        }
         public List<DataBaseKlassen.Bezoeker> getbezoekers(string search)
         {
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
@@ -192,22 +144,6 @@ namespace IventWeb
                 }
             }
         }
-        public List<Bijdrage> GetDataBijdrage(string query)
-        {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Bijdrage> bijdragen = new List<Bijdrage>();
-            while (dr.Read())
-            {
-                Bijdrage b = new Bijdrage(dr.GetInt32(0), dr.GetInt32(1), dr.GetDateTime(2), dr.GetString(3));
-                bijdragen.Add(b);
-            }
-            dr.Close();
-            cmd.Dispose();
-            return bijdragen;
-        }
         public List<BijdrageBericht> GetDataBijdrageBericht(string query)
         {
             OracleCommand cmd = conn.CreateCommand();
@@ -223,22 +159,6 @@ namespace IventWeb
             dr.Close();
             cmd.Dispose();
             return bijdrageberichten;
-        }
-        public List<Categorie> GetDataCategorie(string query)
-        {
-            OracleCommand cmd = conn.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = query;
-            OracleDataReader dr = cmd.ExecuteReader();
-            List<Categorie> categorieen = new List<Categorie>();
-            while (dr.Read())
-            {
-                Categorie c = new Categorie(dr.GetInt32(0), dr.GetInt32(1), dr.GetString(2));
-                categorieen.Add(c);
-            }
-            dr.Close();
-            cmd.Dispose();
-            return categorieen;
         }
         public List<Event> GetDataEvent(string query)
         {

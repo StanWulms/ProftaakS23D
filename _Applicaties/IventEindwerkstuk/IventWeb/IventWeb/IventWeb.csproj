@@ -79,6 +79,7 @@
     <Content Include="Reservatie.aspx" />
     <Content Include="Reservering.aspx" />
     <Content Include="SMS.aspx" />
+    <Content Include="SMSContent.aspx" />
     <Content Include="Systeembeheer.aspx" />
     <Content Include="TerugBrengen.aspx" />
     <Content Include="TheWall.aspx" />
@@ -199,6 +200,13 @@
     </Compile>
     <Compile Include="SMS.aspx.designer.cs">
       <DependentUpon>SMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SMSContent.aspx.cs">
+      <DependentUpon>SMSContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SMSContent.aspx.designer.cs">
+      <DependentUpon>SMSContent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Systeembeheer.aspx.cs">
       <DependentUpon>Systeembeheer.aspx</DependentUpon>

@@ -11,4 +11,12 @@
     </nav>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <div id="text">
+        <asp:Label ID="lblNaam" runat="server" Text="Categorie: "></asp:Label>
+        <asp:Label ID="lblDbNaam" runat="server" Text=""></asp:Label>
+    </div>
+    <div id="Mappen">
+        <asp:Panel ID="pnlMappen" runat="server" Width="410px">
+        </asp:Panel>
+    </div>
 </asp:Content>
