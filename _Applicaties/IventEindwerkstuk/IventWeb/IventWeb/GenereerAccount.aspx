@@ -13,4 +13,6 @@
     </nav>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <asp:TextBox ID="tbemail" runat="server"></asp:TextBox>
+    <asp:Button ID="btnverstuur" runat="server" OnClick="btnverstuur_Click" Text="verstuur email" />
 </asp:Content>

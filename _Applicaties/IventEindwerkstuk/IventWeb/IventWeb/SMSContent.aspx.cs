@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace IventWeb
 {
@@ -19,6 +21,11 @@ namespace IventWeb
         int imgSize = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ACTIVE DIRECTORY
+            SearchResult rs = (SearchResult)Session["directsearch"];
+            if (rs.GetDirectoryEntry().Properties["samaccountname"].Value != null)
+                lblDbNaam.Text = "Username : " + rs.GetDirectoryEntry().Properties["samaccountname"].Value.ToString();
+            //ACTIVE DIRECTORY
             ab = new AccountBijdrage();
             b = new Bijdrage();
             bs = new Bestand();

@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.DirectoryServices;
+using System.DirectoryServices.ActiveDirectory;
+using System.Net.Mail;
+using System.ComponentModel;
 
 namespace IventWeb
 {
@@ -15,6 +19,35 @@ namespace IventWeb
             Session["loadpage"] = "true";
             Session["loadpageadditem"] = "true";
             Session["itemsbezoeker"] = "";
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            bool authentic = false;
+            try
+            {
+                DirectoryEntry entry = new DirectoryEntry("LDAP://" + Convert.ToString(Domain.GetComputerDomain()), tbUsername.Text, tbPassword.Text);
+                object nativeObject = entry.NativeObject;
+                authentic = true;
+                Session["entry"] = entry;
+                DirectorySearcher ds = new DirectorySearcher(entry);
+                ds.Filter = "(&((&(objectCategory=Person)(objectClass=User)))(samaccountname=" + tbUsername.Text + "))";
+
+                ds.SearchScope = SearchScope.Subtree;
+                ds.ServerTimeLimit = TimeSpan.FromSeconds(90);
+
+                SearchResult userObject = ds.FindOne();
+                if (authentic == true && userObject != null)
+                {
+                    Session["username"] = tbUsername.Text;
+                    Session["directsearch"] = userObject;
+                    Response.Redirect("eigenstats.aspx");
+                }
+            }
+            catch (DirectoryServicesCOMException)
+            {
+                
+            }
         }
     }
 }
