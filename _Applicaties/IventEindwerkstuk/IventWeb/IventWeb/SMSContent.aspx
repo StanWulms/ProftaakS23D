@@ -56,8 +56,7 @@
         <!-- Dunno if using Panel -->
         <asp:Panel ID="pnlPost" runat="server">
             <!-- Video -->
-            <video id="Viodeoo" width="320" height="240" controls="controls" autoplay="autoplay" runat="server">
-            <source id="Videoo" src="..\Images\movie.mp4" type="video/mp4"></video>
+            <div id="video" runat="server"></div>
         </asp:Panel>
         <br />
     </div>

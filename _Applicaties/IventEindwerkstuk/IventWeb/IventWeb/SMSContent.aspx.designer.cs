@@ -175,13 +175,13 @@ namespace IventWeb {
         protected global::System.Web.UI.WebControls.Panel pnlPost;
         
         /// <summary>
-        /// Viodeoo control.
+        /// video control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlVideo Viodeoo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl video;
         
         /// <summary>
         /// lblPlaatsReactie control.

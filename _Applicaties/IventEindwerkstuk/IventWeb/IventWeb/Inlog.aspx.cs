@@ -41,7 +41,22 @@ namespace IventWeb
                 {
                     Session["username"] = tbUsername.Text;
                     Session["directsearch"] = userObject;
-                    Response.Redirect("eigenstats.aspx");
+                    string pagina = ddlApplicatie.Text;
+                    switch (pagina)
+                    {
+                        case "Event beheer systeem": Response.Redirect("Systeembeheer.aspx");
+                            break;
+                        case "Materiaalverhuur": Response.Redirect("Verhuur.aspx");
+                            break;
+                        case "Reservering": Response.Redirect("Reservatie.aspx");
+                            break;
+                        case "SMS": Response.Redirect("SMS.aspx");
+                            break;
+                        case "Toegangscontrole": Response.Redirect("Toegangscontrole.aspx");
+                            break;
+                        default: Response.Redirect("Home.aspx");
+                            break;
+                    }
                 }
             }
             catch (DirectoryServicesCOMException)
