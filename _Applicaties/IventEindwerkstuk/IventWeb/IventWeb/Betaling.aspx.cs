@@ -51,7 +51,7 @@ namespace IventWeb
             try
             {
                 string r = lbNietBetaald.SelectedValue;
-                r.Substring(4, r.IndexOf(":", 3) - 8);
+                r = r.Substring(4, r.IndexOf(":", 3) - 7);
                 db.AddData(@"UPDATE reservering SET ""betaald"" = 1 WHERE id = " + r);
                 Session["loadpagebetaling"] = "true";
                 Response.Redirect("Betaling.aspx");
