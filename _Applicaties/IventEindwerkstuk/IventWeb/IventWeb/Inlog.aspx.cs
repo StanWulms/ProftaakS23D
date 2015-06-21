@@ -38,21 +38,21 @@ namespace IventWeb
 
                 SearchResult userObject = ds.FindOne();
                 if (authentic == true && userObject != null)
-                {
+                {                    
                     Session["username"] = tbUsername.Text;
                     Session["directsearch"] = userObject;
-                    string pagina = ddlApplicatie.Text;
+                    int pagina = ddlApplicatie.SelectedIndex;
                     switch (pagina)
                     {
-                        case "Event beheer systeem": Response.Redirect("Systeembeheer.aspx");
+                        case 1: Response.Redirect("Systeembeheer.aspx");
                             break;
-                        case "Materiaalverhuur": Response.Redirect("Verhuur.aspx");
+                        case 2: Response.Redirect("Verhuur.aspx");
                             break;
-                        case "Reservering": Response.Redirect("Reservatie.aspx");
+                        case 3: Response.Redirect("Reservatie.aspx");
                             break;
-                        case "SMS": Response.Redirect("SMS.aspx");
+                        case 4: Response.Redirect("SMS.aspx");
                             break;
-                        case "Toegangscontrole": Response.Redirect("Toegangscontrole.aspx");
+                        case 5: Response.Redirect("Toegangscontrole.aspx");
                             break;
                         default: Response.Redirect("Home.aspx");
                             break;

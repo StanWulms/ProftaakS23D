@@ -1,0 +1,7 @@
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\IventWeb.dll.config
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\IventWeb.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\IventWeb.pdb
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\Release\IventWeb.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\Release\IventWeb.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\Release\IventWeb.pdb
