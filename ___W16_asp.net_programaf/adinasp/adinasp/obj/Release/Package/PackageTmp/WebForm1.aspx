@@ -26,6 +26,13 @@
         <p>
             <asp:Button ID="btnmail" runat="server" OnClick="btnmail_Click" Text="Button" />
         </p>
+        <asp:TextBox ID="tbnaamacc" runat="server"></asp:TextBox>
+        <p>
+            <asp:TextBox ID="tbwwacc" runat="server"></asp:TextBox>
+        </p>
+        <p>
+            <asp:Button ID="btnmaakacc" runat="server" OnClick="btnmaakacc_Click" Text="maak account" />
+        </p>
     </form>
 </body>
 </html>

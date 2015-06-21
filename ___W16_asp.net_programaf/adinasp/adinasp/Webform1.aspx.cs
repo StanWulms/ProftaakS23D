@@ -72,6 +72,32 @@ namespace adinasp
             
             
         }
+
+        protected void btnmaakacc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string oGUID = "";
+                string connectionPrefix = "LDAP://" + lbldomein.Text;                
+                DirectoryEntry dirEntry = new DirectoryEntry(connectionPrefix);                
+                DirectoryEntry newUser = dirEntry.Children.Add
+                    ("CN=" + tbnaamacc.Text, "user");                
+                newUser.Properties["samAccountName"].Value = tbnaamacc.Text;                
+                //newUser.CommitChanges();                
+                oGUID = newUser.Guid.ToString();               
+                newUser.Invoke("SetPassword", new object[] { tbwwacc.Text });
+                //newUser.CommitChanges();
+                dirEntry.Close();
+                newUser.Close();            
+            }
+            catch (System.DirectoryServices.DirectoryServicesCOMException E)
+            {
+                //DoSomethingwith --> E.Message.ToString();
+                tbcheck.Text = E.Message;
+                
+
+            }
+        }
         
     }
 }

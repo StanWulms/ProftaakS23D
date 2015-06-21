@@ -19,8 +19,10 @@ namespace adinasp
 
         protected void btnsave_Click(object sender, EventArgs e)
         {
-            DirectoryEntry entry = new DirectoryEntry("LDAP://" + Convert.ToString(Domain.GetComputerDomain()));            
-            DirectoryEntry group = entry.Children.Find("CN=" + lblnaam.Text);            
+            DirectoryEntry entry = new DirectoryEntry("LDAP://" + Convert.ToString(Domain.GetComputerDomain()));
+            Response.Redirect("eigenstats.aspx");
+            DirectoryEntry group = entry.Children.Find("CN=" + lblnaam.Text, "user");
+            
             if (tbfirstname.Text != "")
             {
                 group.Properties["givenName"].Value = tbfirstname.Text;
@@ -65,8 +67,8 @@ namespace adinasp
             {
                 group.Properties["telephoneNumber"].Value = tbtelefoon.Text;
             }
-            group.CommitChanges();
-            Response.Redirect("eigenstats.aspx");
+            //group.CommitChanges();
+            
         }        
     }
 }
