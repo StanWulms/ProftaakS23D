@@ -44,15 +44,15 @@ namespace IventWeb
                     int pagina = ddlApplicatie.SelectedIndex;
                     switch (pagina)
                     {
-                        case 1: Response.Redirect("Systeembeheer.aspx");
+                        case 0: Response.Redirect("Systeembeheer.aspx");
                             break;
-                        case 2: Response.Redirect("Verhuur.aspx");
+                        case 1: Response.Redirect("Verhuur.aspx");
                             break;
-                        case 3: Response.Redirect("Reservatie.aspx");
+                        case 2: Response.Redirect("Reservatie.aspx");
                             break;
-                        case 4: Response.Redirect("SMS.aspx");
+                        case 3: Response.Redirect("SMS.aspx");
                             break;
-                        case 5: Response.Redirect("Toegangscontrole.aspx");
+                        case 4: Response.Redirect("Toegangscontrole.aspx");
                             break;
                         default: Response.Redirect("Home.aspx");
                             break;
