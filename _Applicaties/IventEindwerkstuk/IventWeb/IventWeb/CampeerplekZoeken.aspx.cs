@@ -218,7 +218,7 @@ namespace IventWeb.ReservatieInhoud
 
             accounts = db.GetDataAccount(@"SELECT * FROM account WHERE ""gebruikersnaam"" = '" + data[volgorde] + "'");
             List<Polsbandje> polsbandjes = new List<Polsbandje>();
-            polsbandjes = db.GetDataPolsbandje(@"SELECT * FROM POLSBANDJE WHERE id = (SELECT MIN(id) FROM polsbandje WHERE LENGTH(""barcode"") <> 12)");
+            polsbandjes = db.GetDataPolsbandje(@"SELECT * FROM POLSBANDJE WHERE id = (SELECT MIN(id) FROM polsbandje WHERE LENGTH(""barcode"") <> 13)");
             //Vervolgens het polsbandje updaten
             string huidigebarcode = (String)Session["huidigebarcode"];
             //Er wordt gekeken of de functie AddData() true of false terug geeft.
@@ -251,9 +251,9 @@ namespace IventWeb.ReservatieInhoud
                     bool noNumber = false;
                     try { Int64 test = Convert.ToInt64(huidigebarcode); }
                     catch { noNumber = true; }
-                    if (noNumber == true || huidigebarcode.Length != 12)
+                    if (noNumber == true || huidigebarcode.Length != 13)
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "barcodeScanner", @"barcodeScanner(""Geen 12 cijferige barcode, scan nogmaals voor: " + data[volgorde] + @""");", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "barcodeScanner", @"barcodeScanner(""Geen 13 cijferige barcode, scan nogmaals voor: " + data[volgorde] + @""");", true);
                         btnDeSelecteerBezoeker.Enabled = false;
                         btnPlaatsReservering.Enabled = false;
                         btnSelecteerBezoeker.Enabled = false;
