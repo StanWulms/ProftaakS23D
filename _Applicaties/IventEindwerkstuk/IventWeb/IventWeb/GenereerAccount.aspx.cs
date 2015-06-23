@@ -21,11 +21,11 @@ namespace IventWeb.SysteembeheerInhoud
             {
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.To.Add(tbemail.Text);
-                mailMessage.From = new MailAddress("balzak@boesbo35.com");//mail adres van de ingevoerde persoon
+                mailMessage.From = new MailAddress("administrator@ict4events.com");//mail adres van de ingevoerde persoon
                 mailMessage.Subject = "bevestigingscode ict4events";
                 mailMessage.Body = "De activatiecode van het event is:" + activatiecode;//de activatiecode met de mail
-                SmtpClient smtpClient = new SmtpClient("smtp.boesbo35.com", 25);
-                smtpClient.Credentials = new System.Net.NetworkCredential("balzak@boesbo35.com", "Qunfong1");
+                SmtpClient smtpClient = new SmtpClient("smtp.ict4events.com", 25);
+                smtpClient.Credentials = new System.Net.NetworkCredential("administrator@ict4events.com", "Qunfong1");
                 smtpClient.Send(mailMessage);                
             }
             catch (Exception ex)

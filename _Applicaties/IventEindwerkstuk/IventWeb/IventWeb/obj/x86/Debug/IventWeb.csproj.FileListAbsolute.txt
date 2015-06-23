@@ -7,3 +7,10 @@ C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\Ivent
 C:\Users\Stan\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.csprojResolveAssemblyReference.cache
 C:\Users\Stan\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.dll
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\IventWeb.dll.config
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\IventWeb.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\IventWeb.pdb
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\_Applicaties\IventEindwerkstuk\IventWeb\IventWeb\obj\x86\Debug\IventWeb.pdb

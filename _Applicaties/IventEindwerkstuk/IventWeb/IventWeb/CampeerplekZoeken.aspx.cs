@@ -127,80 +127,84 @@ namespace IventWeb.ReservatieInhoud
         protected void btnPlaatsReservering_Click(object sender, EventArgs e)
         {
             lblReserveerError.Visible = false;
-            //Als er geen bezoekers geselecteerd wordt er een error weergegeven.
-            if (lbGeselecteerdePersonen.Items.Count == 0 || lblReservatiehouder.Text == "")
-            {
-                lblReserveerError.Text = "Selecteerd eerst bezoekers en een hoofdboeker";
-                lblReserveerError.Visible = true;
-            }
-            else
-            {
-                string plek;
-                plek = lbPlek.SelectedValue;
-                //Vervolgens wordt er gekeken of er wel een plek geselecteerd is.
-                //Zo niet, dan wordt er een error gedisplayd.
-                if (plek != "")
+            Page.Validate("AllValidators");
+            if (Page.IsValid)
+            {               
+                //Als er geen bezoekers geselecteerd wordt er een error weergegeven.
+                if (lbGeselecteerdePersonen.Items.Count == 0 || lblReservatiehouder.Text == "")
                 {
-                    int capaciteit = Convert.ToInt32(plek.Substring(plek.LastIndexOf(":") + 1));
-                    int plekid = Convert.ToInt32(plek.Substring(4, plek.IndexOf(":", 3) - 4));
-                    List<Plek> plekken = new List<Plek>();
-                    plekken = db.GetDataPlek(@"SELECT * FROM plek WHERE id = " + plekid);
-                    //Als laatste wordt er gekeken of er niet te veel mensen op 1 plaats worden gezet.
-                    if (plekken[0].Capaciteit >= lbGeselecteerdePersonen.Items.Count)
-                    {
-                        //INSERT statement voor de nieuwe RESERVERING.
-                        int hoofdboeker = (Int32)Session["persoonid"];
-                        string begindate = tbBeginDatum.Text;
-                        string einddate = tbEindDatum.Text;
-                        db.AddData(@"INSERT INTO reservering (""persoon_id"", ""datumStart"", ""datumEinde"", ""betaald"") VALUES (" + hoofdboeker + ",'" + begindate + "','" + einddate + "',0)");
-                        //Kijken wat het ID is van de zo juist toegevoegde RESERVERING.
-                        //De PLEK_RESERVERING wordt vervolgens ingevuld
-                        List<Reservering> reservaties = new List<Reservering>();
-                        reservaties = db.GetDataReservering(@"SELECT * FROM reservering WHERE id = (SELECT MAX(id) FROM reservering)");
-                        db.AddData(@"INSERT INTO plek_reservering (""plek_id"", ""reservering_id"") VALUES (" + plekid + "," + reservaties[0].ReserveringID + ")");
-                        //INSERT statements voor de RESERVERING_POSLSBANDJE tabel.
-                        //En voor iedere bezoeker een POLSBANDJE.
-                        for (int i = 0; i < lbGeselecteerdePersonen.Items.Count; i++)
-                        {
-                            db.AddData(@"INSERT INTO polsbandje (""barcode"", ""actief"") VALUES ('" + Convert.ToString(i) + "',0)");
-                            //Kijken wat het ID is van het zo juist toegevoegde POLSBANDJE.
-                            List<Polsbandje> polsbandjes = new List<Polsbandje>();
-                            polsbandjes = db.GetDataPolsbandje(@"SELECT * FROM polsbandje WHERE id = (SELECT MAX(id) FROM polsbandje)");
-                            //Kijken wat het ID van het account is.
-                            List<Account> accounts = new List<Account>();
-                            accounts = db.GetDataAccount(@"SELECT * FROM account WHERE ""gebruikersnaam"" = '" + lbGeselecteerdePersonen.Items[i].Text +"'");
-                            db.AddData(@"INSERT INTO reservering_polsbandje (""reservering_id"", ""polsbandje_id"", ""account_id"", ""aanwezig"") VALUES (" + reservaties[0].ReserveringID + ",'" + polsbandjes[0].PolsbandjeID + "'," + accounts[0].AccountID + ",0)");                           
-                        }
-                        //het toekennen van de barcodes aan de accounts                                              
-                        //Alle gesleceteerde bezoekers opslaan in een array.
-                        //Deze namen heb ik nogid om de juiste barcode aan te passen
-                        string[] a = new string[lbGeselecteerdePersonen.Items.Count];
-                        for (int i = 0; i < lbGeselecteerdePersonen.Items.Count; i++)
-                        {
-                            a[i] = lbGeselecteerdePersonen.Items[i].Text;
-                        }
-                        Session["bezoekersArray"] = a;
-                        Session["gebruikersvolorde"] = 0;
-                        //Pop-up venster waar de barcode ingevuld wordt  
-                        ScriptManager.RegisterStartupScript(this, GetType(), "barcodeScanner", @"barcodeScanner(""Scan een nieuwe barcode voor: " + lbGeselecteerdePersonen.Items[0].Text + @""");", true);
-                        btnDeSelecteerBezoeker.Enabled = false;
-                        btnPlaatsReservering.Enabled = false;
-                        btnSelecteerBezoeker.Enabled = false;
-                        btnSelecteerReservatieHouder.Enabled = false;
-                        btnNext.Visible = true;
-                    }
-                    else
-                    {
-                        lblReserveerError.Text = "Er kunnen niet zo veel mensen op die plaats, selecteer een andere plek.";
-                        lblReserveerError.Visible = true;
-                    }
+                    lblReserveerError.Text = "Selecteerd eerst bezoekers en een hoofdboeker";
+                    lblReserveerError.Visible = true;
                 }
                 else
                 {
-                    lblReserveerError.Text = "Selecteer een campeerplaats.";
-                    lblReserveerError.Visible = true;
+                    string plek;
+                    plek = lbPlek.SelectedValue;
+                    //Vervolgens wordt er gekeken of er wel een plek geselecteerd is.
+                    //Zo niet, dan wordt er een error gedisplayd.
+                    if (plek != "")
+                    {
+                        int capaciteit = Convert.ToInt32(plek.Substring(plek.LastIndexOf(":") + 1));
+                        int plekid = Convert.ToInt32(plek.Substring(4, plek.IndexOf(":", 3) - 4));
+                        List<Plek> plekken = new List<Plek>();
+                        plekken = db.GetDataPlek(@"SELECT * FROM plek WHERE id = " + plekid);
+                        //Als laatste wordt er gekeken of er niet te veel mensen op 1 plaats worden gezet.
+                        if (plekken[0].Capaciteit >= lbGeselecteerdePersonen.Items.Count)
+                        {
+                            //INSERT statement voor de nieuwe RESERVERING.
+                            int hoofdboeker = (Int32)Session["persoonid"];
+                            string begindate = tbBeginDatum.Text;
+                            string einddate = tbEindDatum.Text;
+                            db.AddData(@"INSERT INTO reservering (""persoon_id"", ""datumStart"", ""datumEinde"", ""betaald"") VALUES (" + hoofdboeker + ",'" + begindate + "','" + einddate + "',0)");
+                            //Kijken wat het ID is van de zo juist toegevoegde RESERVERING.
+                            //De PLEK_RESERVERING wordt vervolgens ingevuld
+                            List<Reservering> reservaties = new List<Reservering>();
+                            reservaties = db.GetDataReservering(@"SELECT * FROM reservering WHERE id = (SELECT MAX(id) FROM reservering)");
+                            db.AddData(@"INSERT INTO plek_reservering (""plek_id"", ""reservering_id"") VALUES (" + plekid + "," + reservaties[0].ReserveringID + ")");
+                            //INSERT statements voor de RESERVERING_POSLSBANDJE tabel.
+                            //En voor iedere bezoeker een POLSBANDJE.
+                            for (int i = 0; i < lbGeselecteerdePersonen.Items.Count; i++)
+                            {
+                                db.AddData(@"INSERT INTO polsbandje (""barcode"", ""actief"") VALUES ('" + Convert.ToString(i) + "',0)");
+                                //Kijken wat het ID is van het zo juist toegevoegde POLSBANDJE.
+                                List<Polsbandje> polsbandjes = new List<Polsbandje>();
+                                polsbandjes = db.GetDataPolsbandje(@"SELECT * FROM polsbandje WHERE id = (SELECT MAX(id) FROM polsbandje)");
+                                //Kijken wat het ID van het account is.
+                                List<Account> accounts = new List<Account>();
+                                accounts = db.GetDataAccount(@"SELECT * FROM account WHERE ""gebruikersnaam"" = '" + lbGeselecteerdePersonen.Items[i].Text + "'");
+                                db.AddData(@"INSERT INTO reservering_polsbandje (""reservering_id"", ""polsbandje_id"", ""account_id"", ""aanwezig"") VALUES (" + reservaties[0].ReserveringID + ",'" + polsbandjes[0].PolsbandjeID + "'," + accounts[0].AccountID + ",0)");
+                            }
+                            //het toekennen van de barcodes aan de accounts                                              
+                            //Alle gesleceteerde bezoekers opslaan in een array.
+                            //Deze namen heb ik nogid om de juiste barcode aan te passen
+                            string[] a = new string[lbGeselecteerdePersonen.Items.Count];
+                            for (int i = 0; i < lbGeselecteerdePersonen.Items.Count; i++)
+                            {
+                                a[i] = lbGeselecteerdePersonen.Items[i].Text;
+                            }
+                            Session["bezoekersArray"] = a;
+                            Session["gebruikersvolorde"] = 0;
+                            //Pop-up venster waar de barcode ingevuld wordt  
+                            ScriptManager.RegisterStartupScript(this, GetType(), "barcodeScanner", @"barcodeScanner(""Scan een nieuwe barcode voor: " + lbGeselecteerdePersonen.Items[0].Text + @""");", true);
+                            btnDeSelecteerBezoeker.Enabled = false;
+                            btnPlaatsReservering.Enabled = false;
+                            btnSelecteerBezoeker.Enabled = false;
+                            btnSelecteerReservatieHouder.Enabled = false;
+                            btnNext.Visible = true;
+                        }
+                        else
+                        {
+                            lblReserveerError.Text = "Er kunnen niet zo veel mensen op die plaats, selecteer een andere plek.";
+                            lblReserveerError.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        lblReserveerError.Text = "Selecteer een campeerplaats.";
+                        lblReserveerError.Visible = true;
+                    }
                 }
-            }          
+            }                      
         }
 
         //Als de personen aan de database zijn toegevoegd moeten de barcodes nog ingevuld worden.
@@ -218,7 +222,7 @@ namespace IventWeb.ReservatieInhoud
 
             accounts = db.GetDataAccount(@"SELECT * FROM account WHERE ""gebruikersnaam"" = '" + data[volgorde] + "'");
             List<Polsbandje> polsbandjes = new List<Polsbandje>();
-            polsbandjes = db.GetDataPolsbandje(@"SELECT * FROM POLSBANDJE WHERE id = (SELECT MIN(id) FROM polsbandje WHERE LENGTH(""barcode"") <> 12)");
+            polsbandjes = db.GetDataPolsbandje(@"SELECT * FROM POLSBANDJE WHERE id = (SELECT MIN(id) FROM polsbandje WHERE LENGTH(""barcode"") <> 13)");
             //Vervolgens het polsbandje updaten
             string huidigebarcode = (String)Session["huidigebarcode"];
             //Er wordt gekeken of de functie AddData() true of false terug geeft.
@@ -251,9 +255,9 @@ namespace IventWeb.ReservatieInhoud
                     bool noNumber = false;
                     try { Int64 test = Convert.ToInt64(huidigebarcode); }
                     catch { noNumber = true; }
-                    if (noNumber == true || huidigebarcode.Length != 12)
+                    if (noNumber == true || huidigebarcode.Length != 13)
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "barcodeScanner", @"barcodeScanner(""Geen 12 cijferige barcode, scan nogmaals voor: " + data[volgorde] + @""");", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "barcodeScanner", @"barcodeScanner(""Geen 13 cijferige barcode, scan nogmaals voor: " + data[volgorde] + @""");", true);
                         btnDeSelecteerBezoeker.Enabled = false;
                         btnPlaatsReservering.Enabled = false;
                         btnSelecteerBezoeker.Enabled = false;
