@@ -22,9 +22,9 @@ namespace IventWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             //ACTIVE DIRECTORY
-            /*SearchResult rs = (SearchResult)Session["directsearch"];
+            SearchResult rs = (SearchResult)Session["directsearch"];
             if (rs.GetDirectoryEntry().Properties["samaccountname"].Value != null)
-                lblDbNaam.Text = "Username : " + rs.GetDirectoryEntry().Properties["samaccountname"].Value.ToString();*/
+                lblDbNaam.Text = "Username : " + rs.GetDirectoryEntry().Properties["samaccountname"].Value.ToString();
             //ACTIVE DIRECTORY
             ab = new AccountBijdrage();
             b = new Bijdrage();
@@ -107,8 +107,7 @@ namespace IventWeb
                     Image1.ImageUrl = src;
                 }
                 else
-                {
-                    src = "../" + src;
+                {                    
                     video.InnerHtml = @"<video id=""Viodeoo"" width=""320"" height=""240"" controls=""controls"" autoplay=""autoplay"" runat=""server""><source id=""Videoo"" src=" + src + @" type=""video/mp4""></video>";
                 }
             }
