@@ -65,6 +65,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
+    <Compile Include="Boeking.cs" />
     <Compile Include="Campeerplaats.aspx.cs">
       <DependentUpon>Campeerplaats.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -72,6 +74,8 @@
     <Compile Include="Campeerplaats.aspx.designer.cs">
       <DependentUpon>Campeerplaats.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Hoofdboeker.cs" />
+    <Compile Include="Kampeerplaats.cs" />
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
