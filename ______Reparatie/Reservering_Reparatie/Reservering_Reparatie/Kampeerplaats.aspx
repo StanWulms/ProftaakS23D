@@ -10,4 +10,19 @@
     </nav>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    <br />
+    <br />
+    <asp:ListBox ID="lbAccounts" runat="server" Width="200"></asp:ListBox>
+    <br />
+    <asp:ListBox ID="lbVrijePlaatsen" runat="server" Width="200"></asp:ListBox>
+    <br />
+    <br />
+    <asp:Label ID="lblBeginDatum" runat="server" Text="Begindatum: "></asp:Label>
+    <asp:TextBox ID="tbBeginDatum" runat="server"></asp:TextBox>
+    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbBeginDatum" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="([0-9]{2})(-|/)([A-Z]){3}(-|/)([0-9]{4})" ValidationGroup="AllValidators">Ongeldige datum. Formaat: 00-XXX-0000</asp:RegularExpressionValidator>
+    <br />
+    <asp:Label ID="lblEindDatum" runat="server" Text="Einddatum: "></asp:Label>
+    <asp:TextBox ID="tbEindDatum" runat="server"></asp:TextBox>
+    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbEindDatum" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="([0-9]{2})(-|/)([A-Z]){3}(-|/)([0-9]{4})" ValidationGroup="AllValidators">Ongeldige datum. Formaat: 00-XXX-0000</asp:RegularExpressionValidator>
+    <br />
 </asp:Content>

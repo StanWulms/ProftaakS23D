@@ -32,6 +32,8 @@ namespace Reservering_Reparatie
 
                 lblValidation.Text = "Goeie ouwe";
                 lblValidation.Visible = true;
+                //Session["Hoofdbezoeker"] = //?
+                //Session["Accounts"] = List<Account> ...... ?
             }
         }
 
