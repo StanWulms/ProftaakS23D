@@ -45,24 +45,29 @@ BEGIN
 END;
 /
 CREATE OR REPLACE 
-FUNCTION checkbeschikbaar
+PROCEDURE checkbeschikbaar
 (
 gebruikersnaam "ACCOUNT"."gebruikersnaam"%TYPE,
-email "ACCOUNT"."email"%TYPE
+email "ACCOUNT"."email"%TYPE,
+text out VARCHAR2
 )
-RETURN VARCHAR2
 AS
+errortxt VARCHAR2(2000);
 BEGIN
 	IF BESCHIKBAARNAAM(gebruikersnaam) = 'Goed' THEN
 		IF BESCHIKBAAREMAIL(email) = 'Goed' THEN
-			RETURN 'Goed';
+			errortxt := 'Goed';
+			text := errortxt;
 		ELSE
-			RETURN 'e-mail in gebruik';
+			errortxt := 'e-mail in gebruik';
+			text := errortxt;
 		END IF;
 	ELSE
-		RETURN 'gebruikernaam in gebruik';
+		errortxt := 'gebruikernaam in gebruik';
+		text := errortxt;
 	END IF;
 END;
+
 /
 CREATE OR REPLACE 
 FUNCTION CHECKEMAIL 
@@ -121,7 +126,7 @@ BEGIN
 END;
 /
 CREATE OR REPLACE 
-FUNCTION hoofdinschrijving
+PROCEDURE hoofdinschrijving
 (
 voornaam PERSOON."voornaam"%TYPE,
 tussenvoegsel persoon."tussenvoegsel"%TYPE,
@@ -132,10 +137,11 @@ woonplaats PERSOON."woonplaats"%TYPE,
 banknr PERSOON."banknr"%TYPE,
 email "ACCOUNT"."email"%TYPE,
 gebruiker "ACCOUNT"."gebruikersnaam"%TYPE,
-actievatiehash "ACCOUNT"."activatiehash"%TYPE
+actievatiehash "ACCOUNT"."activatiehash"%TYPE,
+text out VARCHAR2
 )
-RETURN VARCHAR2
 AS
+errortext VARCHAR2(2000);
 BEGIN
 	IF CHECKTEKST(voornaam) = 'Goed' THEN
 		dbms_output.put_line('voor');
@@ -158,56 +164,70 @@ BEGIN
 											dbms_output.put_line('geentussenvoegsel');
 											Insert into PERSOON ("voornaam","tussenvoegsel","achternaam","straat","huisnr","woonplaats","banknr") values (voornaam, null, achternaam, straat, huisnr, woonplaats, banknr);
 											Insert into ACCOUNT ("gebruikersnaam","email","activatiehash","geactiveerd") values (gebruiker,email,actievatiehash,'0');
-											RETURN 'goed';
+											errortext := 'goed';
+											text := errortext;
 										ELSE
 											IF CHECKTEKST(tussenvoegsel) = 'Goed' THEN
 												dbms_output.put_line('tussenvoegsel');
 												Insert into PERSOON ("voornaam","tussenvoegsel","achternaam","straat","huisnr","woonplaats","banknr") values (voornaam, tussenvoegsel, achternaam, straat, huisnr, woonplaats, banknr);
 												 
-												RETURN 'goed';
+												errortext := 'goed';
+												text := errortext;
 											ELSE
-												return 'tussenvoegsel niet correct';
+												errortext := 'tussenvoegsel niet correct';
+												text := errortext;
 											END IF;
 										
 										END IF;
 									ELSE
-										return 'activatiehash niet correct';
+										errortext := 'activatiehash niet correct';
+										text := errortext;
 									END IF;
 								ELSE
-									return 'banknummer niet correct';
+									errortext := 'banknummer niet correct';
+									text := errortext;
 								END IF;
 							ELSE
-								return 'e-mail niet correct';
+								errortext := 'e-mail niet correct';
+								text := errortext;
 							END IF;
 						ELSE
-							return 'gebruikernaam niet correct';
+							errortext := 'gebruikernaam niet correct';
+							text := errortext;
 						END IF;
 					ELSE
-						RETURN 'huisnummer niet correct';	
+						errortext := 'huisnummer niet correct';	
+						text := errortext;
 					END IF;
 				ELSE
-					return 'woonplaats niet correct';
+					errortext := 'woonplaats niet correct';
+					text := errortext;
 				END IF;
 			ELSE
-				return 'straat niet correct';
+				errortext := 'straat niet correct';
+				text := errortext;
 			END IF;
 		ELSE
-			return 'achternaam niet correct';
+			errortext := 'achternaam niet correct';
+			text := errortext;
 		END IF;
 	ELSE
-		return 'voornaam niet correct';
+		errortext := 'voornaam niet correct';
+		text := errortext;
 	END IF;
 END;
+
 /
 CREATE OR REPLACE 
-FUNCTION subinschrijving 
+PROCEDURE subinschrijving 
 (
 email "ACCOUNT"."email"%TYPE,
 gebruiker "ACCOUNT"."gebruikersnaam"%TYPE,
-actievatiehash "ACCOUNT"."activatiehash"%TYPE
+actievatiehash "ACCOUNT"."activatiehash"%TYPE,
+text out VARCHAR2
 )
-RETURN VARCHAR2
 AS
+errortxt VARCHAR2(2000);
 BEGIN
 IF CHECKTEKST(gebruiker) = 'Goed' THEN
 	dbms_output.put_line('gebruiker');	
@@ -215,14 +235,19 @@ IF CHECKTEKST(gebruiker) = 'Goed' THEN
 		dbms_output.put_line('email');
 		IF LENGTH(actievatiehash) = 32 THEN
 			Insert into ACCOUNT ("gebruikersnaam","email","activatiehash","geactiveerd") values (gebruiker,email,actievatiehash,'0');
-			return 'account aangemaakt';
+			errortxt :=  'account aangemaakt';
+			text := errortxt;
 		ELSE
-			return 'activatiehash niet correct';
+			errortxt :=  'activatiehash niet correct';
+			text := errortxt;
 		END IF;
 	ELSE
-		return 'email niet correct';
+		errortxt :=  'email niet correct';
+		text := errortxt;
 	END IF;
 ELSE
-	return 'gebruikersnaam niet correct';
+	errortxt := 'gebruikersnaam niet correct';
+	text := errortxt;
 END IF;
 END;
+
