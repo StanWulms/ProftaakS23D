@@ -33,13 +33,13 @@
     <div id="list">
         <asp:ListBox ID="lbBestanden" runat="server" Height="150px" Width="300"></asp:ListBox>
         <br />
-        <asp:Button ID="btnShowBestand" runat="server" Text="Upload bestand" OnClick="btnShowBestand_Click" />
+        <asp:Button ID="btnShowBestand" runat="server" Text="Laat bestand zien" OnClick="btnShowBestand_Click" />
         <br />
         <br />
         <br />
         <asp:ListBox ID="lbPosts" runat="server" Width="300px"></asp:ListBox>
         <br />
-        <asp:Button ID="btnShowBerichtInhoud" runat="server" Text="Button" OnClick="btnShowBerichtInhoud_Click" />
+        <asp:Button ID="btnShowBerichtInhoud" runat="server" Text="Laat bericht zien" OnClick="btnShowBerichtInhoud_Click" />
         <br />
         <asp:Label ID="lblBerichtInhoud" runat="server" Text=""></asp:Label>
         <br />
@@ -77,7 +77,7 @@
         <!-- IDK how to -->
         <div style="background-color:azure">
         <asp:FileUpload ID="FileUpload1" runat="server" />
-        <asp:Button ID="btnFileUpload" runat="server" Text="Upload Filexxxx" OnClick="btnFileUpload_Click" />
+        <asp:Button ID="btnFileUpload" runat="server" Text="Upload File" OnClick="btnFileUpload_Click" />
         <br />
         <asp:Image ID="Image1" runat="server" />
         </div>

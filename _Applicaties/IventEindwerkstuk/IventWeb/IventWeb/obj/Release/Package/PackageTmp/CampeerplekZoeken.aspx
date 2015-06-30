@@ -47,9 +47,11 @@
     <br />
     <asp:Label ID="lblBeginDatum" runat="server" Text="Begindatum: "></asp:Label>
     <asp:TextBox ID="tbBeginDatum" runat="server"></asp:TextBox>
+    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbBeginDatum" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="([0-9]{2})(-|/)([A-Z]){3}(-|/)([0-9]{4})" ValidationGroup="AllValidators">Ongeldige datum. Formaat: 00-XXX-0000</asp:RegularExpressionValidator>
     <br />
     <asp:Label ID="lblEindDatum" runat="server" Text="Einddatum: "></asp:Label>
     <asp:TextBox ID="tbEindDatum" runat="server"></asp:TextBox>
+    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbEindDatum" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="([0-9]{2})(-|/)([A-Z]){3}(-|/)([0-9]{4})" ValidationGroup="AllValidators">Ongeldige datum. Formaat: 00-XXX-0000</asp:RegularExpressionValidator>
     <br /><br />
     <asp:Button ID="btnPlaatsReservering" runat="server" Text="Reserveer Plaats" OnClick="btnPlaatsReservering_Click" />
     <asp:Label ID="lblReserveerError" runat="server" ForeColor="Red"></asp:Label><br /><br />

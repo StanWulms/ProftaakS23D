@@ -1,0 +1,36 @@
+﻿body {
+}
+#text{
+    background-color:green;
+    float:left;
+    display: inline-block;
+    margin-right: 30px;
+}
+#Mappen{
+    background-color:yellow;
+    float:left;
+    display: inline-block;
+    margin-right: 30px;
+}
+#list{
+    background-color: red;
+    float: left;
+    display: inline-block;
+    margin-right: 30px;
+    border: 1px solid;
+    width: 200px;
+    height: 200px;
+}
+#Post{
+    background-color:green;
+    float:left;
+    display: inline-block;
+    margin-right: 30px;
+}
+#PostPlaatsen{
+    background-color:blue;
+    float:left;
+    display: inline-block;
+    margin-right: 30px;
+    width: 300px;
+}

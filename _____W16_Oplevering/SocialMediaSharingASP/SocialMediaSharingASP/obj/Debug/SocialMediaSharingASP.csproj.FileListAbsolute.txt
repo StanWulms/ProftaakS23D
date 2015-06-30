@@ -1,0 +1,6 @@
+c:\users\stan\documents\visual studio 2013\Projects\SocialMediaSharingASP\SocialMediaSharingASP\bin\SocialMediaSharingASP.dll.config
+c:\users\stan\documents\visual studio 2013\Projects\SocialMediaSharingASP\SocialMediaSharingASP\bin\SocialMediaSharingASP.dll
+c:\users\stan\documents\visual studio 2013\Projects\SocialMediaSharingASP\SocialMediaSharingASP\bin\SocialMediaSharingASP.pdb
+c:\users\stan\documents\visual studio 2013\Projects\SocialMediaSharingASP\SocialMediaSharingASP\obj\Debug\SocialMediaSharingASP.csprojResolveAssemblyReference.cache
+c:\users\stan\documents\visual studio 2013\Projects\SocialMediaSharingASP\SocialMediaSharingASP\obj\Debug\SocialMediaSharingASP.dll
+c:\users\stan\documents\visual studio 2013\Projects\SocialMediaSharingASP\SocialMediaSharingASP\obj\Debug\SocialMediaSharingASP.pdb
