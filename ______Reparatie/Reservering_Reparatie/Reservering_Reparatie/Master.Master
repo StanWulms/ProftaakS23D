@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="Reservering_Reparatie.Master" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" type="text/css" href="CSS/Style.css" media="screen"/>
+</head>
+    <body>
+        <!--De container is als het ware het frame waar alle inhoud van de site in zit -->
+        <div id="container">
+            <!-- Header van de website -->
+            <div id="headerlayer">
+                <h1>ICT4Events</h1>
+            </div>
+            <!-- De navigatie-balk -->
+                <section id="header" class = "header">
+                    <div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">       
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </section>
+            <div><br /></div>
+            <!-- Hier worden de verschillende paginas in geladen (De content) -->
+            <form id="form1" runat="server">
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">       
+                    </asp:ContentPlaceHolder>
+                </div>
+            </form>
+            <div><br /></div>
+            <!-- De footer van de website -->
+            <div id="footer">
+                <img src ="Images/Cheering_crowd.jpg" width="1000px" height="180px"/>
+            </div>
+            <div id="footerline">
+                © Inter ICT4Events
+            </div>
+        </div>
+    </body>
+</html>
