@@ -10,24 +10,20 @@ namespace Reservering_Reparatie
         public string Naam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }
-        public string Email { get; set; }
-        public string Iban { get; set; }
         public string Straat { get; set; }
         public string Huisnummer { get; set; }
         public string Woonplaats { get; set; }
-        public string Postcode { get; set; }
+        public string Iban { get; set; }
 
-        public Hoofdboeker(string naam, string tussenvoegsel, string achternaam, string email, string iban, string straat, string huisnummer, string woonplaats, string postcode)
+        public Hoofdboeker(string naam, string tussenvoegsel, string achternaam, string straat, string huisnummer, string woonplaats, string iban)
         {
             this.Naam = naam;
             this.Tussenvoegsel = tussenvoegsel;
             this.Achternaam = achternaam;
-            this.Email = email;
-            this.Iban = iban;
             this.Straat = straat;
             this.Huisnummer = huisnummer;
             this.Woonplaats = woonplaats;
-            this.Postcode = postcode;
+            this.Iban = iban;
         }
 
         public Hoofdboeker()
@@ -35,14 +31,5 @@ namespace Reservering_Reparatie
 
         }
 
-        /// <summary>
-        /// Zoekt naar een hoofdboeker waarvan de ingevulde email overeenkomt met zijn email.
-        /// Als er een match is gevonden wordt de desbetreffende boeker geretourneerd.
-        /// </summary>
-        /// <param name="email">Email van de hoofdboeker</param>
-        public Hoofdboeker ZoekBezoeker(string email)
-        {
-            return null;
-        }
     }
 }

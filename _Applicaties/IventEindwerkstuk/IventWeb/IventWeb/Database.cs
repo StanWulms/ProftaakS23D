@@ -10,6 +10,7 @@ using System.Configuration;
 
 using System.Data.SqlClient;
 //
+using System.Data.OracleClient;
 using System.Data.Common;
 using System.Configuration;
 using Oracle.ManagedDataAccess.Client;

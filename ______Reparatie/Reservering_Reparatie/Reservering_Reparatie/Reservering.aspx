@@ -5,7 +5,7 @@
     <nav id="nav">
         <ul class="nav navbar-nav">
             <li><a href="Reservering.aspx">Reservering</a></li>
-            <li><a href="Campeerplaats.aspx">Campeerplaats</a></li>
+            <li><a href="Kampeerplaats.aspx">Kampeerplaats</a></li>
         </ul>
     </nav>
 </asp:Content>

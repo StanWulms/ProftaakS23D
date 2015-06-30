@@ -7,6 +7,7 @@ namespace Reservering_Reparatie
 {
     public class Account
     {
+
         public string Gebruikersnaam { get; set; }
         public string Email { get; set; }
         public string Activatiehash { get; set; }
@@ -18,14 +19,15 @@ namespace Reservering_Reparatie
             this.Activatiehash = activatiehash;
         }
 
-        /// <summary>
-        /// Zoekt naar een account waarvan de ingevulde gebruikersnaam overeenkomt met zijn gebruikersnaam.
-        /// Als er een match is gevonden wordt het desbetreffende account geretourneerd.
-        /// </summary>
-        /// <param name="email">Email van de hoofdboeker</param>
-        public Account ZoekAccount(string gebruikersnaam)
+        public Account()
         {
-            return null;
+            
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
     }
 }

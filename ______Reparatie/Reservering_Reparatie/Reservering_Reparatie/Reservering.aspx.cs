@@ -26,6 +26,9 @@ namespace Reservering_Reparatie
             Page.Validate("AllValidators");
             if (Page.IsValid)
             {
+                //Het aanroepen van de SP.
+
+
                 lblValidation.Text = "Goeie ouwe";
                 lblValidation.Visible = true;
             }

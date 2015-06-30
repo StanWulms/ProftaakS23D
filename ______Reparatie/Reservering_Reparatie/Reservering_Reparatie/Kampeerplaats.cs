@@ -30,23 +30,25 @@ namespace Reservering_Reparatie
         /// <param name="Nummer">Nummer van de plaats</param>
         public void Reserveer(int Nummer)
         {
-
-        }
-
+            //TODO: implementeer methode
+        }       
+        
         /// <summary>
-        /// Zoekt naar een kampeerplaats waarvan het ingevulde nummer overeenkomt met het nummer van de plek.
-        /// Als er een match is gevonden wordt de desbetreffende kampeerplaats geretourneerd.
+        /// Returnt een lijst met alle kampeerplaatsen waarvan "Gereserveerd" 0 is.
         /// </summary>
-        /// <param name="email">Nummer van de kampeerplaats</param>
-        public Kampeerplaats ZoekPlek(int nummer)
+        /// <param name="kampeerplaatsen">Lijst met alle plaatsen van het event</param>
+        /// <returns>Lijst met alle vrije plaatsen</returns>
+        public List<Kampeerplaats> ZoekVrijePlek(List<Kampeerplaats> kampeerplaatsen)
         {
-            return null;
-        }
-
-        //Returnt een lijst met alle kampeerplaatsen waarvan "Gereserveerd" 0 is.
-        public List<Kampeerplaats> ZoekVrijePlek()
-        {
-            return null;
+            List<Kampeerplaats> kamprs = new List<Kampeerplaats>();
+            foreach (Kampeerplaats k in kampeerplaatsen)
+            {
+                if (k.Gereserveerd == false)
+                {
+                    kamprs.Add(k);
+                }
+            }
+            return kamprs;
         }
 
         public override string ToString()
