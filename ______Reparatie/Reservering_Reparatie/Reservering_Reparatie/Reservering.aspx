@@ -11,6 +11,14 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <br /><br />
+    <asp:Label ID="lblHoofdboeker" runat="server" Text="Heeft u  al een account? Zoek hier uw account:"></asp:Label><br />
+    <asp:TextBox ID="tbHoofdboeker" runat="server"></asp:TextBox>
+    <br />
+    <asp:Button ID="btnZoekHoofdboeker" runat="server" Text="Zoek Hoofdboeker" OnClick="btnZoekHoofdboeker_Click" />
+    <asp:ListBox ID="lbHoofdbezoekers" runat="server" Width="500" Height="100"></asp:ListBox>
+    <br />
+    <asp:Button ID="btnSelecteerHoofdBezoeker" runat="server" Text="Selecteer Hoofdbezoeker" OnClick="btnSelecteerHoofdBezoeker_Click" />
+    <br /> <br /> <br />
     <asp:RequiredFieldValidator ID="rfvVoornaam" runat="server" ControlToValidate="tbVoornaam" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
     <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam: "></asp:Label>
     <asp:TextBox ID="tbVoornaam" runat="server"></asp:TextBox>
@@ -21,14 +29,6 @@
     <asp:RequiredFieldValidator ID="rfvAchternaam" runat="server" ControlToValidate="tbAchternaam" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
     <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam: "></asp:Label>
     <asp:TextBox ID="tbAchternaam" runat="server"></asp:TextBox>
-    <br /><br />
-    <asp:RequiredFieldValidator ID="rfv" runat="server" ControlToValidate="tbGebruikersnaam" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
-    <asp:Label ID="lblGebruikersnaam" runat="server" Text="Gebruikersnaam: "></asp:Label>
-    <asp:TextBox ID="tbGebruikersnaam" runat="server"></asp:TextBox>
-    <br /><br />
-    <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="tbEmail" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
-    <asp:Label ID="lblEmail" runat="server" Text="Email: "></asp:Label>
-    <asp:TextBox ID="tbEmail" runat="server"></asp:TextBox>
     <br /><br />
     <asp:RequiredFieldValidator ID="rfvStraat" runat="server" ControlToValidate="tbStraat" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
     <asp:Label ID="lblStraat" runat="server" Text="Straat: "></asp:Label>
@@ -63,18 +63,15 @@
         <asp:ListItem Value="5">
             5
         </asp:ListItem>
-        <asp:ListItem Value="6">
-            6
-        </asp:ListItem>
     </asp:DropDownList>
     <asp:Button ID="refresh" runat="server" Text="Genereer kaartjes" OnClick="refresh_Click" />
     <br /><br />
     <asp:RequiredFieldValidator ID="rfvAccount1" runat="server" ControlToValidate="tbAccount1" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators" Enabled="False">*</asp:RequiredFieldValidator>
-    <asp:Label ID="lblAccount1" runat="server" Text="Account 1: " Visible="False"></asp:Label>
-    <asp:TextBox ID="tbAccount1" runat="server" Visible="False">-1</asp:TextBox>
+    <asp:Label ID="lblAccount1" runat="server" Text="Account 1: "></asp:Label>
+    <asp:TextBox ID="tbAccount1" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvEmail1" runat="server" ControlToValidate="tbEmail1" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators" Enabled="False">*</asp:RequiredFieldValidator>
-    <asp:Label ID="lblEmail1" runat="server" Text="     Email: " Visible="False"></asp:Label>
-    <asp:TextBox ID="tbEmail1" runat="server" Visible="False">-1</asp:TextBox>
+    <asp:Label ID="lblEmail1" runat="server" Text="     Email: "></asp:Label>
+    <asp:TextBox ID="tbEmail1" runat="server"></asp:TextBox>
     <br /><br />
     <asp:RequiredFieldValidator ID="rfvAccount2" runat="server" ControlToValidate="tbAccount2" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators" Enabled="False">*</asp:RequiredFieldValidator>
     <asp:Label ID="lblAccount2" runat="server" Text="Account 2: " Visible="False"></asp:Label>

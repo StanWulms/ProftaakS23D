@@ -79,7 +79,7 @@ namespace Reservering_Reparatie
                     //return "Error! No Command";
                 }
                 com.Connection = con;
-                com.CommandText = "SELECT * PERSOON";
+                com.CommandText = "SELECT * FROM PERSOON";
                 DbDataReader reader = com.ExecuteReader();
                 List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
                 try
@@ -87,9 +87,9 @@ namespace Reservering_Reparatie
                     while (reader.Read())
                     {
                         string toevoeging;
-                        try { toevoeging = reader.GetString(1); }
+                        try { toevoeging = reader.GetString(2); }
                         catch { toevoeging = ""; }
-                        Hoofdboeker b = new Hoofdboeker(reader.GetString(0), toevoeging, reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6));
+                        Hoofdboeker b = new Hoofdboeker(reader.GetInt32(0), reader.GetString(1), toevoeging, reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7));
                         hoofdboekers.Add(b);
                     }
                     return hoofdboekers;

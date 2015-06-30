@@ -26,6 +26,11 @@ namespace Reservering_Reparatie
             db = new Database();
         }
 
+        public Boeking()
+        {
+
+        }
+
         /// <summary>
         /// Zoekt naar een account waarvan de ingevulde gebruikersnaam overeenkomt met zijn gebruikersnaam.
         /// Als er een match is gevonden wordt het desbetreffende account geretourneerd.
@@ -53,6 +58,7 @@ namespace Reservering_Reparatie
         /// <param name="zoekCriteria">String waarop gezocht wordt. Gaat over de naam en achternaam</param>
         public List<Hoofdboeker> ZoekHoofdboekers(string zoekCriteria)
         {
+            db = new Database();
             List<Hoofdboeker> hfdb = new List<Hoofdboeker>();
             List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
             hoofdboekers = db.GetAllHoofdboekers();
@@ -62,7 +68,7 @@ namespace Reservering_Reparatie
                 {
                     hfdb.Add(b);
                 }
-                if (b.Achternaam.Contains(zoekCriteria))
+                else if (b.Achternaam.Contains(zoekCriteria))
                 {
                     hfdb.Add(b);
                 }
@@ -99,8 +105,8 @@ namespace Reservering_Reparatie
         public void Boek(DateTime beginDatum, DateTime eindDatum)
         {
             //Boeker, kampeerplaats en accounts worden aan de boeking gekoppeld.
-            hoofdboeker = //De boeker van de reservering.
-            kampeerplaats = ZoekKampeerplaats(0); //De kampeerplaats
+           // hoofdboeker = //De boeker van de reservering.
+           // kampeerplaats = ZoekKampeerplaats(0); //De kampeerplaats
             //accounts.Items.Add(account.ZoekPlek("nummer")); //Alle accounts die bij de reservering horen.
         }
 

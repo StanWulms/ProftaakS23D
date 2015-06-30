@@ -4,3 +4,9 @@ C:\Users\Kees\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparati
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\obj\Debug\Reservering_Reparatie.csprojResolveAssemblyReference.cache
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\obj\Debug\Reservering_Reparatie.dll
 C:\Users\Kees\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\obj\Debug\Reservering_Reparatie.pdb
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\obj\Debug\Reservering_Reparatie.csprojResolveAssemblyReference.cache
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\obj\Debug\Reservering_Reparatie.dll
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\bin\Reservering_Reparatie.dll.config
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\bin\Reservering_Reparatie.dll
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\bin\Reservering_Reparatie.pdb
+C:\Users\Stan\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\Reservering_Reparatie\obj\Debug\Reservering_Reparatie.pdb

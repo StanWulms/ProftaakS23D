@@ -9,6 +9,7 @@ namespace Reservering_Reparatie
 {
     public partial class Reservering : System.Web.UI.Page
     {
+        Boeking b;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,17 +51,53 @@ namespace Reservering_Reparatie
             int aantal = Convert.ToInt32(ddlAantal.Text);
             for (int i = 0; i < aantal; i++)
             {
-                if (i == 1) { lblAccount1.Visible = true; tbAccount1.Visible = true; tbAccount1.Text = ""; rfvAccount1.Enabled = true; lblEmail1.Visible = true; tbEmail1.Visible = true; tbEmail1.Text = ""; rfvEmail1.Enabled = true; }
-                if (i == 2) { lblAccount2.Visible = true; tbAccount2.Visible = true; tbAccount2.Text = ""; rfvAccount2.Enabled = true; lblEmail2.Visible = true; tbEmail2.Visible = true; tbEmail2.Text = ""; rfvEmail2.Enabled = true; }
-                if (i == 3) { lblAccount3.Visible = true; tbAccount3.Visible = true; tbAccount3.Text = ""; rfvAccount3.Enabled = true; lblEmail3.Visible = true; tbEmail3.Visible = true; tbEmail3.Text = ""; rfvEmail3.Enabled = true; }
-                if (i == 4) { lblAccount4.Visible = true; tbAccount4.Visible = true; tbAccount4.Text = ""; rfvAccount4.Enabled = true; lblEmail4.Visible = true; tbEmail4.Visible = true; tbEmail4.Text = ""; rfvEmail4.Enabled = true; }
-                if (i == 5) { lblAccount5.Visible = true; tbAccount5.Visible = true; tbAccount5.Text = ""; rfvAccount5.Enabled = true; lblEmail5.Visible = true; tbEmail5.Visible = true; tbEmail5.Text = ""; rfvEmail5.Enabled = true; }
+                if (i == 0) { lblAccount1.Visible = true; tbAccount1.Visible = true; tbAccount1.Text = ""; rfvAccount1.Enabled = true; lblEmail1.Visible = true; tbEmail1.Visible = true; tbEmail1.Text = ""; rfvEmail1.Enabled = true; }
+                if (i == 1) { lblAccount2.Visible = true; tbAccount2.Visible = true; tbAccount2.Text = ""; rfvAccount2.Enabled = true; lblEmail2.Visible = true; tbEmail2.Visible = true; tbEmail2.Text = ""; rfvEmail2.Enabled = true; }
+                if (i == 2) { lblAccount3.Visible = true; tbAccount3.Visible = true; tbAccount3.Text = ""; rfvAccount3.Enabled = true; lblEmail3.Visible = true; tbEmail3.Visible = true; tbEmail3.Text = ""; rfvEmail3.Enabled = true; }
+                if (i == 3) { lblAccount4.Visible = true; tbAccount4.Visible = true; tbAccount4.Text = ""; rfvAccount4.Enabled = true; lblEmail4.Visible = true; tbEmail4.Visible = true; tbEmail4.Text = ""; rfvEmail4.Enabled = true; }
+                if (i == 4) { lblAccount5.Visible = true; tbAccount5.Visible = true; tbAccount5.Text = ""; rfvAccount5.Enabled = true; lblEmail5.Visible = true; tbEmail5.Visible = true; tbEmail5.Text = ""; rfvEmail5.Enabled = true; }
             }
         }
 
         protected void refresh_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnZoekHoofdboeker_Click(object sender, EventArgs e)
+        {
+            b = new Boeking();
+            List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
+            hoofdboekers = b.ZoekHoofdboekers(tbHoofdboeker.Text);
+            foreach (Hoofdboeker hb in hoofdboekers)
+            {
+                lbHoofdbezoekers.Items.Add(hb.ToString());
+            }
+        }
+
+        protected void btnSelecteerHoofdBezoeker_Click(object sender, EventArgs e)
+        {
+            Session["Hoofdbezoeker"] = lbHoofdbezoekers.SelectedItem.Value.Substring(3, lbHoofdbezoekers.SelectedItem.Value.IndexOf("-") - 3);
+            tbVoornaam.Text = "";
+            tbVoornaam.Enabled = false;
+
+            tbTussenvoegsel.Text = "";
+            tbTussenvoegsel.Enabled = false;
+
+            tbAchternaam.Text = "";
+            tbAchternaam.Enabled = false;
+
+            tbStraat.Text = "";
+            tbStraat.Enabled = false;
+
+            tbHuisnummer.Text = "";
+            tbHuisnummer.Enabled = false;
+
+            tbWoonplaats.Text = "";
+            tbWoonplaats.Enabled = false;
+
+            tbBankrekening.Text = "";
+            tbBankrekening.Enabled = false;
         }
     }
 }

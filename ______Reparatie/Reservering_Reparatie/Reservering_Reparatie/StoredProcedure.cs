@@ -34,11 +34,13 @@ namespace Reservering_Reparatie
                 {
                     objConn.Open();
                     objCmd.ExecuteNonQuery();
+                    return "ok";
                     System.Console.WriteLine("Number of employees in department 20 is {0}", objCmd.Parameters["return_value"].Value);
                 }
                 catch (Exception ex)
                 {
                     System.Console.WriteLine("Exception: {0}", ex.ToString());
+                    return "ok";
                 }
 
                 objConn.Close();

@@ -7,6 +7,7 @@ namespace Reservering_Reparatie
 {
     public class Hoofdboeker
     {
+        public int ID { get; set; }
         public string Naam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }
@@ -15,8 +16,9 @@ namespace Reservering_Reparatie
         public string Woonplaats { get; set; }
         public string Iban { get; set; }
 
-        public Hoofdboeker(string naam, string tussenvoegsel, string achternaam, string straat, string huisnummer, string woonplaats, string iban)
+        public Hoofdboeker(int id, string naam, string tussenvoegsel, string achternaam, string straat, string huisnummer, string woonplaats, string iban)
         {
+            this.ID = id;
             this.Naam = naam;
             this.Tussenvoegsel = tussenvoegsel;
             this.Achternaam = achternaam;
@@ -31,5 +33,9 @@ namespace Reservering_Reparatie
 
         }
 
+        public override string ToString()
+        {
+            return "ID: " + ID + " - " + "Naam: " + Naam + " - ";
+        }
     }
 }
