@@ -13,6 +13,8 @@
     <br />
     <br />
     <asp:ListBox ID="lbAccounts" runat="server" Width="200"></asp:ListBox>
+    <asp:Button ID="btnSelecteer" runat="server" Text="Selecteer Account" OnClick="btnSelecteer_Click" />
+    <asp:ListBox ID="lbSelectedAccounts" runat="server" Width="200"></asp:ListBox>
     <br />
     <asp:ListBox ID="lbVrijePlaatsen" runat="server" Width="200"></asp:ListBox>
     <br />
@@ -25,4 +27,5 @@
     <asp:TextBox ID="tbEindDatum" runat="server"></asp:TextBox>
     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="tbEindDatum" Display="Dynamic" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationExpression="([0-9]{2})(-|/)([A-Z]){3}(-|/)([0-9]{4})" ValidationGroup="AllValidators">Ongeldige datum. Formaat: 00-XXX-0000</asp:RegularExpressionValidator>
     <br />
+    <asp:Button ID="btnKampeerplaatsReserveren" runat="server" Text="Kampeerplaats Reserveren" OnClick="btnKampeerplaatsReserveren_Click" />
 </asp:Content>

@@ -7,11 +7,11 @@ namespace Reservering_Reparatie
 {
     public class Kampeerplaats
     {
-        public int Nummer { get; set; }
+        public String Nummer { get; set; }
         public int Capaciteit { get; set; }
         public bool Gereserveerd { get; set; }
 
-        public Kampeerplaats(int nummer, int capaciteit, bool gereserveerd)
+        public Kampeerplaats(string nummer, int capaciteit, bool gereserveerd)
         {
             this.Nummer = nummer;
             this.Capaciteit = capaciteit;
@@ -53,7 +53,7 @@ namespace Reservering_Reparatie
 
         public override string ToString()
         {
-            return base.ToString();
+            return "Nummer: " + Nummer + " - " + "Capaciteit: " + Capaciteit;
         }
     }
 }

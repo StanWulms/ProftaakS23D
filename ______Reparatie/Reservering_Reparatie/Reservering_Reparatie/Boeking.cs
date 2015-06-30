@@ -81,7 +81,7 @@ namespace Reservering_Reparatie
         /// Als er een match is gevonden wordt de desbetreffende kampeerplaats geretourneerd.
         /// </summary>
         /// <param name="email">Nummer van de kampeerplaats</param>
-        public Kampeerplaats ZoekKampeerplaats(int nummer)
+        public Kampeerplaats ZoekKampeerplaats(string nummer)
         {
             Kampeerplaats kampr = new Kampeerplaats();
             List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
@@ -94,6 +94,18 @@ namespace Reservering_Reparatie
                 }
             }
             return kampr;
+        }
+
+        /// <summary>
+        /// Zoek zowel de gereserveerde als de lege kampeerplaatsen.
+        /// </summary>
+        /// <returns></returns>
+        public List<Kampeerplaats> ZoekAlleKampeerplaatsen()
+        {
+            db = new Database();
+            List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
+            kampeerplaatsen = db.GetAllKampeerplaatsen();
+            return kampeerplaatsen;
         }
 
         /// <summary>

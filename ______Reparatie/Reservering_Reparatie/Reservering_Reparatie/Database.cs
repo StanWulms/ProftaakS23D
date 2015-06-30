@@ -117,22 +117,22 @@ namespace Reservering_Reparatie
                 }
                 com.Connection = con;
                 //Alle gereserveerde plekken.
-                com.CommandText = @"SELECT * FROM plek WHERE id IN (SELECT ""plek_id"" FROM plek_reservering)";
+                com.CommandText = @"SELECT ""nummer"", ""capaciteit"" FROM plek WHERE id IN (SELECT ""plek_id"" FROM plek_reservering)";
                 DbDataReader reader = com.ExecuteReader();
                 List<Kampeerplaats> plekken = new List<Kampeerplaats>();
                 try
                 {
                     while (reader.Read())
                     {
-                        Kampeerplaats p = new Kampeerplaats(reader.GetInt32(2), reader.GetInt32(3), true);
+                        Kampeerplaats p = new Kampeerplaats(reader.GetString(0), reader.GetInt32(1), true);
                         plekken.Add(p);
                     }
                     //Alle niet gereserveerde plekken.
-                    com.CommandText = @"SELECT * FROM plek WHERE id NOT IN (SELECT ""plek_id"" FROM plek_reservering)";
+                    com.CommandText = @"SELECT ""nummer"", ""capaciteit"" FROM plek WHERE id NOT IN (SELECT ""plek_id"" FROM plek_reservering)";
                     reader = com.ExecuteReader();
                     while (reader.Read())
                     {
-                        Kampeerplaats p = new Kampeerplaats(reader.GetInt32(2), reader.GetInt32(3), false);
+                        Kampeerplaats p = new Kampeerplaats(reader.GetString(0), reader.GetInt32(1), false);
                         plekken.Add(p);
                     }                   
                     return plekken;

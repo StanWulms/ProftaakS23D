@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Reservering_Reparatie
 {
+    [Serializable]
     public class Account
     {
 
@@ -26,7 +27,7 @@ namespace Reservering_Reparatie
 
         public override string ToString()
         {
-            return base.ToString();
+            return "Gebruikersnaam: " + Gebruikersnaam;
         }
 
     }

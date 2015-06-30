@@ -32,8 +32,53 @@ namespace Reservering_Reparatie
 
                 lblValidation.Text = "Goeie ouwe";
                 lblValidation.Visible = true;
-                //Session["Hoofdbezoeker"] = //?
-                //Session["Accounts"] = List<Account> ...... ?
+                Session["Hoofdbezoeker"] = tbAccount1.Text; // Nu weet je de gebruikersnaam ?¿?
+                //Maken  van de sessie voor de accounts.
+                List<Account> accounts = new List<Account>();
+                
+                //Toevoegen van een Account in de lijst.
+                
+                var chars = "abcdef0123456789";
+                var stringChars = new char[32];
+                var random = new Random();
+                for (int i = 0; i < stringChars.Length; i++)
+                {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+                string activatiehash = new String(stringChars);
+                //Het toevoegen van het account van de hoofdboeker
+                //
+                
+                for (int k = 1; k < Convert.ToInt32(ddlAantal.Text)+1; k++)
+                {
+                    //Vervolgens (als die er zijn) worden de extra bezoekers
+                    //Toegevoegd aan de tabel ACCOUNT.
+                    random = new Random();
+                    for (int j = 0; j < stringChars.Length; j++)
+                    {
+                        stringChars[j] = chars[random.Next(chars.Length)];
+                    }
+                    activatiehash = new String(stringChars);
+                    //Er wordt gekeken welke tbAccount en tbEmail opgehaald moet worden
+                    //Deze worden in het volgende insertstatement ingevoerd.
+                    Account a;
+                    switch (k)
+                    {
+                        case 1: a = new Account(tbAccount1.Text, tbEmail1.Text, activatiehash); accounts.Add(a);
+                            break;
+                        case 2: a = new Account(tbAccount2.Text, tbEmail2.Text, activatiehash); accounts.Add(a);
+                            break;
+                        case 3: a = new Account(tbAccount3.Text, tbEmail3.Text, activatiehash); accounts.Add(a);
+                            break;
+                        case 4: a = new Account(tbAccount4.Text, tbEmail4.Text, activatiehash); accounts.Add(a);
+                            break;
+                        case 5: a = new Account(tbAccount5.Text, tbEmail5.Text, activatiehash); accounts.Add(a);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                    Session["Accounts"] = accounts;
             }
         }
 
