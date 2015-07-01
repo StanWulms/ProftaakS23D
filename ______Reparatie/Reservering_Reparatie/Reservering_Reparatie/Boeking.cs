@@ -194,7 +194,13 @@ namespace Reservering_Reparatie
             db.InsertReservering(b, hoofdboeker);            
             b.ID = db.GetMaxReservering();
             db.InsertPlekReservering(b, kampeerplaats);
-            string polsbandjeid = db.maakpolsbandje();
+            
+            foreach(Account account in accounts)
+            {
+              string polsbandje = db.maakpolsbandje();                
+              db.reserveer_polsbandje(b.ID, account, Convert.ToInt32(polsbandje));                           
+            }
+            
         }
         
         public override string ToString()

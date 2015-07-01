@@ -434,5 +434,32 @@ namespace Reservering_Reparatie
            }  
             return null;
            }
+        public void reserveer_polsbandje(int reserveringid, Account account, int polsbandjeid)
+        {
+            OracleConnection conn;
+            conn = Connect();
+            conn.Open();
+            DbCommand com = OracleClientFactory.Instance.CreateCommand();
+            if (com == null)
+            {
+                //return "Error! No Command";
+            }
+            com.Connection = conn;
+            OracleCommand cmd = (OracleCommand)conn.CreateCommand();
+            try
+            {
+                cmd.Parameters.Add("reservering_id", reserveringid);
+                cmd.Parameters.Add("polsbandje_id", polsbandjeid);
+                cmd.Parameters.Add("account_id", account.ID);                
+                OracleTransaction otn = (OracleTransaction)conn.BeginTransaction(IsolationLevel.ReadCommitted);
+                cmd.CommandText = @"INSERT INTO RESERVERING_POLSBANDJE (""reservering_id"", ""polsbandje_id"", ""account_id"", ""aanwezig"") VALUES (:1,:2,:3,0)";
+                cmd.ExecuteNonQuery();
+                otn.Commit();
+            }
+            catch (NullReferenceException)
+            {
+
+            } 
+        }
     }
 }
