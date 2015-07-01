@@ -11,14 +11,18 @@ namespace Reservering_Reparatie
     {
         Hoofdboeker hb;
         Boeking b;
-        bool nieuweHoofdboeker;
+        bool nietnieuweHoofdboeker = true;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            b = new Boeking();
-            if(!Page.IsPostBack)
+            if (!Page.IsPostBack)
             {
-                nieuweHoofdboeker = true;
+                Session["nieuweHoofdboeker"] = null;
+            }
+            b = new Boeking();
+            if((String)Session["nieuweHoofdboeker"] == null)
+            {
+                Session["nieuweHoofdboeker"] = "true";
             }
         }
 
@@ -85,15 +89,21 @@ namespace Reservering_Reparatie
                                 break;
                         }
                     }
-                    lblValidation.Text = "Persoon geselecteerd.";
+                    if ((String)Session["nieuweHoofdboeker"] == "false")
+                    {
+                        lblValidation.Text = "Persoon geselecteerd.";
 
-                    Hoofdboeker hoofdboeker = new Hoofdboeker(Convert.ToInt32(lbHoofdbezoekers.SelectedValue.Substring(4,lbHoofdbezoekers.SelectedValue.IndexOf("-")-5)),tbVoornaam.Text, tbTussenvoegsel.Text, tbAchternaam.Text, tbStraat.Text, tbHuisnummer.Text, tbWoonplaats.Text, tbBankrekening.Text);
-                    Session["Hoofdboeker"] = hoofdboeker;
-                if (nieuweHoofdboeker)
-                {
-                    lblValidation.Text = b.maakpersoon(hoofdboeker);
-                    lblValidation.Visible = true;
-                }
+                        Hoofdboeker hoofdboeker = new Hoofdboeker(Convert.ToInt32(lbHoofdbezoekers.SelectedValue.Substring(4, lbHoofdbezoekers.SelectedValue.IndexOf("-") - 5)), tbVoornaam.Text, tbTussenvoegsel.Text, tbAchternaam.Text, tbStraat.Text, tbHuisnummer.Text, tbWoonplaats.Text, tbBankrekening.Text);
+                        Session["Hoofdboeker"] = hoofdboeker;
+                    }
+                    else if ((String)Session["nieuweHoofdboeker"] == "true")
+                    {
+                        Hoofdboeker hb = new Hoofdboeker(tbVoornaam.Text, tbTussenvoegsel.Text, tbAchternaam.Text, tbStraat.Text, tbHuisnummer.Text, tbWoonplaats.Text, tbBankrekening.Text);
+                        lblValidation.Text = b.maakpersoon(hb);
+                        lblValidation.Visible = true;
+                        hb = b.LaatsteHoofdbezoeker(hb);
+                        Session["Hoofdboeker"] = hb;
+                    }
                     
 
                 if (lblValidation.Text == "Persoon aangemaakt." || lblValidation.Text == "Persoon geselecteerd.")
@@ -172,7 +182,7 @@ namespace Reservering_Reparatie
             tbBankrekening.Text = hb.Iban;
             tbBankrekening.Enabled = false;
 
-            nieuweHoofdboeker = false;
+            Session["nieuweHoofdboeker"] = "false";
         }
     }
 }

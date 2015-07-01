@@ -159,6 +159,12 @@ namespace Reservering_Reparatie
             return "Account(s) aangemaakt.";
         }
 
+        public Hoofdboeker LaatsteHoofdbezoeker(Hoofdboeker hb)
+        {
+            Hoofdboeker hoofdbezoeker = db.ZoekLaatstGeInsertBoeker(hb);
+            return hoofdbezoeker;
+        }
+
         /// <summary>
         /// De methode Boek wordt als laatste aageroepen en dat is ook de plek
         /// vanwaar de reservering wordt aangepast in de database.

@@ -147,8 +147,43 @@ namespace Reservering_Reparatie
                     return null;
                 }
             }
-
         }
+
+        public Hoofdboeker ZoekLaatstGeInsertBoeker(Hoofdboeker h)
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                //Alle gereserveerde plekken.
+                com.CommandText = @"SELECT id FROM PERSOON WHERE ""voornaam"" ='" + h.Naam + @"' AND ""tussenvoegsel"" ='" + h.Tussenvoegsel + @"' AND ""achternaam"" ='" + h.Achternaam + @"' AND ""straat"" ='" + h.Straat + @"' AND ""huisnr"" =" + h.Huisnummer + @" AND ""woonplaats"" ='" + h.Woonplaats + @"' AND ""banknr"" ='" + h.Iban + "'";
+                DbDataReader reader = com.ExecuteReader();
+                try
+                {
+                    Hoofdboeker hb = new Hoofdboeker();
+                    while (reader.Read())
+                    {
+                        hb = new Hoofdboeker(reader.GetInt32(0), h.Naam, h.Tussenvoegsel, h.Achternaam, h.Straat, h.Huisnummer, h.Woonplaats, h.Iban);
+                    }
+                    return hb;
+                }
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+            }
+        }
+
         public string maakpersoon(Hoofdboeker hoofdboeker)
         {
             try

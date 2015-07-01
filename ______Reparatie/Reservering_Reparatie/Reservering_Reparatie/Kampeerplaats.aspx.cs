@@ -42,13 +42,16 @@ namespace Reservering_Reparatie
 
         protected void btnKampeerplaatsReserveren_Click(object sender, EventArgs e)
         {
+            int capaciteit = -1;
             Page.Validate("AllValidators");
             if (Page.IsValid)
             {
                 string plek = lbVrijePlaatsen.SelectedValue;
-                
-                int capaciteit = Convert.ToInt32(plek.Substring(plek.LastIndexOf(":") + 1));
-                //TEST - lbVrijePlaatsen.Items.Add(capaciteit.ToString());   
+                try
+                {
+                    capaciteit = Convert.ToInt32(plek.Substring(plek.LastIndexOf(":") + 1));
+                }
+                catch { Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Selecteer een Plaats.');</script>"); }
                 
                 if(Convert.ToInt32(lbAccounts.Items.Count.ToString()) <= capaciteit)
                 {
