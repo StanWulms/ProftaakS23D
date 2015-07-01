@@ -135,86 +135,63 @@ straat PERSOON."straat"%TYPE,
 huisnr PERSOON."huisnr"%TYPE,
 woonplaats PERSOON."woonplaats"%TYPE,
 banknr PERSOON."banknr"%TYPE,
-email "ACCOUNT"."email"%TYPE,
-gebruiker "ACCOUNT"."gebruikersnaam"%TYPE,
-actievatiehash "ACCOUNT"."activatiehash"%TYPE,
 text out VARCHAR2
 )
 AS
 errortext VARCHAR2(2000);
 BEGIN
-	IF CHECKTEKST(voornaam) = 'Goed' THEN
-		dbms_output.put_line('voor');
-		IF CHECKTEKST(achternaam) = 'Goed' THEN
-			dbms_output.put_line('achter');		
-			IF CHECKTEKST(straat) = 'Goed' THEN
-				dbms_output.put_line('straat');	
-				IF  CHECKPOSTCODE(woonplaats) = 'Goed' THEN
-					dbms_output.put_line('woonplaats');	
-					IF CHECKHUISNR(huisnr) = 'Goed' THEN
-						dbms_output.put_line('huisnr');	
-						IF CHECKTEKST(gebruiker) = 'Goed' THEN
-							dbms_output.put_line('gebruiker');	
-							IF CHECKEMAIL(email) = 'Goed' THEN
-								dbms_output.put_line('email');
-								IF CHECKBANKNR(banknr) = 'Goed' THEN
-									dbms_output.put_line('banknr');
-									IF LENGTH(actievatiehash) = 32 THEN
-										IF tussenvoegsel IS NULL THEN
-											dbms_output.put_line('geentussenvoegsel');
-											Insert into PERSOON ("voornaam","tussenvoegsel","achternaam","straat","huisnr","woonplaats","banknr") values (voornaam, null, achternaam, straat, huisnr, woonplaats, banknr);
-											Insert into ACCOUNT ("gebruikersnaam","email","activatiehash","geactiveerd") values (gebruiker,email,actievatiehash,'0');
-											errortext := 'goed';
-											text := errortext;
-										ELSE
-											IF CHECKTEKST(tussenvoegsel) = 'Goed' THEN
-												dbms_output.put_line('tussenvoegsel');
-												Insert into PERSOON ("voornaam","tussenvoegsel","achternaam","straat","huisnr","woonplaats","banknr") values (voornaam, tussenvoegsel, achternaam, straat, huisnr, woonplaats, banknr);
-												 
-												errortext := 'goed';
-												text := errortext;
-											ELSE
-												errortext := 'tussenvoegsel niet correct';
-												text := errortext;
-											END IF;
-										
-										END IF;
-									ELSE
-										errortext := 'activatiehash niet correct';
-										text := errortext;
-									END IF;
-								ELSE
-									errortext := 'banknummer niet correct';
-									text := errortext;
-								END IF;
-							ELSE
-								errortext := 'e-mail niet correct';
-								text := errortext;
-							END IF;
-						ELSE
-							errortext := 'gebruikernaam niet correct';
-							text := errortext;
-						END IF;
-					ELSE
-						errortext := 'huisnummer niet correct';	
-						text := errortext;
-					END IF;
-				ELSE
-					errortext := 'woonplaats niet correct';
-					text := errortext;
-				END IF;
-			ELSE
-				errortext := 'straat niet correct';
-				text := errortext;
-			END IF;
-		ELSE
-			errortext := 'achternaam niet correct';
-			text := errortext;
-		END IF;
-	ELSE
-		errortext := 'voornaam niet correct';
-		text := errortext;
-	END IF;
+ IF CHECKTEKST(voornaam) = 'Goed' THEN
+  dbms_output.put_line('voor');
+  IF CHECKTEKST(achternaam) = 'Goed' THEN
+   dbms_output.put_line('achter');  
+   IF CHECKTEKST(straat) = 'Goed' THEN
+    dbms_output.put_line('straat'); 
+    IF  CHECKPOSTCODE(woonplaats) = 'Goed' THEN
+     dbms_output.put_line('woonplaats'); 
+     IF CHECKHUISNR(huisnr) = 'Goed' THEN
+      dbms_output.put_line('huisnr');       
+        IF CHECKBANKNR(banknr) = 'Goed' THEN
+         dbms_output.put_line('banknr');         
+          IF tussenvoegsel IS NULL THEN
+           dbms_output.put_line('geentussenvoegsel');
+           Insert into PERSOON ("voornaam","tussenvoegsel","achternaam","straat","huisnr","woonplaats","banknr") values (voornaam, null, achternaam, straat, huisnr, woonplaats, banknr);           
+           errortext := 'goed';
+           text := errortext;
+          ELSE
+           IF CHECKTEKST(tussenvoegsel) = 'Goed' THEN
+            dbms_output.put_line('tussenvoegsel');
+            Insert into PERSOON ("voornaam","tussenvoegsel","achternaam","straat","huisnr","woonplaats","banknr") values (voornaam, tussenvoegsel, achternaam, straat, huisnr, woonplaats, banknr);             
+            errortext := 'goed';
+            text := errortext;
+           ELSE
+            errortext := 'tussenvoegsel niet correct';
+            text := errortext;
+           END IF;          
+          END IF;         
+        ELSE
+         errortext := 'banknummer niet correct';
+         text := errortext;
+        END IF;       
+     ELSE
+      errortext := 'huisnummer niet correct'; 
+      text := errortext;
+     END IF;
+    ELSE
+     errortext := 'woonplaats niet correct';
+     text := errortext;
+    END IF;
+   ELSE
+    errortext := 'straat niet correct';
+    text := errortext;
+   END IF;
+  ELSE
+   errortext := 'achternaam niet correct';
+   text := errortext;
+  END IF;
+ ELSE
+  errortext := 'voornaam niet correct';
+  text := errortext;
+ END IF;
 END;
 
 /
@@ -250,4 +227,20 @@ ELSE
 	text := errortxt;
 END IF;
 END;
+/
+CREATE OR REPLACE 
+PROCEDURE polsbandjes
+(
+nieuwid out NUMBER
+)
+AS
+idmax NUMBER(20);
+barcodeid NUMBER(13);
+BEGIN
+SELECT MAX(id) into idmax FROM POLSBANDJE;
+barcodeid := 1000000000001 + idmax;
+INSERT into POLSBANDJE("barcode","actief") VALUES(barcodeid, 1);
+SELECT MAX(id) into nieuwid FROM POLSBANDJE;
+END;
+
 

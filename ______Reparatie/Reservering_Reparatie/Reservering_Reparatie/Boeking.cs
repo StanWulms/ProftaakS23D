@@ -13,11 +13,23 @@ namespace Reservering_Reparatie
         Kampeerplaats kampeerplaats;
         Database db;
 
+        public int ID { get; set; }
         public String BeginDatum { get; set; }
         public String EindDatum { get; set; }
 
         public Boeking(String beginDatum, String eindDatum)
         {
+            this.BeginDatum = beginDatum;
+            this.EindDatum = eindDatum;
+            accounts = new List<Account>();
+            hoofdboeker = new Hoofdboeker();
+            kampeerplaats = new Kampeerplaats();
+            db = new Database();
+        }
+
+        public Boeking(int id, String beginDatum, String eindDatum)
+        {
+            this.ID = id;
             this.BeginDatum = beginDatum;
             this.EindDatum = eindDatum;
             accounts = new List<Account>();
@@ -177,9 +189,11 @@ namespace Reservering_Reparatie
             Hoofdboeker hoofdboeker = (Hoofdboeker)System.Web.HttpContext.Current.Session["Hoofdboeker"];
             accounts = (List<Account>)System.Web.HttpContext.Current.Session["Accounts"];
             Kampeerplaats kampeerplaats = ZoekKampeerplaats(nummer);
-            //INSERT statements:
-            Boeking b = new Boeking(beginDatum, eindDatum);
+            //INSERT statements:     
+            Boeking b = new Boeking(1, beginDatum, eindDatum);
             db.InsertReservering(b, hoofdboeker);
+            b.ID = db.GetMaxReservering();
+            db.InsertPlekReservering(b, kampeerplaats);
         }
         
         public override string ToString()

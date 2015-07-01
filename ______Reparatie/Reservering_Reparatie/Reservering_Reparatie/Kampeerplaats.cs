@@ -7,12 +7,21 @@ namespace Reservering_Reparatie
 {
     public class Kampeerplaats
     {
+        public int ID { get; set; }
         public String Nummer { get; set; }
         public int Capaciteit { get; set; }
         public bool Gereserveerd { get; set; }
 
         public Kampeerplaats(string nummer, int capaciteit, bool gereserveerd)
         {
+            this.Nummer = nummer;
+            this.Capaciteit = capaciteit;
+            this.Gereserveerd = gereserveerd;
+        }
+
+        public Kampeerplaats(int id, string nummer, int capaciteit, bool gereserveerd)
+        {
+            this.ID = id;
             this.Nummer = nummer;
             this.Capaciteit = capaciteit;
             this.Gereserveerd = gereserveerd;
