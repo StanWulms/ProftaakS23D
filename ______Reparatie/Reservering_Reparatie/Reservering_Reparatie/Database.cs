@@ -414,5 +414,25 @@ namespace Reservering_Reparatie
 
             }
         }
+        public string maakpolsbandje()
+            {
+                try
+            {
+               OracleConnection conn;
+               conn = Connect();
+               conn.Open();               
+               OracleCommand ora_cm = new OracleCommand("polsbandjes", conn );
+               ora_cm.BindByName = true;
+               ora_cm.CommandType = CommandType.StoredProcedure;                            
+               ora_cm.Parameters.Add("nieuwid", OracleDbType.Int32, 32767).Direction = ParameterDirection.Output;
+               ora_cm.ExecuteNonQuery();                 
+               return ora_cm.Parameters["nieuwid"].Value.ToString();         //het nieuwe polsbandjeid    
+           }
+           catch (Exception ex)
+           {
+               System.Console.WriteLine("Exception: {0}", ex.ToString());
+           }  
+            return null;
+           }
     }
 }

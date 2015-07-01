@@ -191,9 +191,10 @@ namespace Reservering_Reparatie
             Kampeerplaats kampeerplaats = ZoekKampeerplaats(nummer);
             //INSERT statements:     
             Boeking b = new Boeking(1, beginDatum, eindDatum);
-            db.InsertReservering(b, hoofdboeker);
+            db.InsertReservering(b, hoofdboeker);            
             b.ID = db.GetMaxReservering();
             db.InsertPlekReservering(b, kampeerplaats);
+            string polsbandjeid = db.maakpolsbandje();
         }
         
         public override string ToString()
