@@ -26,6 +26,7 @@ namespace Reservering_Reparatie
             this.Woonplaats = woonplaats;
             this.Iban = iban;
         }
+
         public Hoofdboeker(int id, string naam, string tussenvoegsel, string achternaam, string straat, string huisnummer, string woonplaats, string iban)
         {
             this.ID = id;

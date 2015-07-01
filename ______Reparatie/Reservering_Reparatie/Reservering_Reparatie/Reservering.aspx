@@ -13,9 +13,9 @@
     <br /><br />
     <asp:Label ID="lblHoofdboeker" runat="server" Text="Heeft u  al een account? Zoek hier uw account:"></asp:Label><br />
     <asp:TextBox ID="tbHoofdboeker" runat="server"></asp:TextBox>
-    <br />
     <asp:Button ID="btnZoekHoofdboeker" runat="server" Text="Zoek Hoofdboeker" OnClick="btnZoekHoofdboeker_Click" />
-    <asp:ListBox ID="lbHoofdbezoekers" runat="server" Width="500" Height="100"></asp:ListBox>
+    <br /><br />
+    <asp:ListBox ID="lbHoofdbezoekers" runat="server" Width="500" Height="100"></asp:ListBox><br />      
     <br />
     <asp:Button ID="btnSelecteerHoofdBezoeker" runat="server" Text="Selecteer Hoofdbezoeker" OnClick="btnSelecteerHoofdBezoeker_Click" />
     <br /> <br /> <br />

@@ -32,6 +32,43 @@ namespace Reservering_Reparatie
             OracleConnection con = new OracleConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString);
             return con;
         }
+
+        //GetMax... retourneert het hoogst gevonden id in de database van een bepaalde tabel
+        public int GetMaxReservering()
+        {
+            int id = 0;
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = "SELECT id FROM reservering WHERE id = (SELECT MAX(id) FROM reservering)";
+                DbDataReader reader = com.ExecuteReader();
+                List<Account> accounts = new List<Account>();
+                try
+                {
+                    reader.Read();
+                    id = reader.GetInt32(0);
+                    reader.Close();
+                    return id;
+                }
+                catch (NullReferenceException)
+                {
+                    return 0;
+                }
+            }
+        }
+
+
         //GetAll... retourneert een lijst met alle objecten die in de
         //database te vinden zijn.
         public List<Account> GetAllAccounts()
@@ -122,22 +159,22 @@ namespace Reservering_Reparatie
                 }
                 com.Connection = con;
                 //Alle gereserveerde plekken.
-                com.CommandText = @"SELECT ""nummer"", ""capaciteit"" FROM plek WHERE id IN (SELECT ""plek_id"" FROM plek_reservering)";
+                com.CommandText = @"SELECT id, ""nummer"", ""capaciteit"" FROM plek WHERE id IN (SELECT ""plek_id"" FROM plek_reservering)";
                 DbDataReader reader = com.ExecuteReader();
                 List<Kampeerplaats> plekken = new List<Kampeerplaats>();
                 try
                 {
                     while (reader.Read())
                     {
-                        Kampeerplaats p = new Kampeerplaats(reader.GetString(0), reader.GetInt32(1), true);
+                        Kampeerplaats p = new Kampeerplaats(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), true);
                         plekken.Add(p);
                     }
                     //Alle niet gereserveerde plekken.
-                    com.CommandText = @"SELECT ""nummer"", ""capaciteit"" FROM plek WHERE id NOT IN (SELECT ""plek_id"" FROM plek_reservering)";
+                    com.CommandText = @"SELECT id, ""nummer"", ""capaciteit"" FROM plek WHERE id NOT IN (SELECT ""plek_id"" FROM plek_reservering)";
                     reader = com.ExecuteReader();
                     while (reader.Read())
                     {
-                        Kampeerplaats p = new Kampeerplaats(reader.GetString(0), reader.GetInt32(1), false);
+                        Kampeerplaats p = new Kampeerplaats(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2), false);
                         plekken.Add(p);
                     }
                     return plekken;
@@ -149,6 +186,9 @@ namespace Reservering_Reparatie
             }
 
         }
+
+
+        //Voor het aanmaken van de accounts
         public string maakpersoon(Hoofdboeker hoofdboeker)
         {
             try
@@ -169,6 +209,36 @@ namespace Reservering_Reparatie
                 ora_cmd.Parameters.Add("huisnr ", OracleDbType.NVarchar2, hoofdboeker.Huisnummer, ParameterDirection.Input);
                 ora_cmd.Parameters.Add("woonplaats ", OracleDbType.NVarchar2, hoofdboeker.Woonplaats, ParameterDirection.Input);
                 ora_cmd.Parameters.Add("banknr ", OracleDbType.NVarchar2, hoofdboeker.Iban, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
+
+                /*********************Oracle Command**********************************************************************/
+
+                ora_cmd.ExecuteNonQuery();
+
+                //Now get the values output by the stored procedure    
+                return ora_cmd.Parameters["text"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Exception: {0}", ex.ToString());
+            }
+            return "foutmelding";
+        }
+        public string accountmaken(Account account)
+        {
+            try
+            {
+                OracleConnection conn;
+                conn = Connect();
+                conn.Open();
+                OracleCommand ora_cmd = new OracleCommand("subinschrijving", conn);
+                ora_cmd.BindByName = true;
+                ora_cmd.CommandType = CommandType.StoredProcedure;
+
+
+                ora_cmd.Parameters.Add("email", OracleDbType.Varchar2, account.Email, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("gebruiker", OracleDbType.Varchar2, account.Gebruikersnaam, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("actievatiehash", OracleDbType.Varchar2, account.Activatiehash, ParameterDirection.Input);
                 ora_cmd.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
 
                 /*********************Oracle Command**********************************************************************/
@@ -216,42 +286,9 @@ namespace Reservering_Reparatie
             return "foutmelding";
         }
 
-        public string accountmaken(Account account)
-        {
-            try
-            {
-                OracleConnection conn;
-                conn = Connect();
-                conn.Open();
-                OracleCommand ora_cmd = new OracleCommand("subinschrijving", conn);
-                ora_cmd.BindByName = true;
-                ora_cmd.CommandType = CommandType.StoredProcedure;
 
-
-                ora_cmd.Parameters.Add("email", OracleDbType.Varchar2, account.Email, ParameterDirection.Input);
-                ora_cmd.Parameters.Add("gebruiker", OracleDbType.Varchar2, account.Gebruikersnaam, ParameterDirection.Input);
-                ora_cmd.Parameters.Add("actievatiehash", OracleDbType.Varchar2, account.Activatiehash, ParameterDirection.Input);
-                ora_cmd.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
-
-                /*********************Oracle Command**********************************************************************/
-
-                ora_cmd.ExecuteNonQuery();
-
-                //Now get the values output by the stored procedure    
-                return ora_cmd.Parameters["text"].Value.ToString();
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine("Exception: {0}", ex.ToString());
-            }
-            return "foutmelding";
-        }
-
-        public void InsertReservering(Kampeerplaats kampeerplaats)
-        {
-
-        }
-
+        //Het inserten van de tabellen horend bij de reservatie.
+        //o.a. de nieuwe reservering en de koppeling met de plaats, hoofdboeker en accounts
         public void InsertPolsbandje()
         {
             using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
@@ -291,34 +328,58 @@ namespace Reservering_Reparatie
                 }
             }
         }
-
         public void InsertReservering(Boeking boeking, Hoofdboeker hoofdboeker)
         {
-                OracleConnection conn;
-                conn = Connect();
-                conn.Open();
-                DbCommand com = OracleClientFactory.Instance.CreateCommand();
-                if (com == null)
-                {
-                    //return "Error! No Command";
-                }
-                com.Connection = conn;
-                OracleCommand cmd = (OracleCommand)conn.CreateCommand();
-                try
-                {
-                    cmd.Parameters.Add("persoon_id", hoofdboeker.ID);
-                    cmd.Parameters.Add("datumStart", boeking.BeginDatum);
-                    cmd.Parameters.Add("datumEinde", boeking.EindDatum);
-                    OracleTransaction otn = (OracleTransaction)conn.BeginTransaction(IsolationLevel.ReadCommitted);
-                    cmd.CommandText = @"INSERT INTO RESERVERING (""persoon_id"", ""datumStart"", ""datumEinde"", ""betaald"") VALUES (:1,:2,:3,0)";
-                    cmd.ExecuteNonQuery();
-                    otn.Commit();
-                }
-                catch (NullReferenceException)
-                {
+            OracleConnection conn;
+            conn = Connect();
+            conn.Open();
+            DbCommand com = OracleClientFactory.Instance.CreateCommand();
+            if (com == null)
+            {
+                //return "Error! No Command";
+            }
+            com.Connection = conn;
+            OracleCommand cmd = (OracleCommand)conn.CreateCommand();
+            try
+            {
+                cmd.Parameters.Add("persoon_id", hoofdboeker.ID);
+                cmd.Parameters.Add("datumStart", boeking.BeginDatum);
+                cmd.Parameters.Add("datumEinde", boeking.EindDatum);
+                OracleTransaction otn = (OracleTransaction)conn.BeginTransaction(IsolationLevel.ReadCommitted);
+                cmd.CommandText = @"INSERT INTO RESERVERING (""persoon_id"", ""datumStart"", ""datumEinde"", ""betaald"") VALUES (:1,:2,:3,0)";
+                cmd.ExecuteNonQuery();
+                otn.Commit();
+            }
+            catch (NullReferenceException)
+            {
 
-                }
-            
+            }           
+        }
+        public void InsertPlekReservering(Boeking boeking, Kampeerplaats kampeerplaats)
+        {
+            OracleConnection conn;
+            conn = Connect();
+            conn.Open();
+            DbCommand com = OracleClientFactory.Instance.CreateCommand();
+            if (com == null)
+            {
+                //return "Error! No Command";
+            }
+            com.Connection = conn;
+            OracleCommand cmd = (OracleCommand)conn.CreateCommand();
+            try
+            {
+                cmd.Parameters.Add("plek_id", kampeerplaats.ID);
+                cmd.Parameters.Add("reservering_id", boeking.ID);
+                OracleTransaction otn = (OracleTransaction)conn.BeginTransaction(IsolationLevel.ReadCommitted);
+                cmd.CommandText = @"INSERT INTO PLEK_RESERVERING (""plek_id"", ""reservering_id"") VALUES (:1,:2)";
+                cmd.ExecuteNonQuery();
+                otn.Commit();
+            }
+            catch (NullReferenceException)
+            {
+
+            }
         }
     }
 }
