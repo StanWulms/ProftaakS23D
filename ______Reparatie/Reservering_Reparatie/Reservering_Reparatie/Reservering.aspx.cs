@@ -9,11 +9,17 @@ namespace Reservering_Reparatie
 {
     public partial class Reservering : System.Web.UI.Page
     {
+        Hoofdboeker hb;
         Boeking b;
+        bool nieuweHoofdboeker;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            b = new Boeking();
+            if(!Page.IsPostBack)
+            {
+                nieuweHoofdboeker = true;
+            }
         }
 
         /// <summary>
@@ -27,58 +33,76 @@ namespace Reservering_Reparatie
             Page.Validate("AllValidators");
             if (Page.IsValid)
             {
-                //Het aanroepen van de SP.
+                    //Het aanroepen van de SP.
 
 
-                lblValidation.Text = "Goeie ouwe";
-                lblValidation.Visible = true;
-                Session["Hoofdbezoeker"] = tbAccount1.Text; // Nu weet je de gebruikersnaam ?¿?
-                //Maken  van de sessie voor de accounts.
-                List<Account> accounts = new List<Account>();
-                
-                //Toevoegen van een Account in de lijst.
-                
-                var chars = "abcdef0123456789";
-                var stringChars = new char[32];
-                var random = new Random();
-                for (int i = 0; i < stringChars.Length; i++)
-                {
-                    stringChars[i] = chars[random.Next(chars.Length)];
-                }
-                string activatiehash = new String(stringChars);
-                //Het toevoegen van het account van de hoofdboeker
-                //
-                
-                for (int k = 1; k < Convert.ToInt32(ddlAantal.Text)+1; k++)
-                {
-                    //Vervolgens (als die er zijn) worden de extra bezoekers
-                    //Toegevoegd aan de tabel ACCOUNT.
-                    random = new Random();
-                    for (int j = 0; j < stringChars.Length; j++)
+                    lblValidation.Text = "Goeie ouwe";
+                    lblValidation.Visible = true;
+                    //Hoofdboeker h = new Hoofdboeker()
+                    Session["Hoofdbezoeker"] = tbAccount1.Text; // Nu weet je de gebruikersnaam ?¿?
+                    //Maken  van de sessie voor de accounts.
+                    List<Account> accounts = new List<Account>();
+
+                    //Toevoegen van een Account in de lijst.
+
+                    var chars = "abcdef0123456789";
+                    var stringChars = new char[32];
+                    var random = new Random();
+                    for (int i = 0; i < stringChars.Length; i++)
                     {
-                        stringChars[j] = chars[random.Next(chars.Length)];
+                        stringChars[i] = chars[random.Next(chars.Length)];
                     }
-                    activatiehash = new String(stringChars);
-                    //Er wordt gekeken welke tbAccount en tbEmail opgehaald moet worden
-                    //Deze worden in het volgende insertstatement ingevoerd.
-                    Account a;
-                    switch (k)
+                    string activatiehash = new String(stringChars);
+                    //Het toevoegen van het account van de hoofdboeker
+                    //
+
+                    for (int k = 1; k < Convert.ToInt32(ddlAantal.Text) + 1; k++)
                     {
-                        case 1: a = new Account(tbAccount1.Text, tbEmail1.Text, activatiehash); accounts.Add(a);
-                            break;
-                        case 2: a = new Account(tbAccount2.Text, tbEmail2.Text, activatiehash); accounts.Add(a);
-                            break;
-                        case 3: a = new Account(tbAccount3.Text, tbEmail3.Text, activatiehash); accounts.Add(a);
-                            break;
-                        case 4: a = new Account(tbAccount4.Text, tbEmail4.Text, activatiehash); accounts.Add(a);
-                            break;
-                        case 5: a = new Account(tbAccount5.Text, tbEmail5.Text, activatiehash); accounts.Add(a);
-                            break;
-                        default:
-                            break;
+                        //Vervolgens (als die er zijn) worden de extra bezoekers
+                        //Toegevoegd aan de tabel ACCOUNT.
+                        random = new Random();
+                        for (int j = 0; j < stringChars.Length; j++)
+                        {
+                            stringChars[j] = chars[random.Next(chars.Length)];
+                        }
+                        activatiehash = new String(stringChars);
+                        //Er wordt gekeken welke tbAccount en tbEmail opgehaald moet worden
+                        //Deze worden in het volgende insertstatement ingevoerd.
+                        Account a;
+                        switch (k)
+                        {
+                            case 1: a = new Account(tbAccount1.Text, tbEmail1.Text, activatiehash); accounts.Add(a);
+                                break;
+                            case 2: a = new Account(tbAccount2.Text, tbEmail2.Text, activatiehash); accounts.Add(a);
+                                break;
+                            case 3: a = new Account(tbAccount3.Text, tbEmail3.Text, activatiehash); accounts.Add(a);
+                                break;
+                            case 4: a = new Account(tbAccount4.Text, tbEmail4.Text, activatiehash); accounts.Add(a);
+                                break;
+                            case 5: a = new Account(tbAccount5.Text, tbEmail5.Text, activatiehash); accounts.Add(a);
+                                break;
+                            default:
+                                break;
+                        }
                     }
+                    lblValidation.Text = "Persoon geselecteerd.";
+
+                    Hoofdboeker hoofdboeker = new Hoofdboeker(Convert.ToInt32(lbHoofdbezoekers.SelectedValue.Substring(4,lbHoofdbezoekers.SelectedValue.IndexOf("-")-5)),tbVoornaam.Text, tbTussenvoegsel.Text, tbAchternaam.Text, tbStraat.Text, tbHuisnummer.Text, tbWoonplaats.Text, tbBankrekening.Text);
+                    Session["Hoofdboeker"] = hoofdboeker;
+                if (nieuweHoofdboeker)
+                {
+                    lblValidation.Text = b.maakpersoon(hoofdboeker);
+                    lblValidation.Visible = true;
                 }
+                    
+
+                if (lblValidation.Text == "Persoon aangemaakt." || lblValidation.Text == "Persoon geselecteerd.")
+                {
                     Session["Accounts"] = accounts;
+                    lblValidation2.Text = b.MaakAccounts(accounts);
+                    lblValidation2.Visible = true;
+                    Response.Redirect("Kampeerplaats.aspx");
+                }
             }
         }
 
@@ -114,8 +138,8 @@ namespace Reservering_Reparatie
         protected void btnZoekHoofdboeker_Click(object sender, EventArgs e)
         {
             b = new Boeking();
-            List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
-            hoofdboekers = b.ZoekHoofdboekers(tbHoofdboeker.Text);
+            List<Hoofdboeker> hoofdboekers = b.ZoekHoofdboekers(tbHoofdboeker.Text);
+            lbHoofdbezoekers.Items.Clear();
             foreach (Hoofdboeker hb in hoofdboekers)
             {
                 lbHoofdbezoekers.Items.Add(hb.ToString());
@@ -124,27 +148,31 @@ namespace Reservering_Reparatie
 
         protected void btnSelecteerHoofdBezoeker_Click(object sender, EventArgs e)
         {
-            Session["Hoofdbezoeker"] = lbHoofdbezoekers.SelectedItem.Value.Substring(3, lbHoofdbezoekers.SelectedItem.Value.IndexOf("-") - 3);
-            tbVoornaam.Text = "";
+            Session["Hoofdboeker"] = lbHoofdbezoekers.SelectedItem.Value.Substring(3, lbHoofdbezoekers.SelectedItem.Value.IndexOf("-") - 3);
+            Hoofdboeker hb = b.ZoekJuisteHoofdboeker((String)Session["Hoofdboeker"]);
+            
+            tbVoornaam.Text = hb.Naam;
             tbVoornaam.Enabled = false;
 
-            tbTussenvoegsel.Text = "";
+            tbTussenvoegsel.Text = hb.Tussenvoegsel;
             tbTussenvoegsel.Enabled = false;
 
-            tbAchternaam.Text = "";
+            tbAchternaam.Text = hb.Achternaam;
             tbAchternaam.Enabled = false;
 
-            tbStraat.Text = "";
+            tbStraat.Text = hb.Straat;
             tbStraat.Enabled = false;
 
-            tbHuisnummer.Text = "";
+            tbHuisnummer.Text = hb.Huisnummer;
             tbHuisnummer.Enabled = false;
 
-            tbWoonplaats.Text = "";
+            tbWoonplaats.Text = hb.Woonplaats;
             tbWoonplaats.Enabled = false;
 
-            tbBankrekening.Text = "";
+            tbBankrekening.Text = hb.Iban;
             tbBankrekening.Enabled = false;
+
+            nieuweHoofdboeker = false;
         }
     }
 }

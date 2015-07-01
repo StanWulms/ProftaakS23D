@@ -14,15 +14,14 @@ namespace Reservering_Reparatie
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            b = new Boeking();
+            kp = new Kampeerplaats();
             if (!Page.IsPostBack)
             {
                 try
                 {
                     lbAccounts.Items.Clear();
                     lbVrijePlaatsen.Items.Clear();
-
-                    b = new Boeking();
-                    kp = new Kampeerplaats();
 
                     List<Account> accounts = (List<Account>)Session["Accounts"];
                     for (int i = 0; i < accounts.Count; i++)
@@ -49,10 +48,14 @@ namespace Reservering_Reparatie
                 string plek = lbVrijePlaatsen.SelectedValue;
                 
                 int capaciteit = Convert.ToInt32(plek.Substring(plek.LastIndexOf(":") + 1));
-                //TEST - lbVrijePlaatsen.Items.Add(capaciteit.ToString());
-                if(Convert.ToInt32(lbSelectedAccounts.Items.Count.ToString()) <= capaciteit)
+                //TEST - lbVrijePlaatsen.Items.Add(capaciteit.ToString());   
+                
+                if(Convert.ToInt32(lbAccounts.Items.Count.ToString()) <= capaciteit)
                 {
                     lbVrijePlaatsen.Items.Add("Reservering Geslaagd.");
+                    //ALLES aanroepen om data te inserten --> Boeking --> DatabaseKlasse --> DB;
+                    string nummer = lbVrijePlaatsen.SelectedValue.Substring(8,lbVrijePlaatsen.SelectedValue.IndexOf("-")-9);
+                    b.Boek(tbBeginDatum.Text, tbEindDatum.Text, nummer);
                 }
             }
         }

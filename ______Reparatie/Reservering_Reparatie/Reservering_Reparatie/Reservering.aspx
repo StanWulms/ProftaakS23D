@@ -39,7 +39,7 @@
     <asp:TextBox ID="tbHuisnummer" runat="server" MaxLength="5" Width="45px"></asp:TextBox>
     <br /><br />
     <asp:RequiredFieldValidator ID="rfvWoonplaats" runat="server" ControlToValidate="tbWoonplaats" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
-    <asp:Label ID="lblWoonplaats" runat="server" Text="Woonplaats: "></asp:Label>
+    <asp:Label ID="lblWoonplaats" runat="server" Text="Postcode: "></asp:Label>
     <asp:TextBox ID="tbWoonplaats" runat="server"></asp:TextBox>
     <br /><br />
     <asp:RequiredFieldValidator ID="rfvBankrekening" runat="server" ControlToValidate="tbBankrekening" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
@@ -105,4 +105,6 @@
     <br />
     <asp:Button ID="btnRegistreer" runat="server" Text="Registreer" OnClick="btnRegistreer_Click" ValidationGroup="AllValidators" CausesValidation="false"/>
     <asp:Label ID="lblValidation" runat="server" Visible="False" ForeColor="Red"></asp:Label>
+    <br />
+    <asp:Label ID="lblValidation2" runat="server" Visible="false" ForeColor="Red"></asp:Label>
 </asp:Content>

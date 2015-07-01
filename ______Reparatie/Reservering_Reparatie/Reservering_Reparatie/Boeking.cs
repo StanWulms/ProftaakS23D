@@ -13,10 +13,10 @@ namespace Reservering_Reparatie
         Kampeerplaats kampeerplaats;
         Database db;
 
-        public DateTime BeginDatum { get; set; }
-        public DateTime EindDatum { get; set; }
+        public String BeginDatum { get; set; }
+        public String EindDatum { get; set; }
 
-        public Boeking(DateTime beginDatum, DateTime eindDatum)
+        public Boeking(String beginDatum, String eindDatum)
         {
             this.BeginDatum = beginDatum;
             this.EindDatum = eindDatum;
@@ -28,7 +28,10 @@ namespace Reservering_Reparatie
 
         public Boeking()
         {
-
+            accounts = new List<Account>();
+            hoofdboeker = new Hoofdboeker();
+            kampeerplaats = new Kampeerplaats();
+            db = new Database();
         }
 
         /// <summary>
@@ -58,7 +61,7 @@ namespace Reservering_Reparatie
         /// <param name="zoekCriteria">String waarop gezocht wordt. Gaat over de naam en achternaam</param>
         public List<Hoofdboeker> ZoekHoofdboekers(string zoekCriteria)
         {
-            db = new Database();
+            //db = new Database();
             List<Hoofdboeker> hfdb = new List<Hoofdboeker>();
             List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
             hoofdboekers = db.GetAllHoofdboekers();
@@ -71,6 +74,22 @@ namespace Reservering_Reparatie
                 else if (b.Achternaam.Contains(zoekCriteria))
                 {
                     hfdb.Add(b);
+                }
+            }
+            return hfdb;
+        }
+
+        public Hoofdboeker ZoekJuisteHoofdboeker(string id)
+        {
+            //db = new Database();
+            Hoofdboeker hfdb = new Hoofdboeker();
+            List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
+            hoofdboekers = db.GetAllHoofdboekers();
+            foreach (Hoofdboeker b in hoofdboekers)
+            {
+                if (b.ID == Convert.ToInt32(id))
+                {
+                    hfdb = b;
                 }
             }
             return hfdb;
@@ -102,10 +121,42 @@ namespace Reservering_Reparatie
         /// <returns></returns>
         public List<Kampeerplaats> ZoekAlleKampeerplaatsen()
         {
-            db = new Database();
+           // db = new Database();
             List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
             kampeerplaatsen = db.GetAllKampeerplaatsen();
             return kampeerplaatsen;
+        }
+
+        public string maakpersoon(Hoofdboeker hoofdboeker)
+        {
+            if(db.maakpersoon(hoofdboeker) != "goed")
+            {
+                return db.maakpersoon(hoofdboeker);
+            }
+            else
+            {
+                return "Persoon aangemaakt.";
+            }
+        }
+
+        public string MaakAccounts(List<Account> accounts)
+        {
+           // db = new Database();
+            foreach(Account a in accounts)
+            {
+                if(db.checknaamemail(a) != "Goed")
+                {
+                    return db.checknaamemail(a);
+                }
+            }
+            foreach(Account a in accounts)
+            {
+                if(db.accountmaken(a) != "account aangemaakt")
+                {
+                    return db.accountmaken(a);
+                }
+            }
+            return "Account(s) aangemaakt.";
         }
 
         /// <summary>
@@ -114,14 +165,17 @@ namespace Reservering_Reparatie
         /// </summary>
         /// <param name="beginDatum">Begin datum van het event</param>
         /// <param name="eindDatum">Eind datum van het event</param>
-        public void Boek(DateTime beginDatum, DateTime eindDatum)
+        public void Boek(string beginDatum, string eindDatum, string nummer)
         {
             //Boeker, kampeerplaats en accounts worden aan de boeking gekoppeld.
-           // hoofdboeker = //De boeker van de reservering.
-           // kampeerplaats = ZoekKampeerplaats(0); //De kampeerplaats
-            //accounts.Items.Add(account.ZoekPlek("nummer")); //Alle accounts die bij de reservering horen.
+            Hoofdboeker hoofdboeker = (Hoofdboeker)System.Web.HttpContext.Current.Session["Hoofdboeker"];
+            accounts = (List<Account>)System.Web.HttpContext.Current.Session["Accounts"];
+            Kampeerplaats kampeerplaats = ZoekKampeerplaats(nummer);
+            //INSERT statements:
+            Boeking b = new Boeking(beginDatum, eindDatum);
+            db.InsertReservering(b, hoofdboeker);
         }
-
+        
         public override string ToString()
         {
             return base.ToString();

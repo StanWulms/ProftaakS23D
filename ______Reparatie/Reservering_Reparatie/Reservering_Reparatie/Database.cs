@@ -27,6 +27,11 @@ namespace Reservering_Reparatie
             // ConnectionStringSettings mySettings = ConfigurationManager.ConnectionStrings["DatabaseConnection"];
         }
 
+        public OracleConnection Connect()
+        {
+            OracleConnection con = new OracleConnection(ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString);
+            return con;
+        }
         //GetAll... retourneert een lijst met alle objecten die in de
         //database te vinden zijn.
         public List<Account> GetAllAccounts()
@@ -134,7 +139,7 @@ namespace Reservering_Reparatie
                     {
                         Kampeerplaats p = new Kampeerplaats(reader.GetString(0), reader.GetInt32(1), false);
                         plekken.Add(p);
-                    }                   
+                    }
                     return plekken;
                 }
                 catch (NullReferenceException)
@@ -142,7 +147,178 @@ namespace Reservering_Reparatie
                     return null;
                 }
             }
+
+        }
+        public string maakpersoon(Hoofdboeker hoofdboeker)
+        {
+            try
+            {
+                /*********************Oracle Command**********************************************************************/
+                OracleConnection conn;
+                conn = Connect();
+                conn.Open();
+                OracleCommand ora_cmd = new OracleCommand("hoofdinschrijving", conn);
+                ora_cmd.BindByName = true;
+                ora_cmd.CommandType = CommandType.StoredProcedure;
+
+
+                ora_cmd.Parameters.Add("voornaam ", OracleDbType.NVarchar2, hoofdboeker.Naam, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("tussenvoegsel ", OracleDbType.NVarchar2, hoofdboeker.Tussenvoegsel, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("achternaam ", OracleDbType.NVarchar2, hoofdboeker.Achternaam, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("straat ", OracleDbType.NVarchar2, hoofdboeker.Straat, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("huisnr ", OracleDbType.NVarchar2, hoofdboeker.Huisnummer, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("woonplaats ", OracleDbType.NVarchar2, hoofdboeker.Woonplaats, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("banknr ", OracleDbType.NVarchar2, hoofdboeker.Iban, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
+
+                /*********************Oracle Command**********************************************************************/
+
+                ora_cmd.ExecuteNonQuery();
+
+                //Now get the values output by the stored procedure    
+                return ora_cmd.Parameters["text"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Exception: {0}", ex.ToString());
+            }
+            return "foutmelding";
+        }
+        public string checknaamemail(Account account)
+        {
+            try
+            {
+                OracleConnection conn;
+                conn = Connect();
+                conn.Open();
+                OracleCommand ora_cm = new OracleCommand("checkbeschikbaar", conn);
+                ora_cm.BindByName = true;
+                ora_cm.CommandType = CommandType.StoredProcedure;
+
+
+                ora_cm.Parameters.Add("gebruikersnaam", OracleDbType.Varchar2, account.Gebruikersnaam, ParameterDirection.Input);
+                ora_cm.Parameters.Add("email", OracleDbType.Varchar2, account.Email, ParameterDirection.Input);
+                ora_cm.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
+
+                /*********************Oracle Command**********************************************************************/
+
+                ora_cm.ExecuteNonQuery();
+                return ora_cm.Parameters["text"].Value.ToString();
+                //Now get the values output by the stored procedure    
+
+                /*********************Oracle Command**********************************************************************/
+
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Exception: {0}", ex.ToString());
+            }
+            return "foutmelding";
         }
 
+        public string accountmaken(Account account)
+        {
+            try
+            {
+                OracleConnection conn;
+                conn = Connect();
+                conn.Open();
+                OracleCommand ora_cmd = new OracleCommand("subinschrijving", conn);
+                ora_cmd.BindByName = true;
+                ora_cmd.CommandType = CommandType.StoredProcedure;
+
+
+                ora_cmd.Parameters.Add("email", OracleDbType.Varchar2, account.Email, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("gebruiker", OracleDbType.Varchar2, account.Gebruikersnaam, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("actievatiehash", OracleDbType.Varchar2, account.Activatiehash, ParameterDirection.Input);
+                ora_cmd.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
+
+                /*********************Oracle Command**********************************************************************/
+
+                ora_cmd.ExecuteNonQuery();
+
+                //Now get the values output by the stored procedure    
+                return ora_cmd.Parameters["text"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Exception: {0}", ex.ToString());
+            }
+            return "foutmelding";
+        }
+
+        public void InsertReservering(Kampeerplaats kampeerplaats)
+        {
+
+        }
+
+        public void InsertPolsbandje()
+        {
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                
+                OracleConnection conn;
+                conn = Connect();
+                conn.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = conn;
+                OracleCommand cmd = (OracleCommand)con.CreateCommand();
+                try
+                {
+                    /*cmd.Parameters.Add("email", email);
+                    cmd.Parameters.Add("titel", titel);
+                    cmd.Parameters.Add("voornaam",voornaam);
+                    cmd.Parameters.Add("achternaam",achternaam);
+                    cmd.Parameters.Add("btwnummer",btwnummer);
+                    cmd.Parameters.Add("wachtwoord",wachtwoord);
+                    cmd.Parameters.Add("nieuwsbrief",nieuwsbrief);*/
+                    OracleTransaction otn = (OracleTransaction)con.BeginTransaction(IsolationLevel.ReadCommitted);
+                    cmd.CommandText = "INSERT INTO POLSBANDJE (actief) VALUES (0)";
+                    cmd.ExecuteNonQuery();
+                    otn.Commit();
+                }
+                catch (NullReferenceException)
+                {
+
+                }
+            }
+        }
+
+        public void InsertReservering(Boeking boeking, Hoofdboeker hoofdboeker)
+        {
+                OracleConnection conn;
+                conn = Connect();
+                conn.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = conn;
+                OracleCommand cmd = (OracleCommand)conn.CreateCommand();
+                try
+                {
+                    cmd.Parameters.Add("persoon_id", hoofdboeker.ID);
+                    cmd.Parameters.Add("datumStart", boeking.BeginDatum);
+                    cmd.Parameters.Add("datumEinde", boeking.EindDatum);
+                    OracleTransaction otn = (OracleTransaction)conn.BeginTransaction(IsolationLevel.ReadCommitted);
+                    cmd.CommandText = @"INSERT INTO RESERVERING (""persoon_id"", ""datumStart"", ""datumEinde"", ""betaald"") VALUES (:1,:2,:3,0)";
+                    cmd.ExecuteNonQuery();
+                    otn.Commit();
+                }
+                catch (NullReferenceException)
+                {
+
+                }
+            
+        }
     }
 }

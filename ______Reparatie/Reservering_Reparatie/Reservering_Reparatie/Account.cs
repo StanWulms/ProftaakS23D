@@ -5,7 +5,6 @@ using System.Web;
 
 namespace Reservering_Reparatie
 {
-    [Serializable]
     public class Account
     {
 
