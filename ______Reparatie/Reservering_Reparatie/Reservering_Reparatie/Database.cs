@@ -21,10 +21,8 @@ namespace Reservering_Reparatie
 
         public Database()
         {
-            // connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
             DbConnection con = OracleClientFactory.Instance.CreateConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-            // ConnectionStringSettings mySettings = ConfigurationManager.ConnectionStrings["DatabaseConnection"];
         }
 
         public OracleConnection Connect()
@@ -38,8 +36,7 @@ namespace Reservering_Reparatie
         {
             int id = 0;
 
-                OracleConnection conn = Connect();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                conn = Connect();
                 conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
@@ -65,7 +62,6 @@ namespace Reservering_Reparatie
         {
             int id = 0;
             conn = Connect();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
                 conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
@@ -95,7 +91,6 @@ namespace Reservering_Reparatie
         public List<Account> GetAllAccounts()
         {
             conn = Connect();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
                 conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
@@ -121,10 +116,11 @@ namespace Reservering_Reparatie
                 }
             
         }
+
+
         public List<Hoofdboeker> GetAllHoofdboekers()
         {
             conn = Connect();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
                 conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
@@ -150,13 +146,12 @@ namespace Reservering_Reparatie
                 catch (NullReferenceException)
                 {
                     return null;
-                }
-            
+                }    
         }
+
         public List<Kampeerplaats> GetAllKampeerplaatsen()
         {
             conn = Connect();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
                 conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
@@ -195,7 +190,6 @@ namespace Reservering_Reparatie
         public Hoofdboeker ZoekLaatstGeInsertBoeker(Hoofdboeker h)
         {
             conn = Connect();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
                 conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
@@ -228,7 +222,6 @@ namespace Reservering_Reparatie
         {
             try
             {
-                /*********************Oracle Command**********************************************************************/
                 OracleConnection conn;
                 conn = Connect();
                 conn.Open();
@@ -246,7 +239,6 @@ namespace Reservering_Reparatie
                 ora_cmd.Parameters.Add("banknr ", OracleDbType.NVarchar2, hoofdboeker.Iban, ParameterDirection.Input);
                 ora_cmd.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
 
-                /*********************Oracle Command**********************************************************************/
 
                 ora_cmd.ExecuteNonQuery();
 
@@ -270,13 +262,10 @@ namespace Reservering_Reparatie
                 ora_cmd.BindByName = true;
                 ora_cmd.CommandType = CommandType.StoredProcedure;
 
-
                 ora_cmd.Parameters.Add("email", OracleDbType.Varchar2, account.Email, ParameterDirection.Input);
                 ora_cmd.Parameters.Add("gebruiker", OracleDbType.Varchar2, account.Gebruikersnaam, ParameterDirection.Input);
                 ora_cmd.Parameters.Add("actievatiehash", OracleDbType.Varchar2, account.Activatiehash, ParameterDirection.Input);
                 ora_cmd.Parameters.Add("text", OracleDbType.Varchar2, 32767).Direction = ParameterDirection.Output;
-
-                /*********************Oracle Command**********************************************************************/
 
                 ora_cmd.ExecuteNonQuery();
 
@@ -324,39 +313,6 @@ namespace Reservering_Reparatie
 
         //Het inserten van de tabellen horend bij de reservatie.
         //o.a. de nieuwe reservering en de koppeling met de plaats, hoofdboeker en accounts
-        public void InsertPolsbandje()
-        {   
-                OracleConnection conn;
-                conn = Connect();
-                conn.Open();
-                DbCommand com = OracleClientFactory.Instance.CreateCommand();
-                if (com == null)
-                {
-                    //return "Error! No Command";
-                }
-                com.Connection = conn;
-                OracleCommand cmd = (OracleCommand)conn.CreateCommand();
-                try
-                {
-                    /*cmd.Parameters.Add("email", email);
-                    cmd.Parameters.Add("titel", titel);
-                    cmd.Parameters.Add("voornaam",voornaam);
-                    cmd.Parameters.Add("achternaam",achternaam);
-                    cmd.Parameters.Add("btwnummer",btwnummer);
-                    cmd.Parameters.Add("wachtwoord",wachtwoord);
-                    cmd.Parameters.Add("nieuwsbrief",nieuwsbrief);*/
-                    OracleTransaction otn = (OracleTransaction)conn.BeginTransaction(IsolationLevel.ReadCommitted);
-                    cmd.CommandText = "INSERT INTO POLSBANDJE (actief) VALUES (0)";
-                    cmd.ExecuteNonQuery();
-                    otn.Commit();
-                }
-                catch (NullReferenceException)
-                {
-
-                }
-            
-        }
-
         public void InsertReservering(Boeking boeking, Hoofdboeker hoofdboeker)
         {
             OracleConnection conn;
@@ -384,6 +340,12 @@ namespace Reservering_Reparatie
 
             }           
         }
+
+        /// <summary>
+        /// Inserten van een nieuwe plek_reservering d.m.v. een boeking en kampeerplaats.
+        /// </summary>
+        /// <param name="boeking"></param>
+        /// <param name="kampeerplaats"></param>
         public void InsertPlekReservering(Boeking boeking, Kampeerplaats kampeerplaats)
         {
             OracleConnection conn;
@@ -410,9 +372,14 @@ namespace Reservering_Reparatie
 
             }
         }
+
+        /// <summary>
+        /// Inserten van een nieuw Polsbandje.
+        /// </summary>
+        /// <returns></returns>
         public string maakpolsbandje()
-            {
-                try
+        {
+            try
             {
                OracleConnection conn;
                conn = Connect();
@@ -428,8 +395,15 @@ namespace Reservering_Reparatie
            {
                System.Console.WriteLine("Exception: {0}", ex.ToString());
            }  
-            return null;
-           }
+           return null;
+        }
+
+        /// <summary>
+        /// Inserten van een nieuwe row in Reservering_Polsbandje
+        /// </summary>
+        /// <param name="reserveringid"></param>
+        /// <param name="account"></param>
+        /// <param name="polsbandjeid"></param>
         public void reserveer_polsbandje(int reserveringid, Account account, int polsbandjeid)
         {
             OracleConnection conn;

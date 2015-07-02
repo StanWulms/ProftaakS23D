@@ -40,6 +40,11 @@ namespace Reservering_Reparatie
             }
         }
 
+        /// <summary>
+        /// Met deze knop reserveer je een kampeerplek.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnKampeerplaatsReserveren_Click(object sender, EventArgs e)
         {
             int capaciteit = -1;
@@ -47,15 +52,17 @@ namespace Reservering_Reparatie
             if (Page.IsValid)
             {
                 string plek = lbVrijePlaatsen.SelectedValue;
+                //Als er geen plek geselecteerd wordt, wordt dit afgevangen met een MessageBox.
                 try
                 {
                     capaciteit = Convert.ToInt32(plek.Substring(plek.LastIndexOf(":") + 1));
                 }
                 catch { Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Selecteer een Plaats.');</script>"); }
                 
+                //Als het aantal accounts niet kleiner (of gelijk aan) de capaciteit van de kampeerplaats is, dan wordt er een MessageBox getoond.
+                //Als het aantal past, dan wordt de reservatie geplaatst.
                 if(Convert.ToInt32(lbAccounts.Items.Count.ToString()) <= capaciteit)
                 {
-                    //ALLES aanroepen om data te inserten --> Boeking --> DatabaseKlasse --> DB;
                     string nummer = lbVrijePlaatsen.SelectedValue.Substring(8,lbVrijePlaatsen.SelectedValue.IndexOf("-")-9);
                     b.Boek(tbBeginDatum.Text, tbEindDatum.Text, nummer);
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Uw reservatie is geplaatst.');</script>");

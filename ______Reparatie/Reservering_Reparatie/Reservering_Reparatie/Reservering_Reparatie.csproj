@@ -96,7 +96,6 @@
     <Compile Include="Reservering.aspx.designer.cs">
       <DependentUpon>Reservering.aspx</DependentUpon>
     </Compile>
-    <Compile Include="StoredProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master.Master" />

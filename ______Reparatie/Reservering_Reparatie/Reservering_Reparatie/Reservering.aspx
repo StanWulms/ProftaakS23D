@@ -17,7 +17,7 @@
     <br /><br />
     <asp:ListBox ID="lbHoofdbezoekers" runat="server" Width="500" Height="100"></asp:ListBox><br />      
     <br />
-    <asp:Button ID="btnSelecteerHoofdBezoeker" runat="server" Text="Selecteer Hoofdbezoeker" OnClick="btnSelecteerHoofdBezoeker_Click" />
+    <asp:Button ID="btnSelecteerHoofdBezoeker" runat="server" Text="Selecteer Hoofdboeker" OnClick="btnSelecteerHoofdBezoeker_Click" />
     <br /> <br /> <br />
     <asp:RequiredFieldValidator ID="rfvVoornaam" runat="server" ControlToValidate="tbVoornaam" Display="Dynamic" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="AllValidators">*</asp:RequiredFieldValidator>
     <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam: "></asp:Label>

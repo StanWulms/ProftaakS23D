@@ -99,11 +99,15 @@ namespace Reservering_Reparatie
                     }
                     else if ((String)Session["nieuweHoofdboeker"] == "true")
                     {
-                        Hoofdboeker hb = new Hoofdboeker(tbVoornaam.Text, tbTussenvoegsel.Text, tbAchternaam.Text, tbStraat.Text, tbHuisnummer.Text, tbWoonplaats.Text, tbBankrekening.Text);
-                        lblValidation.Text = b.maakpersoon(hb);
-                        lblValidation.Visible = true;
-                        hb = b.LaatsteHoofdbezoeker(hb);
-                        Session["Hoofdboeker"] = hb;
+                        //Door middel van dit IF-statement wordt, als er verkeerde gegevens ingevoerd worden bij 'Account', er maar één keer een nieuwe persoon(HoofdBoeker) aangemaakt.
+                        if (lblValidation.Text != "" && (lblValidation.Text != "Persoon aangemaakt." || lblValidation.Text != "Persoon geselecteerd."))
+                        {
+                            Hoofdboeker hb = new Hoofdboeker(tbVoornaam.Text, tbTussenvoegsel.Text, tbAchternaam.Text, tbStraat.Text, tbHuisnummer.Text, tbWoonplaats.Text, tbBankrekening.Text);
+                            lblValidation.Text = b.maakpersoon(hb);
+                            lblValidation.Visible = true;
+                            hb = b.LaatsteHoofdbezoeker(hb);
+                            Session["Hoofdboeker"] = hb;
+                        }
                     }
                     
 
@@ -144,11 +148,21 @@ namespace Reservering_Reparatie
             }
         }
 
+        /// <summary>
+        /// Deze knop is er om opnieuwe op de pagina te komen (en de Page_Load aan te roepen).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void refresh_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Door middel van deze knop worden alle hoofdboekers uit de database in een listbox gezet.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnZoekHoofdboeker_Click(object sender, EventArgs e)
         {
             b = new Boeking();
@@ -160,6 +174,11 @@ namespace Reservering_Reparatie
             }
         }
 
+        /// <summary>
+        /// Door middel van deze knop kan een, al bestaande, hoofdboeker uit de lijst geselecteerd worden.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSelecteerHoofdBezoeker_Click(object sender, EventArgs e)
         {
             lblValidation.Text = "";
@@ -191,7 +210,7 @@ namespace Reservering_Reparatie
 
                 Session["nieuweHoofdboeker"] = "false";
             }
-            catch { lblValidation.Text = "Selecteer eerst een hoofdboeker"; }
+            catch { Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Selecteer eerst een hoofdboeker.');</script>"); }
         }
     }
 }
