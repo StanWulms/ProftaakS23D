@@ -58,7 +58,7 @@ namespace Reservering_Reparatie
                     //ALLES aanroepen om data te inserten --> Boeking --> DatabaseKlasse --> DB;
                     string nummer = lbVrijePlaatsen.SelectedValue.Substring(8,lbVrijePlaatsen.SelectedValue.IndexOf("-")-9);
                     b.Boek(tbBeginDatum.Text, tbEindDatum.Text, nummer);
-                    Response.Redirect("Kampeerplaats.aspx");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Uw reservatie is geplaatst.');</script>");
                 }
             }
         }
