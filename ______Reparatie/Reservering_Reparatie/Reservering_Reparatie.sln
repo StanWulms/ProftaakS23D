@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservering_Reparatie", "Reservering_Reparatie\Reservering_Reparatie.csproj", "{8554443B-7002-45E5-8713-DFA9C2D7A8E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unittestRESERVERING", "unittestRESERVERING\unittestRESERVERING.csproj", "{EB421C29-90F3-4F3C-9F97-2F8A00619939}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8554443B-7002-45E5-8713-DFA9C2D7A8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8554443B-7002-45E5-8713-DFA9C2D7A8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8554443B-7002-45E5-8713-DFA9C2D7A8E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB421C29-90F3-4F3C-9F97-2F8A00619939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB421C29-90F3-4F3C-9F97-2F8A00619939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB421C29-90F3-4F3C-9F97-2F8A00619939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB421C29-90F3-4F3C-9F97-2F8A00619939}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
