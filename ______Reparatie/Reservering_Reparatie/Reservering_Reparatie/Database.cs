@@ -37,20 +37,16 @@ namespace Reservering_Reparatie
         public int GetMaxReservering()
         {
             int id = 0;
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {
-                if (con == null)
-                {
-                    //return "Error! No Connection";
-                }
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
+
+                OracleConnection conn = Connect();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
                 {
                     //return "Error! No Command";
                 }
-                com.Connection = con;
+                com.Connection = conn;
                 com.CommandText = "SELECT id FROM reservering WHERE id = (SELECT MAX(id) FROM reservering)";
                 DbDataReader reader = com.ExecuteReader();
                 try
@@ -64,25 +60,19 @@ namespace Reservering_Reparatie
                 {
                     return 0;
                 }
-            }
         }
         public int GetMaxAccount()
         {
             int id = 0;
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {
-                if (con == null)
-                {
-                    //return "Error! No Connection";
-                }
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
+            conn = Connect();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
                 {
                     //return "Error! No Command";
                 }
-                com.Connection = con;
+                com.Connection = conn;
                 com.CommandText = "SELECT id FROM account WHERE id = (SELECT MAX(id) FROM account)";
                 DbDataReader reader = com.ExecuteReader();
                 try
@@ -96,7 +86,7 @@ namespace Reservering_Reparatie
                 {
                     return 0;
                 }
-            }
+            
         }
 
 
@@ -104,20 +94,15 @@ namespace Reservering_Reparatie
         //database te vinden zijn.
         public List<Account> GetAllAccounts()
         {
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {
-                if (con == null)
-                {
-                    //return "Error! No Connection";
-                }
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
+            conn = Connect();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
                 {
                     //return "Error! No Command";
                 }
-                com.Connection = con;
+                com.Connection = conn;
                 com.CommandText = "SELECT * FROM account;";
                 DbDataReader reader = com.ExecuteReader();
                 List<Account> accounts = new List<Account>();
@@ -134,24 +119,19 @@ namespace Reservering_Reparatie
                 {
                     return null;
                 }
-            }
+            
         }
         public List<Hoofdboeker> GetAllHoofdboekers()
         {
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {
-                if (con == null)
-                {
-                    //return "Error! No Connection";
-                }
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
+            conn = Connect();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
                 {
                     //return "Error! No Command";
                 }
-                com.Connection = con;
+                com.Connection = conn;
                 com.CommandText = "SELECT * FROM PERSOON";
                 DbDataReader reader = com.ExecuteReader();
                 List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
@@ -171,24 +151,19 @@ namespace Reservering_Reparatie
                 {
                     return null;
                 }
-            }
+            
         }
         public List<Kampeerplaats> GetAllKampeerplaatsen()
         {
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {
-                if (con == null)
-                {
-                    //return "Error! No Connection";
-                }
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
+            conn = Connect();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
                 {
                     //return "Error! No Command";
                 }
-                com.Connection = con;
+                com.Connection = conn;
                 //Alle gereserveerde plekken.
                 com.CommandText = @"SELECT id, ""nummer"", ""capaciteit"" FROM plek WHERE id IN (SELECT ""plek_id"" FROM plek_reservering)";
                 DbDataReader reader = com.ExecuteReader();
@@ -214,25 +189,20 @@ namespace Reservering_Reparatie
                 {
                     return null;
                 }
-            }
+            
         }
 
         public Hoofdboeker ZoekLaatstGeInsertBoeker(Hoofdboeker h)
         {
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {
-                if (con == null)
-                {
-                    //return "Error! No Connection";
-                }
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-                con.Open();
+            conn = Connect();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                conn.Open();
                 DbCommand com = OracleClientFactory.Instance.CreateCommand();
                 if (com == null)
                 {
                     //return "Error! No Command";
                 }
-                com.Connection = con;
+                com.Connection = conn;
                 //Alle gereserveerde plekken.
                 com.CommandText = @"SELECT id FROM PERSOON WHERE ""voornaam"" ='" + h.Naam + @"' AND ""tussenvoegsel"" ='" + h.Tussenvoegsel + @"' AND ""achternaam"" ='" + h.Achternaam + @"' AND ""straat"" ='" + h.Straat + @"' AND ""huisnr"" =" + h.Huisnummer + @" AND ""woonplaats"" ='" + h.Woonplaats + @"' AND ""banknr"" ='" + h.Iban + "'";
                 DbDataReader reader = com.ExecuteReader();
@@ -249,7 +219,7 @@ namespace Reservering_Reparatie
                 {
                     return null;
                 }
-            }
+            
         }
 
 
@@ -355,14 +325,7 @@ namespace Reservering_Reparatie
         //Het inserten van de tabellen horend bij de reservatie.
         //o.a. de nieuwe reservering en de koppeling met de plaats, hoofdboeker en accounts
         public void InsertPolsbandje()
-        {
-            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
-            {
-                if (con == null)
-                {
-                    //return "Error! No Connection";
-                }
-                
+        {   
                 OracleConnection conn;
                 conn = Connect();
                 conn.Open();
@@ -372,7 +335,7 @@ namespace Reservering_Reparatie
                     //return "Error! No Command";
                 }
                 com.Connection = conn;
-                OracleCommand cmd = (OracleCommand)con.CreateCommand();
+                OracleCommand cmd = (OracleCommand)conn.CreateCommand();
                 try
                 {
                     /*cmd.Parameters.Add("email", email);
@@ -382,7 +345,7 @@ namespace Reservering_Reparatie
                     cmd.Parameters.Add("btwnummer",btwnummer);
                     cmd.Parameters.Add("wachtwoord",wachtwoord);
                     cmd.Parameters.Add("nieuwsbrief",nieuwsbrief);*/
-                    OracleTransaction otn = (OracleTransaction)con.BeginTransaction(IsolationLevel.ReadCommitted);
+                    OracleTransaction otn = (OracleTransaction)conn.BeginTransaction(IsolationLevel.ReadCommitted);
                     cmd.CommandText = "INSERT INTO POLSBANDJE (actief) VALUES (0)";
                     cmd.ExecuteNonQuery();
                     otn.Commit();
@@ -391,8 +354,9 @@ namespace Reservering_Reparatie
                 {
 
                 }
-            }
+            
         }
+
         public void InsertReservering(Boeking boeking, Hoofdboeker hoofdboeker)
         {
             OracleConnection conn;

@@ -212,7 +212,7 @@ namespace Reservering_Reparatie
         
         public override string ToString()
         {
-            return base.ToString();
+            return "ID: " + ID + " - " + "Begindatum: " + BeginDatum + " - " + "Einddatum: " + EindDatum;
         }
     }
 }

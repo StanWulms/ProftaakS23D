@@ -8,6 +8,7 @@ namespace Reservering_Reparatie
 {
     public class StoredProcedure
     {
+        //WEG?
         public StoredProcedure()
         {
 

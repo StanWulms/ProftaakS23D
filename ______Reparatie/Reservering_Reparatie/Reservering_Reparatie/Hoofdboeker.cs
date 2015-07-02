@@ -46,7 +46,7 @@ namespace Reservering_Reparatie
 
         public override string ToString()
         {
-            return "ID: " + ID + " - " + "Naam: " + Naam + " - " + "Achternaam: " + Achternaam;
+            return "ID: " + ID + " - " + "Naam: " + Naam + " - " + "Achternaam: " + Achternaam + " - " + "Iban: " + Iban;
         }
     }
 }
