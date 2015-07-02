@@ -36,18 +36,12 @@ namespace Reservering_Reparatie
             Page.Validate("AllValidators");
             if (Page.IsValid)
             {
-                    //Het aanroepen van de SP.
-
-
-                    lblValidation.Text = "Goeie ouwe";
-                    lblValidation.Visible = true;
-                    //Hoofdboeker h = new Hoofdboeker()
-                    Session["Hoofdbezoeker"] = tbAccount1.Text; // Nu weet je de gebruikersnaam ?¿?
-                    //Maken  van de sessie voor de accounts.
+                //Maken van een Sessie voor de hoofdboeker
+                    Session["Hoofdbezoeker"] = tbAccount1.Text;
                     List<Account> accounts = new List<Account>();
 
-                    //Toevoegen van een Account in de lijst.
-
+                //Toevoegen van een Account in de lijst.
+                    //Maken van random Activatiehash.
                     var chars = "abcdef0123456789";
                     var stringChars = new char[32];
                     var random = new Random();
@@ -56,13 +50,11 @@ namespace Reservering_Reparatie
                         stringChars[i] = chars[random.Next(chars.Length)];
                     }
                     string activatiehash = new String(stringChars);
-                    //Het toevoegen van het account van de hoofdboeker
-                    //
-
+                    
+                //Het toevoegen van het account van de hoofdboeker
                     for (int k = 1; k < Convert.ToInt32(ddlAantal.Text) + 1; k++)
                     {
-                        //Vervolgens (als die er zijn) worden de extra bezoekers
-                        //Toegevoegd aan de tabel ACCOUNT.
+
                         random = new Random();
                         for (int j = 0; j < stringChars.Length; j++)
                         {
@@ -70,10 +62,11 @@ namespace Reservering_Reparatie
                         }
                         activatiehash = new String(stringChars);
                         //Er wordt gekeken welke tbAccount en tbEmail opgehaald moet worden
-                        //Deze worden in het volgende insertstatement ingevoerd.
+                        //Deze worden in het volgende gebruikt om een 'Account' aan te maken.
                         Account a;
                         //Nieuw account ID
                         int id = b.GetMaxAccount();
+                        //Bij elk nieuw account wordt er respectievelijk één opgeteld bij het ID.
                         switch (k)
                         {
                             case 1: a = new Account((id+k), tbAccount1.Text, tbEmail1.Text, activatiehash); accounts.Add(a);
@@ -90,6 +83,7 @@ namespace Reservering_Reparatie
                                 break;
                         }
                     }
+                //Er wordt gekeken of er een nieuwe Hoofdboeker aangemaakt wordt of dat er een geselecteerd wordt.
                     if ((String)Session["nieuweHoofdboeker"] == "false")
                     {
                         lblValidation.Text = "Persoon geselecteerd.";
@@ -109,7 +103,6 @@ namespace Reservering_Reparatie
                             Session["Hoofdboeker"] = hb;
                         }
                     }
-                    
 
                 if (lblValidation.Text == "Persoon aangemaakt." || lblValidation.Text == "Persoon geselecteerd.")
                 {

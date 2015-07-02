@@ -30,17 +30,7 @@ namespace Reservering_Reparatie
         public Kampeerplaats()
         {
 
-        }
-        
-        /// <summary>
-        /// Zet de boolean "gereserveerd" van de kampeerplek die overeenkomt met het
-        /// ingevoerde nummer op true. De plaats is vervolgens gereserveerd.
-        /// </summary>
-        /// <param name="Nummer">Nummer van de plaats</param>
-        public void Reserveer(int Nummer)
-        {
-            //TODO: implementeer methode
-        }       
+        }     
         
         /// <summary>
         /// Returnt een lijst met alle kampeerplaatsen waarvan "Gereserveerd" 0 is.
@@ -60,6 +50,10 @@ namespace Reservering_Reparatie
             return kamprs;
         }
 
+        /// <summary>
+        /// De ToString methode zorgt dat je het ondergegeven formaat krijgt als je op een Kampeerplaats .ToString() aanroept.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "Nummer: " + Nummer + " - " + "Capaciteit: " + Capaciteit;

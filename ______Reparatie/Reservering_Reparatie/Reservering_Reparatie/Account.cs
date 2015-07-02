@@ -32,6 +32,10 @@ namespace Reservering_Reparatie
             
         }
 
+        /// <summary>
+        /// De ToString methode zorgt dat je het ondergegeven formaat krijgt als je op een Account .ToString() aanroept.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "Gebruikersnaam: " + Gebruikersnaam;

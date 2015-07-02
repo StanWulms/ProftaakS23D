@@ -44,6 +44,10 @@ namespace Reservering_Reparatie
 
         }
 
+        /// <summary>
+        /// De ToString methode zorgt dat je het ondergegeven formaat krijgt als je op een Hoofdboeker .ToString() aanroept.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "ID: " + ID + " - " + "Naam: " + Naam + " - " + "Achternaam: " + Achternaam + " - " + "Iban: " + Iban;

@@ -53,7 +53,6 @@ namespace Reservering_Reparatie
         /// <param name="zoekCriteria">String waarop gezocht wordt. Gaat over de naam en achternaam</param>
         public List<Hoofdboeker> ZoekHoofdboekers(string zoekCriteria)
         {
-            //db = new Database();
             List<Hoofdboeker> hfdb = new List<Hoofdboeker>();
             List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
             hoofdboekers = db.GetAllHoofdboekers();
@@ -73,7 +72,6 @@ namespace Reservering_Reparatie
 
         public Hoofdboeker ZoekJuisteHoofdboeker(string id)
         {
-            //db = new Database();
             Hoofdboeker hfdb = new Hoofdboeker();
             List<Hoofdboeker> hoofdboekers = new List<Hoofdboeker>();
             hoofdboekers = db.GetAllHoofdboekers();
@@ -113,12 +111,16 @@ namespace Reservering_Reparatie
         /// <returns></returns>
         public List<Kampeerplaats> ZoekAlleKampeerplaatsen()
         {
-           // db = new Database();
             List<Kampeerplaats> kampeerplaatsen = new List<Kampeerplaats>();
             kampeerplaatsen = db.GetAllKampeerplaatsen();
             return kampeerplaatsen;
         }
 
+        /// <summary>
+        /// Het aanmaken van een nieuwe persoon (Hoofdboeker)
+        /// </summary>
+        /// <param name="hoofdboeker"></param>
+        /// <returns></returns>
         public string maakpersoon(Hoofdboeker hoofdboeker)
         {
             if(db.maakpersoon(hoofdboeker) != "goed")
@@ -131,9 +133,13 @@ namespace Reservering_Reparatie
             }
         }
 
+        /// <summary>
+        /// Het aanmaken van nieuwe accounts.
+        /// </summary>
+        /// <param name="accounts"></param>
+        /// <returns></returns>
         public string MaakAccounts(List<Account> accounts)
         {
-           // db = new Database();
             foreach(Account a in accounts)
             {
                 if(db.checknaamemail(a) != "Goed")
@@ -151,6 +157,11 @@ namespace Reservering_Reparatie
             return "Account(s) aangemaakt.";
         }
 
+        /// <summary>
+        /// Zoeken naar de laatst ingevoerde hoofdboeker
+        /// </summary>
+        /// <param name="hb"></param>
+        /// <returns></returns>
         public Hoofdboeker LaatsteHoofdbezoeker(Hoofdboeker hb)
         {
             Hoofdboeker hoofdbezoeker = db.ZoekLaatstGeInsertBoeker(hb);
@@ -176,7 +187,7 @@ namespace Reservering_Reparatie
             Hoofdboeker hoofdboeker = (Hoofdboeker)System.Web.HttpContext.Current.Session["Hoofdboeker"];
             accounts = (List<Account>)System.Web.HttpContext.Current.Session["Accounts"];
             Kampeerplaats kampeerplaats = ZoekKampeerplaats(nummer);
-            //INSERT statements:     
+ 
             Boeking b = new Boeking(1, beginDatum, eindDatum);
             db.InsertReservering(b, hoofdboeker);            
             b.ID = db.GetMaxReservering();
@@ -190,6 +201,10 @@ namespace Reservering_Reparatie
             
         }
         
+        /// <summary>
+        /// De ToString methode zorgt dat je het ondergegeven formaat krijgt als je op een Boeking .ToString() aanroept.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "ID: " + ID + " - " + "Begindatum: " + BeginDatum + " - " + "Einddatum: " + EindDatum;
