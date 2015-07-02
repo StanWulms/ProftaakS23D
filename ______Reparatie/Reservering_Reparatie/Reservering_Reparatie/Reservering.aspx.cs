@@ -162,31 +162,36 @@ namespace Reservering_Reparatie
 
         protected void btnSelecteerHoofdBezoeker_Click(object sender, EventArgs e)
         {
-            Session["Hoofdboeker"] = lbHoofdbezoekers.SelectedItem.Value.Substring(3, lbHoofdbezoekers.SelectedItem.Value.IndexOf("-") - 3);
-            Hoofdboeker hb = b.ZoekJuisteHoofdboeker((String)Session["Hoofdboeker"]);
-            
-            tbVoornaam.Text = hb.Naam;
-            tbVoornaam.Enabled = false;
+            lblValidation.Text = "";
+            try
+            {
+                Session["Hoofdboeker"] = lbHoofdbezoekers.SelectedItem.Value.Substring(3, lbHoofdbezoekers.SelectedItem.Value.IndexOf("-") - 3);
+                Hoofdboeker hb = b.ZoekJuisteHoofdboeker((String)Session["Hoofdboeker"]);
 
-            tbTussenvoegsel.Text = hb.Tussenvoegsel;
-            tbTussenvoegsel.Enabled = false;
+                tbVoornaam.Text = hb.Naam;
+                tbVoornaam.Enabled = false;
 
-            tbAchternaam.Text = hb.Achternaam;
-            tbAchternaam.Enabled = false;
+                tbTussenvoegsel.Text = hb.Tussenvoegsel;
+                tbTussenvoegsel.Enabled = false;
 
-            tbStraat.Text = hb.Straat;
-            tbStraat.Enabled = false;
+                tbAchternaam.Text = hb.Achternaam;
+                tbAchternaam.Enabled = false;
 
-            tbHuisnummer.Text = hb.Huisnummer;
-            tbHuisnummer.Enabled = false;
+                tbStraat.Text = hb.Straat;
+                tbStraat.Enabled = false;
 
-            tbWoonplaats.Text = hb.Woonplaats;
-            tbWoonplaats.Enabled = false;
+                tbHuisnummer.Text = hb.Huisnummer;
+                tbHuisnummer.Enabled = false;
 
-            tbBankrekening.Text = hb.Iban;
-            tbBankrekening.Enabled = false;
+                tbWoonplaats.Text = hb.Woonplaats;
+                tbWoonplaats.Enabled = false;
 
-            Session["nieuweHoofdboeker"] = "false";
+                tbBankrekening.Text = hb.Iban;
+                tbBankrekening.Enabled = false;
+
+                Session["nieuweHoofdboeker"] = "false";
+            }
+            catch { lblValidation.Text = "Selecteer eerst een hoofdboeker"; }
         }
     }
 }
