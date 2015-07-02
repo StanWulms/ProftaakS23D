@@ -22,24 +22,6 @@ namespace Reservering_Reparatie {
         protected global::System.Web.UI.WebControls.ListBox lbAccounts;
         
         /// <summary>
-        /// btnSelecteer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSelecteer;
-        
-        /// <summary>
-        /// lbSelectedAccounts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbSelectedAccounts;
-        
-        /// <summary>
         /// lbVrijePlaatsen control.
         /// </summary>
         /// <remarks>

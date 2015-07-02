@@ -11,7 +11,6 @@ namespace Reservering_Reparatie
     {
         Hoofdboeker hb;
         Boeking b;
-        bool nietnieuweHoofdboeker = true;
 
         protected void Page_Load(object sender, EventArgs e)
         {

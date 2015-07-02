@@ -13,8 +13,6 @@
     <br />
     <br />
     <asp:ListBox ID="lbAccounts" runat="server" Width="200"></asp:ListBox>
-    <asp:Button ID="btnSelecteer" runat="server" Text="Selecteer Account" OnClick="btnSelecteer_Click" />
-    <asp:ListBox ID="lbSelectedAccounts" runat="server" Width="200"></asp:ListBox>
     <br />
     <asp:ListBox ID="lbVrijePlaatsen" runat="server" Width="200"></asp:ListBox>
     <br />

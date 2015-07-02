@@ -55,27 +55,12 @@ namespace Reservering_Reparatie
                 
                 if(Convert.ToInt32(lbAccounts.Items.Count.ToString()) <= capaciteit)
                 {
-                    lbVrijePlaatsen.Items.Add("Reservering Geslaagd.");
                     //ALLES aanroepen om data te inserten --> Boeking --> DatabaseKlasse --> DB;
                     string nummer = lbVrijePlaatsen.SelectedValue.Substring(8,lbVrijePlaatsen.SelectedValue.IndexOf("-")-9);
                     b.Boek(tbBeginDatum.Text, tbEindDatum.Text, nummer);
+                    Response.Redirect("Kampeerplaats.aspx");
                 }
             }
-        }
-
-        protected void btnSelecteer_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string a;
-                a = lbAccounts.SelectedValue;
-                if (a != "")
-                {
-                    lbSelectedAccounts.Items.Add(a);
-                    lbAccounts.Items.Remove(a);
-                }
-            }
-            catch { }
         }
     }
 }
