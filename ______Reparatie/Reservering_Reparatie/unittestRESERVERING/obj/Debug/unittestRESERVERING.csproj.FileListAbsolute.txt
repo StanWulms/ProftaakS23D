@@ -1,0 +1,9 @@
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\bin\Debug\unittestRESERVERING.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\bin\Debug\unittestRESERVERING.pdb
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\bin\Debug\Reservering_Reparatie.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\bin\Debug\Reservering_Reparatie.pdb
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\obj\Debug\unittestRESERVERING.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\obj\Debug\unittestRESERVERING.dll
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\obj\Debug\unittestRESERVERING.pdb
+C:\Users\Mark\Documents\GitHub\ProftaakS23D\______Reparatie\Reservering_Reparatie\unittestRESERVERING\bin\Debug\Oracle.DataAccess.dll
