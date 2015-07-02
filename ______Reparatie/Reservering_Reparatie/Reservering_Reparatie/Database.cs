@@ -53,7 +53,38 @@ namespace Reservering_Reparatie
                 com.Connection = con;
                 com.CommandText = "SELECT id FROM reservering WHERE id = (SELECT MAX(id) FROM reservering)";
                 DbDataReader reader = com.ExecuteReader();
-                List<Account> accounts = new List<Account>();
+                try
+                {
+                    reader.Read();
+                    id = reader.GetInt32(0);
+                    reader.Close();
+                    return id;
+                }
+                catch (NullReferenceException)
+                {
+                    return 0;
+                }
+            }
+        }
+        public int GetMaxAccount()
+        {
+            int id = 0;
+            using (DbConnection con = OracleClientFactory.Instance.CreateConnection())
+            {
+                if (con == null)
+                {
+                    //return "Error! No Connection";
+                }
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+                con.Open();
+                DbCommand com = OracleClientFactory.Instance.CreateCommand();
+                if (com == null)
+                {
+                    //return "Error! No Command";
+                }
+                com.Connection = con;
+                com.CommandText = "SELECT id FROM account WHERE id = (SELECT MAX(id) FROM account)";
+                DbDataReader reader = com.ExecuteReader();
                 try
                 {
                     reader.Read();
@@ -220,6 +251,7 @@ namespace Reservering_Reparatie
                 }
             }
         }
+
 
         //Voor het aanmaken van de accounts
         public string maakpersoon(Hoofdboeker hoofdboeker)

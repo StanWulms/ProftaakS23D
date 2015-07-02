@@ -177,6 +177,13 @@ namespace Reservering_Reparatie
             return hoofdbezoeker;
         }
 
+        //retourneert het nieuwe account id
+        public int GetMaxAccount()
+        {
+            int id = db.GetMaxAccount() + 1;
+            return id;
+        }
+
         /// <summary>
         /// De methode Boek wordt als laatste aageroepen en dat is ook de plek
         /// vanwaar de reservering wordt aangepast in de database.
