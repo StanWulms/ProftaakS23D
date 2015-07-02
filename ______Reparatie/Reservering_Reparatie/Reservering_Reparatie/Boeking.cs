@@ -47,26 +47,6 @@ namespace Reservering_Reparatie
         }
 
         /// <summary>
-        /// Zoekt naar een account waarvan de ingevulde gebruikersnaam overeenkomt met zijn gebruikersnaam.
-        /// Als er een match is gevonden wordt het desbetreffende account geretourneerd.
-        /// </summary>
-        /// <param name="email">Email van de hoofdboeker</param>
-        public Account ZoekAccount(string gebruikersnaam)
-        {
-            Account acc = new Account();
-            List<Account> accounts = new List<Account>();
-            accounts = db.GetAllAccounts();
-            foreach (Account a in accounts)
-            {
-                if (a.Gebruikersnaam == gebruikersnaam)
-                {
-                    acc = a;
-                }
-            }
-            return acc;
-        }
-
-        /// <summary>
         /// Zoekt naar een hoofdboeker waarvan de ingevulde zoekcriteria overeenkomt met zijn naam of achternaam.
         /// Als er een match is gevonden wordt de desbetreffende boeker geretourneerd.
         /// </summary>
