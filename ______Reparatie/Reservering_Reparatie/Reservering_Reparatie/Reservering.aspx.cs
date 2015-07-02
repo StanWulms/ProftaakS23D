@@ -76,15 +76,15 @@ namespace Reservering_Reparatie
                         int id = b.GetMaxAccount();
                         switch (k)
                         {
-                            case 1: a = new Account(id, tbAccount1.Text, tbEmail1.Text, activatiehash); accounts.Add(a);
+                            case 1: a = new Account((id+k), tbAccount1.Text, tbEmail1.Text, activatiehash); accounts.Add(a);
                                 break;
-                            case 2: a = new Account(id, tbAccount2.Text, tbEmail2.Text, activatiehash); accounts.Add(a);
+                            case 2: a = new Account((id + k), tbAccount2.Text, tbEmail2.Text, activatiehash); accounts.Add(a);
                                 break;
-                            case 3: a = new Account(id, tbAccount3.Text, tbEmail3.Text, activatiehash); accounts.Add(a);
+                            case 3: a = new Account((id + k), tbAccount3.Text, tbEmail3.Text, activatiehash); accounts.Add(a);
                                 break;
-                            case 4: a = new Account(id, tbAccount4.Text, tbEmail4.Text, activatiehash); accounts.Add(a);
+                            case 4: a = new Account((id + k), tbAccount4.Text, tbEmail4.Text, activatiehash); accounts.Add(a);
                                 break;
-                            case 5: a = new Account(id, tbAccount5.Text, tbEmail5.Text, activatiehash); accounts.Add(a);
+                            case 5: a = new Account((id + k), tbAccount5.Text, tbEmail5.Text, activatiehash); accounts.Add(a);
                                 break;
                             default:
                                 break;
@@ -112,7 +112,10 @@ namespace Reservering_Reparatie
                     Session["Accounts"] = accounts;
                     lblValidation2.Text = b.MaakAccounts(accounts);
                     lblValidation2.Visible = true;
-                    Response.Redirect("Kampeerplaats.aspx");
+                    if (lblValidation2.Text == "Account(s) aangemaakt.")
+                    {
+                        Response.Redirect("Kampeerplaats.aspx");
+                    }
                 }
             }
         }

@@ -180,7 +180,7 @@ namespace Reservering_Reparatie
         //retourneert het nieuwe account id
         public int GetMaxAccount()
         {
-            int id = db.GetMaxAccount() + 1;
+            int id = db.GetMaxAccount();
             return id;
         }
 

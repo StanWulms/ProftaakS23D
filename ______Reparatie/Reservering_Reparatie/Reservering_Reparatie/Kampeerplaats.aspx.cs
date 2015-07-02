@@ -59,6 +59,11 @@ namespace Reservering_Reparatie
                     string nummer = lbVrijePlaatsen.SelectedValue.Substring(8,lbVrijePlaatsen.SelectedValue.IndexOf("-")-9);
                     b.Boek(tbBeginDatum.Text, tbEindDatum.Text, nummer);
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Uw reservatie is geplaatst.');</script>");
+                    Response.Redirect("Reservering.aspx");
+                }
+                else
+                {
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Selecteer een plaats met meer Capaciteit. U heeft een plaats geselecteerd met minder capaciteit dan het aantal personen.');</script>");
                 }
             }
         }
